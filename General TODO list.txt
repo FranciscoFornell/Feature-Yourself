@@ -1,0 +1,2 @@
+TODO: Implementar internacionalización i18n.
+TODO: Crear una vista de dashboard para administración y preferencias.

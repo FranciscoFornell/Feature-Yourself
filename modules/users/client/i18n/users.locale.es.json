@@ -1,0 +1,21 @@
+{
+  "SIGNIN_SOCIAL_MSG": "Regístrese usando sus redes sociales",
+  "SIGNIN_LOCAL_MSG": "O regístrese usando su cuenta local",
+  "SIGNUP_LOCAL_MSG": "O cree ahora su cuenta local",
+  "SIGNIN": "Registrar",
+  "SIGNUP": "Crear cuenta",
+  "USERNAME": "Nombre de usuario",
+  "PASSWORD": "Contraseña",
+  "FORGOT_PASSWORD": "¿Olvidó su contraseña?",
+  "FIRST_NAME": "Nombre",
+  "LAST_NAME": "Apellidos",
+  "EMAIL": "Email",
+  "INVALID_EMAIL_MSG": "Esto no parece un email válido.",
+  "OWASP_MIN_LENGHT": "La contraseña debe tener una longitud de al menos {{owaspValue}} caracteres.",
+  "OWASP_MAX_LENGHT": "La contraseña debe tener menos de {{owaspValue}} caracteres.",
+  "OWASP_REPEATED_CHARS": "La contraseña no debe contener secuencias de un mismo caracter repetido tres o más veces.",
+  "OWASP_REQ_LOWERCASE": "La contraseña debe contener al menos una letra minúscula.",
+  "OWASP_REQ_UPPERCASE": "La contraseña debe contener al menos una letra mayúscula.",
+  "OWASP_REQ_NUMBER": "La contraseña debe contener al menos un número.",
+  "OWASP_REQ_SPECIAL": "La contraseña debe contener al menos un caracter especial."
+}

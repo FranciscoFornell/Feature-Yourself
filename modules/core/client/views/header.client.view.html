@@ -1,0 +1,138 @@
+<!-- <div class="container" ng-controller="HeaderController">
+  <div class="navbar-header">
+    <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a ui-sref="home" class="navbar-brand">MEAN.JS</a>
+  </div>
+  <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+    <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
+      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
+        <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
+        <ul ng-switch-when="dropdown" class="dropdown-menu">
+          <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
+            <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
+          </li>
+        </ul>
+        <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
+      <li ui-sref-active="active">
+        <a ui-sref="authentication.signup">Sign Up</a>
+      </li>
+      <li class="divider-vertical"></li>
+      <li ui-sref-active="active">
+        <a ui-sref="authentication.signin">Sign In</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
+      <li class="dropdown" dropdown>
+        <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+          <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+          <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li ui-sref-active="active">
+            <a ui-sref="settings.profile">Edit Profile</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="settings.picture">Change Profile Picture</a>
+          </li>
+          <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
+            <a ui-sref="settings.password">Change Password</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="settings.accounts">Manage Social Accounts</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="/api/auth/signout" target="_self">Signout</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div> -->
+<!-- TODO: Buscar una forma de que la opción de cambiar wl idioma sea lo menos intrusiva posible -->
+<md-toolbar data-ng-controller="HeaderController as hdrCtrl" class="main-toolbar">
+  <div class="md-toolbar-tools md-whiteframe-z1">
+    <md-button class="md-fab md-primary md-hue-2" aria-label="Show/hide sidenav" ng-click="hdrCtrl.toggleSidenav()">
+      <span class="hamburger-icon" ng-class="hdrCtrl.hamburguerIconClass()">
+        <span></span>
+      </span>
+    </md-button>
+    <a href="/#!/" >Awesome Personal Page (APP)</a>
+    <!-- <md-menu-bar data-ng-if="hdrCtrl.menu.shouldRender(hdrCtrl.authentication.user);">
+      <md-menu data-ng-repeat="item in hdrCtrl.menu.items | orderBy: 'position'">
+        <md-button class="md-raised md-mini md-hue-1" ng-click="$mdOpenMenu()">
+          <span data-ng-bind="item.title"></span><b class="caret"></b>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item data-ng-repeat="subitem in item.items | orderBy: 'position'">
+            <md-button class="md-primary md-hue-2" ng-href="/#!/{{subitem.link}}">
+              <span data-ng-bind="subitem.title"></span>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-menu-bar> -->
+    <span flex></span>
+    <span layout="row" layout-align="center center">
+      <md-button class="md-raised md-hue-1" ng-class="hdrCtrl.traslateButtonClass" aria-label="Change language" ng-click="hdrCtrl.changeLanguage()">
+        <div layout="row" layout-align="center center">
+        <span ng-bind="hdrCtrl.traslateButtonText"></span>
+        <span class="flag-icon"></span>          
+        </div>
+      </md-button>
+      <div data-ng-hide="hdrCtrl.authentication.user">
+        <md-button class="md-fab md-icon-button md-primary md-hue-2"
+          aria-label="Login options"
+          ng-click="hdrCtrl.showLoginDialog($event)">
+          <md-tooltip md-delay="0" md-direction="down">Login</md-tooltip>
+          <md-icon md-svg-icon="account-circle" aria-label="account circle" class="md-icon-48"></md-icon>
+        </md-button>
+      </div>
+      <md-menu md-offset="0 66"
+        md-position-mode="target-right target"
+        data-ng-show="hdrCtrl.authentication.user"
+        ng-cloak>
+        <md-button class="md-fab md-icon-button md-accent md-hue-2"
+          aria-label="Login options"
+          ng-click="$mdOpenMenu($event)">
+          <md-tooltip md-delay="0" md-direction="left">{{hdrCtrl.authentication.user.displayName}}</md-tooltip>
+          <md-icon md-svg-icon="account-circle" aria-label="account circle" class="md-icon-48"></md-icon>
+        </md-button>
+        <!-- <md-button class="md-raised md-mini md-hue-1" ng-click="$mdOpenMenu()" aria-label="User options">
+          <span data-ng-bind="hdrCtrl.authentication.user.displayName"></span><b class="caret"></b>
+        </md-button> -->
+        <md-menu-content>
+          <md-menu-item>
+            <md-button aria-label="Edit profile" class="md-primary md-hue-2" ng-href="/#!/settings/profile">
+              Edit Profile
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button aria-label="Manage social accounts" class="md-primary md-hue-2" ng-href="/#!/settings/accounts">
+              Manage Social Accounts
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button aria-label="Change Password" class="md-primary md-hue-2" data-ng-show="hdrCtrl.authentication.user.provider === 'local'" ng-href="/#!/settings/password">
+              Change Password
+            </md-button>
+          </md-menu-item>           
+            <md-divider></md-divider>
+          <md-menu-item>
+            <md-button aria-label="Sign out" class="md-primary md-hue-2" ng-click="hdrCtrl.signout()">
+              Sign Out
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </span>
+  </div>
+</md-toolbar>

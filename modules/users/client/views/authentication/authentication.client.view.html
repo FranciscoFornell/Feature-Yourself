@@ -1,0 +1,82 @@
+<!-- <section class="row" ng-controller="AuthenticationController">
+  <h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
+  <div class="col-md-12 text-center">
+    <img ng-click="callOauthProvider('/api/auth/facebook')" ng-src="/modules/users/client/img/buttons/facebook.png">
+    <img ng-click="callOauthProvider('/api/auth/twitter')" ng-src="/modules/users/client/img/buttons/twitter.png">
+    <img ng-click="callOauthProvider('/api/auth/google')" ng-src="/modules/users/client/img/buttons/google.png">
+    <img ng-click="callOauthProvider('/api/auth/linkedin')" ng-src="/modules/users/client/img/buttons/linkedin.png">
+    <img ng-click="callOauthProvider('/api/auth/github')" ng-src="/modules/users/client/img/buttons/github.png">
+    <img ng-click="callOauthProvider('/api/auth/paypal')"  ng-src="/modules/users/client/img/buttons/paypal.png">
+  </div>
+  <div ui-view></div>
+</section> -->
+
+<!-- NOTE: Dejo de momento la vista antigua comentada -->
+<md-dialog aria-label="Sign in form" ng-cloak data-ng-controller="AuthenticationController as autCtrl" layout="column">
+  <form name="autForm" ng-submit="autCtrl.anyUserExists ? autCtrl.signin(autForm.$valid) : autCtrl.signup(autForm.$valid)">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Login</h2>
+        <span flex></span>
+        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="autCtrl.cancel()">
+          <md-tooltip>
+            <span translate="CANCEL"></span>
+          </md-tooltip>
+          <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content layout="column" layout-align="center center">
+      <span class="md-headline" translate="SIGNIN_SOCIAL_MSG"></span>
+      <div layout="row" layout-padding layout-wrap layout-align="center center">
+        <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/facebook')" aria-label="Login with Facebook">
+          <md-tooltip>
+                  Facebook
+                </md-tooltip>
+          <md-icon md-svg-icon="facebook-box" style="color: #3b5998;" aria-label="Facebook Icon" class="md-icon-128"></md-icon>
+        </md-button>
+        <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/twitter')" aria-label="Login with Twitter">
+          <md-tooltip>
+                  Twitter
+                </md-tooltip>
+          <md-icon md-svg-icon="twitter-box" style="color: #55acee;" aria-label="Twitter Icon" class="md-icon-128"></md-icon>
+        </md-button>
+        <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/google')" aria-label="Login with Google+">
+          <md-tooltip>
+                  Google+
+                </md-tooltip>
+          <md-icon md-svg-icon="google-plus-box" style="color: #dc4e41;" aria-label="Google+ Icon" class="md-icon-128"></md-icon>
+        </md-button>
+        <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/linkedin')" aria-label="Login with Linkedin">
+          <md-tooltip>
+                  Linkedin
+                </md-tooltip>
+          <md-icon md-svg-icon="linkedin-box" style="color: #0077b5;" aria-label="Linkedin Icon" class="md-icon-128"></md-icon>
+        </md-button>
+        <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/github')" aria-label="Login with Github">
+          <md-tooltip>
+                  Github
+                </md-tooltip>
+          <md-icon md-svg-icon="github-box" style="color: #333333;" aria-label="Github Icon" class="md-icon-128"></md-icon>
+        </md-button>
+      </div>
+      <span class="md-headline" translate="{{autCtrl.loginType}}_LOCAL_MSG"></span>
+      <md-content class="login-form" layout="row" layout-align="center center">
+        <div layout="column" flex="75" flex-sm="95" flex-md="85" layout-align="start center" ng-include="autCtrl.loginForm">
+        </div>
+        <md-subheader class="md-no-sticky md-warn" ng-show="autCtrl.error" ng-bind="autCtrl.error">
+        </md-subheader>
+      </md-content>
+      <span flex></span>
+    </md-dialog-content>
+    <div class="md-actions" layout="row" layout-align="center center">
+      <md-button aria-label="Cancel button" type="button" class="md-raised" ng-click="autCtrl.cancel()">
+         <span translate="CANCEL"></span>
+      </md-button>
+      <span flex></span>
+      <md-button aria-label="Submit button" type="submit" class="md-raised md-primary">
+        <span translate="{{autCtrl.loginType}}"></span>
+      </md-button>
+    </div>
+  </form>  
+</md-dialog>

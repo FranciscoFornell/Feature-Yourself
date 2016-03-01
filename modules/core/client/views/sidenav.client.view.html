@@ -1,0 +1,34 @@
+<md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z5 main-sidenav" layout="column">
+	<md-toolbar class="md-theme-light md-hue-1 md-whiteframe-z1">
+		<h1 class="md-toolbar-tools">Admin options</h1>
+	</md-toolbar>
+	<!--  <md-menu-bar data-ng-if="sNavCtrl.menu.shouldRender(sNavCtrl.authentication.user);">
+		<md-menu data-ng-repeat="item in sNavCtrl.menu.items | orderBy: 'position'">
+			<md-button class="md-raised md-mini md-hue-1" ng-click="$mdOpenMenu()">
+				<span data-ng-bind="item.title"></span><b class="caret"></b>
+			</md-button>
+			<md-menu-content>
+				<md-menu-item data-ng-repeat="subitem in item.items | orderBy: 'position'">
+					<md-button class="md-primary md-hue-2" ng-href="/#!/{{subitem.link}}">
+						<span data-ng-bind="subitem.title"></span>
+						<span data-ng-bind="subitem.link"></span>
+					</md-button>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
+	</md-menu-bar> -->
+	<md-menu data-ng-if="sNavCtrl.menu.shouldRender(sNavCtrl.authentication.user);" data-ng-repeat="item in sNavCtrl.menu.items | orderBy: 'position'">
+		<md-button
+			aria-label="{{item.title}}"
+			ng-click="$mdOpenMenu($event)">
+			<span ng-bind="item.title"></span>
+		</md-button>			
+		<md-menu-content>
+		   <md-menu-item data-ng-repeat="subitem in item.items | orderBy: 'position'">
+		   		<md-button aria-label="{{subitem.title}}" ng-href="#!/{{subitem.link}}">
+		   			<span ng-bind="subitem.title"></span>
+		   		</md-button>
+		   </md-menu-item>
+		</md-menu-content>
+	</md-menu>
+</md-sidenav>

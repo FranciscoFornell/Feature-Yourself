@@ -1,0 +1,21 @@
+{
+  "SIGNIN_SOCIAL_MSG": "Sign in using your social accounts",
+  "SIGNIN_LOCAL_MSG": "Or sign in with your local account",
+  "SIGNUP_LOCAL_MSG": "Or sign up with your local account",
+  "SIGNIN": "Sign In",
+  "SIGNUP": "Sign Up",
+  "USERNAME": "Username",
+  "PASSWORD": "Password",
+  "FORGOT_PASSWORD": "Forgot your password?",
+  "FIRST_NAME": "First Name",
+  "LAST_NAME": "Last Name",
+  "EMAIL": "Email",
+  "INVALID_EMAIL_MSG": "This doesn't look like a valid email.",
+  "OWASP_MIN_LENGHT": "The password must be at least {{owaspValue}} characters long.",
+  "OWASP_MAX_LENGHT": "The password must be fewer than {{owaspValue}} characters.",
+  "OWASP_REPEATED_CHARS": "The password may not contain sequences of three or more repeated characters.",
+  "OWASP_REQ_LOWERCASE": "The password must contain at least one lowercase letter.",
+  "OWASP_REQ_UPPERCASE": "The password must contain at least one uppercase letter.",
+  "OWASP_REQ_NUMBER": "The password must contain at least one number.",
+  "OWASP_REQ_SPECIAL": "The password must contain at least one special character."
+}

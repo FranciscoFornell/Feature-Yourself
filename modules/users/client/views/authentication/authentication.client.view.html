@@ -1,3 +1,4 @@
+<!-- NOTE: Dejo de momento el formulario antiguo comentado -->
 <!-- <section class="row" ng-controller="AuthenticationController">
   <h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
   <div class="col-md-12 text-center">
@@ -64,9 +65,11 @@
       <md-content class="login-form" layout="row" layout-align="center center">
         <div layout="column" flex="75" flex-sm="95" flex-md="85" layout-align="start center" ng-include="autCtrl.loginForm">
         </div>
-        <md-subheader class="md-no-sticky md-warn" ng-show="autCtrl.error" ng-bind="autCtrl.error">
-        </md-subheader>
       </md-content>
+      <p ng-show="autCtrl.error">
+        <md-subheader class="md-no-sticky md-warn" ng-bind="autCtrl.error">
+        </md-subheader>
+      </p>
       <span flex></span>
     </md-dialog-content>
     <div class="md-actions" layout="row" layout-align="center center">

@@ -59,15 +59,15 @@
     vm.toggleSidenav = function(){
       if (!vm.sidenavIsMoving){
         vm.sidenavIsMoving = true;
-        $mdSidenav('left').toggle()
+        $mdSidenav('left-sidenav').toggle()
         .then(function(){
           vm.sidenavIsMoving = false;
-        }); 
+        });
       }     
     };
 
     vm.hamburguerIconClass = function(){
-      return $mdSidenav('left').isOpen() ? 'is-active' : '';
+      return $mdSidenav('left-sidenav').isOpen() ? 'is-active' : '';
     };
 
     vm.showLoginDialog = function(ev){

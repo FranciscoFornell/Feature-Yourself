@@ -1,5 +1,7 @@
-<!-- TODO: Adaptar a material design -->
-<section ng-controller="SettingsController">
+<!-- TODO: Asegurarme de que queda bien con cada vista parcial -->
+<!-- NOTE: Estudiar la posibilidad de cambiar todo esto por un sistema de tabs. -->
+<!-- NOTE: Dejo de momento el formulario antiguo comentado -->
+<!-- <section ng-controller="SettingsController">
   <div class="page-header">
     <h1>Settings</h1>
   </div>
@@ -22,6 +24,27 @@
     </nav>
     <div class="col-sm-9 col-md-8 settings-view">
       <div ui-view></div>
+    </div>
+  </div>
+</section> -->
+<section flex ng-controller="SettingsController as sCtrl" layout="column" layout-align="center start">
+  <div layout="row" layout-sm="column" style="width: 100%; height: 100%;">
+    <div layout="column" layout-align="center">
+      <md-button class="md-raised" ui-sref="settings.profile" ui-sref-active="md-primary" aria-label="Edit profile">
+        <span translate="EDIT_PROFILE"></span>
+      </md-button>
+      <md-button class="md-raised" ui-sref="settings.picture" ui-sref-active="md-primary" aria-label="Change Profile Picture">
+        <span translate="CHANGE_PROF_PIC"></span>
+      </md-button>
+      <md-button class="md-raised" ui-sref="settings.password" ui-sref-active="md-primary" aria-label="Change Password" ng-show="sCtrl.user.provider === 'local'">
+        <span translate="CHANGE_PASSWORD"></span>
+      </md-button>
+      <md-button class="md-raised" ui-sref="settings.accounts" ui-sref-active="md-primary" aria-label="Manage Social Accounts">
+        <span translate="MANAGE_SOCIAL"></span>
+      </md-button>
+    </div>
+    <div layout="column" flex>
+      <div layout="column" flex ui-view></div>
     </div>
   </div>
 </section>

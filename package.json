@@ -6,10 +6,10 @@
   "private": false,
   "author": "Francisco Fornell Vázquez",
   "license": "MIT",
-  // "repository": {
-  //   "type": "git",
-  //   "url": "https://github.com/meanjs/mean.git"
-  // },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meanjs/mean.git"
+  },
   "engines": {
     "node": ">=0.10.28",
     "npm": ">=1.4.28"

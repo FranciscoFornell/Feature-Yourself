@@ -10,6 +10,7 @@
   "FIRST_NAME": "First Name",
   "LAST_NAME": "Last Name",
   "EMAIL": "Email",
+  "EDIT_PROFILE_TITLE": "Edit your profile",
   "INVALID_EMAIL_MSG": "This doesn't look like a valid email.",
   "OWASP_MIN_LENGHT": "The password must be at least {{owaspValue}} characters long.",
   "OWASP_MAX_LENGHT": "The password must be fewer than {{owaspValue}} characters.",
@@ -17,5 +18,13 @@
   "OWASP_REQ_LOWERCASE": "The password must contain at least one lowercase letter.",
   "OWASP_REQ_UPPERCASE": "The password must contain at least one uppercase letter.",
   "OWASP_REQ_NUMBER": "The password must contain at least one number.",
-  "OWASP_REQ_SPECIAL": "The password must contain at least one special character."
+  "OWASP_REQ_SPECIAL": "The password must contain at least one special character.",
+  "SAVE_PROFILE": "Save Profile",
+  "SAVE_PROFILE_SUCCESS": "Profile saved successfully",
+  "CHANGE_PASSWORD_TITLE": "Change your password",
+  "CURRENT_PASSWORD": "Current Password",
+  "NEW_PASSWORD": "New Password",
+  "VERIFY_PASSWORD": "Verify Password",
+  "SAVE_PASSWORD": "Save Password",
+  "SAVE_PASSWORD_SUCCESS": "Password Changed Successfully"
 }

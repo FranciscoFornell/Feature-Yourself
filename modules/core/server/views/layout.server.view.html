@@ -35,12 +35,14 @@
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 </head>
 
-<body class="ng-cloak">
+<body class="ng-cloak" layout="column" style="overflow: hidden;">
   <header ng-include="'/modules/core/client/views/header.client.view.html'"></header>
-  <section ng-controller="SidenavController as sNavCtrl" data-ng-include="'/modules/core/client/views/sidenav.client.view.html'"></section>
-  <section>
-    {% block content %}{% endblock %}
-  </section>
+  <div flex layout="row" class="main-content" ng-controller="SidenavController as sNavCtrl">
+    <section ng-include="'/modules/core/client/views/sidenav.client.view.html'"></section>
+    <section flex layout="column">
+      {% block content %}{% endblock %}
+    </section>
+  </div>
 
   <!--Embedding The User Object-->
   <script type="text/javascript">

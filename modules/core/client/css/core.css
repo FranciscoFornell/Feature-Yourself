@@ -114,13 +114,16 @@ a:hover .header-profile-image {
 .main-toolbar{
   z-index: 61;
   position: fixed;
-}
-.main-content{
-  padding-top: 64px;
+  top: 0;
 }
 .main-sidenav{
   position: fixed;
-  padding-top: 64px;
+  margin-top: 64px;
+}
+.main-content{
+  position: static;
+  margin-top: 64px;
+  overflow: scroll;
 }
 /*Material design icon sizes*/
 .md-icon-48{
@@ -191,7 +194,7 @@ a:hover .header-profile-image {
   padding-bottom: 35px;
 }
 .editor-form > div > md-input-container{
-  height: 77px;
+  margin-bottom: -10px;
   width: 280px;
 }
 .editor-form .md-subheader {

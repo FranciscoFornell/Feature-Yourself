@@ -1,5 +1,10 @@
 {
   "HELLO_WORLD": "Hello world!",
   "CANCEL": "Cancel",
-  "REQUIRED_FIELD": "This is required!"
+  "REQUIRED_FIELD": "This is required!",
+  "EDIT_PROFILE": "Edit Profile",
+  "CHANGE_PROF_PIC": "Change Profile Picture",
+  "CHANGE_PASSWORD": "Change Password",
+  "MANAGE_SOCIAL": "Manage Social Accounts",
+  "SIGNOUT": "Sign Out"
 }

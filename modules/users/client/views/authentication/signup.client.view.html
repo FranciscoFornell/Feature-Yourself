@@ -97,7 +97,7 @@
     <md-progress-linear ng-class="requirementsColor" md-mode="determinate" value="{{requirementsProgress}}"></md-progress-linear>
     <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
     <div ng-message="weakpassword">
-      <p ng-repeat="passwordError in passwordErrors"><span translate="{{passwordError}}" translate-value-owasp-value="{{owaspValue}}"></span></p>
+      <p ng-repeat="passwordError in passwordErrors" translate="{{passwordError}}" translate-value-owasp-value="{{owaspValue}}"></p>
     </div>
   </div>
 </md-input-container>

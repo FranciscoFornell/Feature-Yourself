@@ -30,9 +30,9 @@
     .module('core')
     .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['$scope', '$window', '$state', 'Authentication', 'Menus', '$mdSidenav', '$mdDialog', '$translate'];
+  HeaderController.$inject = ['$scope', '$window', '$state', 'Authentication', 'Menus', '$mdSidenav', '$mdDialog', '$translate', '$mdComponentRegistry'];
   
-  function HeaderController ($scope, $window ,$state, Authentication, Menus, $mdSidenav, $mdDialog, $translate) {
+  function HeaderController ($scope, $window ,$state, Authentication, Menus, $mdSidenav, $mdDialog, $translate, $mdComponentRegistry) {
     /* jshint validthis: true */
 
     var vm = this;
@@ -56,18 +56,24 @@
 
     vm.sidenavIsMoving = false;
 
+    // This waits untill left-sidenav exists to make $mdSidenav look for it
+    // Otherwise we'd be getting an error: "No instance found for handle left-sidenav"
+    $mdComponentRegistry.when('left-sidenav').then(function(it){
+      vm.leftSidenav = $mdSidenav('left-sidenav');
+    });
+
     vm.toggleSidenav = function(){
-      if (!vm.sidenavIsMoving){
+      if (vm.leftSidenav && !vm.sidenavIsMoving){
         vm.sidenavIsMoving = true;
-        $mdSidenav('left-sidenav').toggle()
-        .then(function(){
-          vm.sidenavIsMoving = false;
-        });
+        vm.leftSidenav.toggle()
+          .then(function(){
+            vm.sidenavIsMoving = false;
+          });
       }     
     };
 
     vm.hamburguerIconClass = function(){
-      return $mdSidenav('left-sidenav').isOpen() ? 'is-active' : '';
+      return (vm.leftSidenav && vm.leftSidenav.isOpen()) ? 'is-active' : '';
     };
 
     vm.showLoginDialog = function(ev){

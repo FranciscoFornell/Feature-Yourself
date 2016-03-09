@@ -21,6 +21,7 @@ var noReturnUrls = [
 exports.signup = function (req, res) {
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
+  // TODO: Mejor que compruebe que no haya usuarios locales, si no hay que le asigne el rol admin, y si los hay, que devuelva error
 
   // Init Variables
   var user = new User(req.body);
@@ -245,10 +246,10 @@ exports.removeOAuthProvider = function (req, res, next) {
 
 // NOTE: Nuevo
 /**
- * Checks if any user exists
+ * Checks if any local user exists
  */
 exports.exists = function (req, res) {
-  User.find({}).limit(1).count({},function(err, result){
+  User.find({ provider: 'local' }).limit(1).count({},function(err, result){
     res.json(result ? true : false);
   });
 };

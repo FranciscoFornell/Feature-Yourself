@@ -6,5 +6,19 @@
   "CHANGE_PROF_PIC": "Cambiar Imagen de Perfil",
   "CHANGE_PASSWORD": "Cambiar Contraseña",
   "MANAGE_SOCIAL": "Administrar Cuentas Sociales",
-  "SIGNOUT": "Cerrar Sesión"
+  "SIGNOUT": "Cerrar Sesión",
+  "SUBMIT": "Enviar",
+  "PASSWORD_RESET_INVALID_TITLE": "Restablecimiento de contraseña inválido",
+  "PASSWORD_RESET_INVALID_MESSAGE": "Pida un nuevo restablecimiento de contraseña",
+  "PASSWORD_RESET_SUCCESS_TITLE": "Contraseña restablecida con éxito",
+  "PASSWORD_RESET_SUCCESS_MESSAGE": "Ir a la página de inicio",
+  "INVALID_LOGIN": "Nombre de usuario o contraseña incorrectos",
+  "AUTHENTICATION_REQUIRED": "Se requiere autenticación para continuar",
+  "SELECT_IMAGE": "Seleccionar Imagen",
+  "UPLOAD": "Subir",
+  "404_NOT_FOUND": "Página No Encontrada",
+  "403_FORBIDDEN_TITLE": "Prohibido",
+  "403_FORBIDDEN_MESSAGE": "No tiene autorización para acceder a este recurso",
+  "400_BAD_REQUEST_TITLE": "Solicitud incorrecta",
+  "400_BAD_REQUEST_MESSAGE": "Hizo una solicitud incorrecta"
 }

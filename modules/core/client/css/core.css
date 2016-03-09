@@ -46,6 +46,14 @@ a:hover .header-profile-image {
   white-space: pre-line;
   text-align: justify;
 }
+.centered-text{
+  text-align: center;
+}
+.message-area{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
 /*animated hamburguer icon*/
 .hamburger-icon {
   display: block;
@@ -123,7 +131,29 @@ a:hover .header-profile-image {
 .main-content{
   position: static;
   margin-top: 64px;
-  overflow: scroll;
+  overflow: auto;
+}
+.child-content{
+  margin-top: -64px;
+  padding-top: 64px;
+  overflow: auto;
+  height: 100vh;
+}
+.dashboard-sidenav{
+  height: 100vh;
+  margin-top: -64px;
+  padding-top: 64px;
+}
+.dashboard-sidenav md-toolbar{
+  overflow-y: auto;
+  height: auto;
+  /*display: block;*/
+}
+.dashboard-content{
+  overflow-y: auto;
+  height: 100vh;
+  margin-top: -64px;
+  padding-top: 64px;
 }
 /*Material design icon sizes*/
 .md-icon-48{
@@ -134,11 +164,35 @@ a:hover .header-profile-image {
   width: 128px;
   height: 128px;
 }
+.md-subicon-128{
+  color: white;
+  background-color: black; /*Fallback for older browsers*/
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 2px;
+  border-radius: 5px;
+}
+
 /*Custom button styles*/
 .md-square-icon-button{
   padding: 0;
   margin: 5px;
   border-radius: 10%;
+}
+.md-dashboard-button {
+  display: block;
+  padding-top: 10px;
+  /*min-height: 80px;*/
+  flex-shrink: 0;
+}
+.md-dashboard-icon {
+  position: relative;
+  line-height: 75%;
+  bottom: -4px;
+  display: block;
+  font-size: 70px;
 }
 
 /*Star rating styles*/
@@ -258,6 +312,12 @@ a:hover .header-profile-image {
     width: 72px;
     height: 72px;
   }
+  .md-square-icon-button > .md-subicon-128{
+    width: 20px;
+    height: 20px;
+    bottom: 10px;
+    left: 10px;
+  }
   .md-square-icon-button {
     min-width: 0;
   }
@@ -270,5 +330,37 @@ a:hover .header-profile-image {
   .md-headline {    
     font-size: 18px;
     line-height: 22px;
+  }
+  .md-toolbar-tools {
+    min-height: 64px;
+  }
+  .md-button.md-fab {
+    min-width: 56px;
+  }
+  .md-button.md-fab.md-mini {
+    min-width: 40px;
+  }
+  .md-dashboard-button {
+    display: inline;
+    padding-top: 0;
+  }
+  .md-dashboard-icon {
+    display: inline-block;
+    font-size: 25px;
+  }
+  .dashboard-sidenav{
+    /*height: auto;*/
+    margin-top: -64px;
+    padding-top: 64px;
+  }
+  .dashboard-sidenav md-toolbar{
+    overflow-y: auto;
+    height: auto;
+    display: flex;
+  }
+}
+@media screen and (max-width:599px){
+  .dashboard-sidenav{
+    height: auto;
   }
 }

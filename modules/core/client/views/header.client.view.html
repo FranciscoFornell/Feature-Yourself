@@ -111,23 +111,33 @@
         </md-button> -->
         <md-menu-content>
           <md-menu-item>
-            <md-button aria-label="Edit profile" class="md-primary md-hue-2" ng-href="/#!/settings/profile">
+            <md-button aria-label="Edit profile" class="md-primary md-hue-2" ui-sref="settings.profile">
+              <md-icon md-svg-icon="account-check" aria-label="Edit Profile Icon"></md-icon>
               <span translate="EDIT_PROFILE"></span>
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button aria-label="Manage social accounts" class="md-primary md-hue-2" ng-href="/#!/settings/accounts">
-              <span translate="MANAGE_SOCIAL"></span>
+            <md-button aria-label="Edit profile" class="md-primary md-hue-2" ui-sref="settings.picture">
+              <md-icon md-svg-icon="file-image" aria-label="Change Profile Picture Icon"></md-icon>
+              <span translate="CHANGE_PROF_PIC"></span>
             </md-button>
           </md-menu-item>
-          <md-menu-item>
-            <md-button aria-label="Change Password" class="md-primary md-hue-2" data-ng-show="hdrCtrl.authentication.user.provider === 'local'" ng-href="/#!/settings/password">
+          <md-menu-item data-ng-show="hdrCtrl.authentication.user.provider === 'local'">
+            <md-button aria-label="Change Password" class="md-primary md-hue-2" ui-sref="settings.password">
+              <md-icon md-svg-icon="account-key" aria-label="Change Password Icon"></md-icon>
               <span translate="CHANGE_PASSWORD"></span>
             </md-button>
           </md-menu-item>           
-            <md-divider></md-divider>
+          <md-menu-item>
+            <md-button aria-label="Manage social accounts" class="md-primary md-hue-2" ui-sref="settings.accounts">
+              <md-icon md-svg-icon="account-multiple" aria-label="Manage Social Accounts Icon"></md-icon>
+              <span translate="MANAGE_SOCIAL"></span>
+            </md-button>
+          </md-menu-item>
+          <md-divider></md-divider>
           <md-menu-item>
             <md-button aria-label="Sign out" class="md-primary md-hue-2" ng-click="hdrCtrl.signout()">
+              <md-icon md-svg-icon="logout-variant" aria-label="Manage Social Accounts Icon"></md-icon>
               <span translate="SIGNOUT"></span>
             </md-button>
           </md-menu-item>

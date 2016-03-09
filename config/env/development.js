@@ -45,8 +45,8 @@ module.exports = {
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
-    clientID: process.env.GOOGLE_ID || 'APP_ID',
-    clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
+    clientID: process.env.GOOGLE_ID || '741920524827-8gjuu7poe815dpu4h53okdpk4kkrlph6.apps.googleusercontent.com', //'APP_ID',
+    clientSecret: process.env.GOOGLE_SECRET || 'AV_cJPaWJXzCVkY-R87-vlAS', //'APP_SECRET',
     callbackURL: '/api/auth/google/callback'
   },
   linkedin: {

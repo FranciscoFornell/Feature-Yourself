@@ -1,5 +1,5 @@
-<!-- TODO: Adaptar a material design -->
-<section class="row" ng-controller="SocialAccountsController">
+<!-- NOTE: Dejo de momento el formulario antiguo comentado -->
+<!-- <section class="row" ng-controller="SocialAccountsController">
   <h3 class="col-md-12 text-center" ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
   <div class="col-md-12 text-center">
     <div ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="social-account-container">
@@ -47,5 +47,27 @@
         <i class="glyphicon glyphicon-plus"></i>
       </a>
     </div>
+  </div>
+</section> -->
+<section flex ng-controller="SocialAccountsController as sACtrl" layout="row" layout-align="center">
+  <div layout="column" layout-align="center center" flex="35" flex-lg="60" flex-md="75" flex-sm="95" >
+    <div class="md-whiteframe-z1" layout-padding layout="column" layout-align="center center">
+      <h3 ng-show="sACtrl.hasConnectedAdditionalSocialAccounts()" class="md-headline" translate="SOCIAL_CONNECTED"></h3>
+      <div layout="row" layout-padding layout-wrap layout-align="center center">
+        <md-button ng-repeat="(providerName, providerData) in sACtrl.user.additionalProvidersData" type="button" class="md-raised md-square-icon-button" ng-click="sACtrl.removeUserSocialAccount(providerName)" aria-label="Remove {{sACtrl.providersCollection[providerName].name}} account">
+          <md-tooltip><span ng-bind="sACtrl.providersCollection[providerName].name"></span></md-tooltip>
+          <md-icon md-svg-icon="{{sACtrl.providersCollection[providerName].mdIcon}}" style="color: {{sACtrl.providersCollection[providerName].color}};" aria-label="{{sACtrl.providersCollection[providerName].name}} Icon" class="md-icon-128"></md-icon>
+          <md-icon md-svg-icon="account-remove"  aria-label="Add account icon" class="md-subicon-128"></md-icon>
+        </md-button>
+      </div>
+      <h3 ng-show="sACtrl.anyUnconnected" class="md-headline" translate="SOCIAL_UNCONNECTED"></h3>
+      <div layout="row" layout-padding layout-wrap layout-align="center center">
+        <md-button ng-repeat="provider in sACtrl.providersArray" type="button" class="md-raised md-square-icon-button" href="/api/auth/{{provider.provider}}" target="_self" aria-label="Add {{provider.name}} account" ng-hide="sACtrl.isConnectedSocialAccount('{{provider.provider}}')">
+          <md-tooltip>{{provider.name}}</md-tooltip>
+          <md-icon md-svg-icon="{{provider.mdIcon}}" style="color: {{provider.color}};" aria-label="{{provider.name}} Icon" class="md-icon-128"></md-icon>
+          <md-icon md-svg-icon="account-plus"  aria-label="Add account icon" class="md-subicon-128"></md-icon>
+        </md-button>
+      </div>
+    </div>    
   </div>
 </section>

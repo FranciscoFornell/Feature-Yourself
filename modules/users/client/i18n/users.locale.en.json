@@ -22,9 +22,22 @@
   "SAVE_PROFILE": "Save Profile",
   "SAVE_PROFILE_SUCCESS": "Profile saved successfully",
   "CHANGE_PASSWORD_TITLE": "Change your password",
+  "RESET_PASSWORD_TITLE": "Reset your password",
   "CURRENT_PASSWORD": "Current Password",
   "NEW_PASSWORD": "New Password",
   "VERIFY_PASSWORD": "Verify Password",
   "SAVE_PASSWORD": "Save Password",
-  "SAVE_PASSWORD_SUCCESS": "Password Changed Successfully"
+  "UPDATE_PASSWORD": "Update Password",
+  "SAVE_PASSWORD_SUCCESS": "Password Changed Successfully",
+  "PASSWORD_NOT_MATCH": "Passwords do not match",
+  "CURRENT_PASSWORD_INCORRECT" : "Current password is incorrect",
+  "WEAK_PASSWORD" : "New password is too weak",
+  "RESTORE_PASSWORD_TITLE": "Restore your password",
+  "RESTORE_PASSWORD_MESSAGE": "Enter your account username.",
+  "USERNAME_NOT_FOUND": "No account with that username has been found",
+  "FAILURE_EMAIL_SEND": "Failure sending email",
+  "RESTORE_PASSWORD_EMAIL_SENT": "An email has been sent to the provided email with further instructions",
+  "RESET_PASSWORD_TOKEN_EXPIRED": "Password reset token is invalid or has expired",
+  "SOCIAL_UNCONNECTED": "Unconnected social accounts:",
+  "SOCIAL_CONNECTED": "Connected social accounts:"
 }

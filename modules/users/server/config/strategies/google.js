@@ -28,7 +28,7 @@ module.exports = function (config) {
       displayName: profile.displayName,
       email: profile.emails[0].value,
       username: profile.username,
-      profileImageURL: (providerData.picture) ? providerData.picture : undefined,
+      profileImageURL: (providerData.image) ? providerData.image.url.substr(0,providerData.image.url.length-6) : undefined,
       provider: 'google',
       providerIdentifierField: 'id',
       providerData: providerData

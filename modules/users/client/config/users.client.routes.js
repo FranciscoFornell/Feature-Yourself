@@ -43,10 +43,14 @@ angular.module('users').config(['$stateProvider',
         url: '/signin?err',
         templateUrl: 'modules/users/client/views/authentication/signin.client.view.html'
       })
+      .state('reqAuthentication', {
+        url: '/require-authentication',
+        templateUrl: 'modules/users/client/views/authentication/require-authentication.client.html'
+      })
       .state('password', {
         abstract: true,
         url: '/password',
-        template: '<ui-view/>'
+        template: '<ui-view flex/>'
       })
       .state('password.forgot', {
         url: '/forgot',
@@ -55,7 +59,7 @@ angular.module('users').config(['$stateProvider',
       .state('password.reset', {
         abstract: true,
         url: '/reset',
-        template: '<ui-view/>'
+        template: '<ui-view flex/>'
       })
       .state('password.reset.invalid', {
         url: '/invalid',

@@ -22,9 +22,22 @@
   "SAVE_PROFILE": "Guardar Perfil",
   "SAVE_PROFILE_SUCCESS": "Perfil guardado satisfactoriamente",
   "CHANGE_PASSWORD_TITLE": "Cambie su contraseña",
+  "RESET_PASSWORD_TITLE": "Restablezca su contraseña",
   "CURRENT_PASSWORD": "Contraseña actual",
   "NEW_PASSWORD": "Contraseña nueva",
   "VERIFY_PASSWORD": "Verificar contraseña",
   "SAVE_PASSWORD": "Guardar contraseña",
-  "SAVE_PASSWORD_SUCCESS": "Contraseña cambiada satisfactoriamente"
+  "UPDATE_PASSWORD": "Actualizar contraseña",
+  "SAVE_PASSWORD_SUCCESS": "Contraseña cambiada satisfactoriamente",
+  "PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
+  "CURRENT_PASSWORD_INCORRECT" : "La contraseña actual es incorrecta",
+  "WEAK_PASSWORD" : "La nueva contraseña es demasiado débil",
+  "RESTORE_PASSWORD_TITLE": "Restaure su contraseña",
+  "RESTORE_PASSWORD_MESSAGE": "Ingrese el nombre de usuario de su cuenta.",
+  "USERNAME_NOT_FOUND": "No se ha encontrado ninguna cuenta con ese nombre de usuario",
+  "FAILURE_EMAIL_SEND": "Fallo al enviar email",
+  "RESTORE_PASSWORD_EMAIL_SENT": "Se ha enviado un email con instrucciones a la dirección proporcionada",
+  "RESET_PASSWORD_TOKEN_EXPIRED": "El identificador de restablecimiento de contraseña es inválido o ha expirado",
+  "SOCIAL_UNCONNECTED": "Cuentas sociales desconectadas:",
+  "SOCIAL_CONNECTED": "Cuentas sociales conectadas:"
 }

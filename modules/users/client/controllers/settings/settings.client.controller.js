@@ -1,3 +1,4 @@
+// NOTE: Dejo de momento el controlador antiguo comentado
 // 'use strict';
 
 // angular.module('users').controller('SettingsController', ['$scope', 'Authentication',
@@ -21,6 +22,5 @@
     vm.user = Authentication.user;
 
     $translatePartialLoader.addPart('users');
-    $translate.refresh();
   }
 })();

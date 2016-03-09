@@ -49,7 +49,9 @@
 
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'passwordForm');
-
+        if($scope.passwordForm.newPassword.$error.weakpassword){
+          vm.error='WEAK_PASSWORD';
+        }
         return false;
       }
 

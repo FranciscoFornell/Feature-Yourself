@@ -6,5 +6,19 @@
   "CHANGE_PROF_PIC": "Change Profile Picture",
   "CHANGE_PASSWORD": "Change Password",
   "MANAGE_SOCIAL": "Manage Social Accounts",
-  "SIGNOUT": "Sign Out"
+  "SIGNOUT": "Sign Out",
+  "SUBMIT": "Submit",
+  "PASSWORD_RESET_INVALID_TITLE": "Password reset is invalid",
+  "PASSWORD_RESET_INVALID_MESSAGE": "Ask for a new password reset",
+  "PASSWORD_RESET_SUCCESS_TITLE": "Password successfully reset",
+  "PASSWORD_RESET_SUCCESS_MESSAGE": "Continue to home page",
+  "INVALID_LOGIN": "Invalid username or password",
+  "AUTHENTICATION_REQUIRED": "Authentication required to continue",
+  "SELECT_IMAGE": "Select Image",
+  "UPLOAD": "Upload",
+  "404_NOT_FOUND": "Page Not Found",
+  "403_FORBIDDEN_TITLE": "Forbidden",
+  "403_FORBIDDEN_MESSAGE": "You are not authorized to access this resource",
+  "400_BAD_REQUEST_TITLE": "Bad Request",
+  "400_BAD_REQUEST_MESSAGE": "You made a bad request"
 }

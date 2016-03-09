@@ -34,7 +34,7 @@ exports.forgot = function (req, res, next) {
         }, '-salt -password', function (err, user) {
           if (!user) {
             return res.status(400).send({
-              message: 'No account with that username has been found'
+              message: 'USERNAME_NOT_FOUND'
             });
           } else if (user.provider !== 'local') {
             return res.status(400).send({
@@ -80,11 +80,11 @@ exports.forgot = function (req, res, next) {
       smtpTransport.sendMail(mailOptions, function (err) {
         if (!err) {
           res.send({
-            message: 'An email has been sent to the provided email with further instructions.'
+            message: 'RESTORE_PASSWORD_EMAIL_SENT'
           });
         } else {
           return res.status(400).send({
-            message: 'Failure sending email'
+            message: 'FAILURE_EMAIL_SEND'
           });
         }
 
@@ -162,12 +162,12 @@ exports.reset = function (req, res, next) {
             });
           } else {
             return res.status(400).send({
-              message: 'Passwords do not match'
+              message: 'PASSWORD_NOT_MATCH'
             });
           }
         } else {
           return res.status(400).send({
-            message: 'Password reset token is invalid or has expired.'
+            message: 'RESET_PASSWORD_TOKEN_EXPIRED'
           });
         }
       });
@@ -203,6 +203,7 @@ exports.reset = function (req, res, next) {
 /**
  * Change Password
  */
+// TODO: Implementar i18 en los mensajes que se retornan
 exports.changePassword = function (req, res, next) {
   // Init Variables
   var passwordDetails = req.body;
@@ -227,7 +228,7 @@ exports.changePassword = function (req, res, next) {
                       res.status(400).send(err);
                     } else {
                       res.send({
-                        message: 'Password changed successfully'
+                        message: 'SAVE_PASSWORD_SUCCESS'
                       });
                     }
                   });
@@ -235,17 +236,17 @@ exports.changePassword = function (req, res, next) {
               });
             } else {
               res.status(400).send({
-                message: 'Passwords do not match'
+                message: 'PASSWORD_NOT_MATCH'
               });
             }
           } else {
             res.status(400).send({
-              message: 'Current password is incorrect'
+              message: 'CURRENT_PASSWORD_INCORRECT'
             });
           }
         } else {
           res.status(400).send({
-            message: 'User is not found'
+            message: 'USERNAME_NOT_FOUND'
           });
         }
       });

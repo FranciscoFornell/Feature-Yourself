@@ -55,8 +55,22 @@ exports.update = function (req, res) {
  */
 exports.changeProfilePicture = function (req, res) {
   var user = req.user;
-  var message = null;
-  var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
+  var message = null; 
+  // NOTE: Cambiadas las opciones para que el nombre de archivo sea uno por usuario y se sobreescriba el fichero si existe
+  var options = {
+    storage: multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, config.uploads.profileUpload.dest);
+      },
+      filename: function (req, file, cb) {
+        cb(null, user._id.toString());
+      }
+    }),
+    limits: config.uploads.profileUpload.limits
+  };
+  var upload = multer(options).single('newProfilePicture');
+  // NOTE: Así estaba antes, por si tengo que volverlo a su estado anterior
+  // var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   
   // Filtering to upload only images

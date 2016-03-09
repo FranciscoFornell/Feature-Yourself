@@ -12,7 +12,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
   }
 ]);
 
-angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, Authentication) {
+angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, Authentication, $translate) {
 
   // Check authentication before changing state
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -30,7 +30,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
         if (Authentication.user !== undefined && typeof Authentication.user === 'object') {
           $state.go('forbidden');
         } else {
-          $state.go('authentication.signin').then(function () {
+          $state.go('reqAuthentication').then(function () {
             storePreviousState(toState, toParams);
           });
         }
@@ -41,6 +41,12 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
   // Record previous state
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     storePreviousState(fromState, fromParams);
+  });
+
+  // NOTE: Nuevo
+  //Refresh angular-translate tables
+  $rootScope.$on('$translatePartialLoaderStructureChanged', function () {
+    $translate.refresh();
   });
 
   // Store previous state

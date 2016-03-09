@@ -73,16 +73,16 @@
     .module('users')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$state', '$http', '$location', '$window', 'Authentication', '$mdDialog', '$translatePartialLoader', '$translate'];
+  AuthenticationController.$inject = ['$scope', '$state', '$http', '$location', '$window', 'Authentication', '$mdDialog', '$translatePartialLoader', '$translate', 'SocialProviders'];
   
-  function AuthenticationController ($scope, $state, $http, $location, $window, Authentication, $mdDialog, $translatePartialLoader, $translate) {
+  function AuthenticationController ($scope, $state, $http, $location, $window, Authentication, $mdDialog, $translatePartialLoader, $translate, SocialProviders) {
     /* jshint validthis: true */
 
     var vm = this;
     vm.authentication = Authentication;
+    vm.providersArray = SocialProviders.providersArray;
 
     $translatePartialLoader.addPart('users');
-    $translate.refresh();
 
     $http.get('/api/users/exists').
       success(function(data, status, headers, config) {
@@ -100,7 +100,7 @@
       });
 
     // If user is signed in then redirect back home
-    if (vm.authentication.user) $location.path('/');
+    if (vm.authentication.user) $mdDialog.cancel();
 
     vm.signup = function(isValid) {
 

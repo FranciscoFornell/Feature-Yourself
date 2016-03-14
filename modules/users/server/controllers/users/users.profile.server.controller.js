@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var _ = require('lodash'),
   fs = require('fs'),
@@ -55,7 +55,6 @@ exports.update = function (req, res) {
  */
 exports.changeProfilePicture = function (req, res) {
   var user = req.user;
-  var message = null; 
   // NOTE: Cambiadas las opciones para que el nombre de archivo sea uno por usuario y se sobreescriba el fichero si existe
   var options = {
     storage: multer.diskStorage({

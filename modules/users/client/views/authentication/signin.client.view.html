@@ -2,7 +2,7 @@
 <!-- <div ng-controller="AuthenticationController">
   <h3 class="col-md-12 text-center">Or with your account</h3>
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
-    <form name="userForm" ng-submit="signin(userForm. scope="" onload=""$valid)" class="signin" novalidate autocomplete="off">
+    <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
           <label for="username">Username</label>
@@ -26,15 +26,14 @@
         <div class="text-center forgot-password">
           <a ui-sref="password.forgot">Forgot your password?</a>
         </div>
-        <alert type="danger" ng-show="error" class="text-center text-danger">
+        <uib-alert type="danger" ng-show="error" class="text-center text-danger">
           <span ng-bind="error"></span>
-        </alert>
+        </uib-alert>
       </fieldset>
     </form>
   </div>
 </div>
  -->
-<!-- NOTE: reconvierto a dialog, conservo de momento la vista anterior comentada. -->
 <md-input-container>
   <label translate="USERNAME"></label>
   <input required type="text" id="username" name="username" ng-model="autCtrl.credentials.username">

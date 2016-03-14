@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module dependencies.
+ * Module dependencies
  */
 var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
@@ -23,11 +23,8 @@ exports.signup = function (req, res) {
   delete req.body.roles;
   // TODO: Mejor que compruebe que no haya usuarios locales, si no hay que le asigne el rol admin, y si los hay, que devuelva error
 
-  // Init Variables
+  // Init user and add missing fields
   var user = new User(req.body);
-  var message = null;
-
-  // Add missing user fields
   user.provider = 'local';
   user.displayName = user.firstName + ' ' + user.lastName;
 

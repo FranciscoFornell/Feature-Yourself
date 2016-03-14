@@ -9,6 +9,9 @@
 //     // Get the topbar menu
 //     $scope.menu = Menus.getMenu('topbar');
 
+//     // Get the account menu
+//     $scope.accountMenu = Menus.getMenu('account').items[0];
+
 //     // Toggle the menu items
 //     $scope.isCollapsed = false;
 //     $scope.toggleCollapsibleMenu = function () {
@@ -53,6 +56,8 @@
     langButton.language = vm.currentLanguage === 'en' ? 'es' : 'en';
     vm.traslateButtonText = langButton.text[langButton.language];
     vm.traslateButtonClass = langButton.class[langButton.language];
+    //TODO: Implementar que el menú de cuenta lo cargue de aquí
+    vm.accountMenu = Menus.getMenu('account').items[0];
 
     vm.sidenavIsMoving = false;
 

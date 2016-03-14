@@ -4,6 +4,6 @@
   angular.module('core')
     .config(['$mdIconProvider', function($mdIconProvider) {
       $mdIconProvider
-      .defaultIconSet('lib/angular-material/mdi.svg');
+      .defaultIconSet('lib/mdi/mdi.svg');
     }]);
 })();

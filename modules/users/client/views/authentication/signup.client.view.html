@@ -91,7 +91,7 @@
 <md-input-container>
   <label translate="PASSWORD"></label>
   <input required type="password" id="password" name="password" maxlength="18" ng-model="autCtrl.credentials.password" password-validator>
-  <div ng-messages="autForm.password.$error">
+  <div ng-messages="autForm.password.$error" md-auto-hide="false">
     <md-progress-linear ng-class="requirementsColor" md-mode="determinate" value="{{requirementsProgress}}" ng-hide="autForm.password.$error.required"></md-progress-linear>
     <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
     <div ng-message="weakpassword">

@@ -25,12 +25,12 @@
     </div>
   </div>
 </section> -->
-<section flex ng-controller="SettingsController as sCtrl" layout="row" layout-sm="column" layout-fill>
-  <div layout="column" class="dashboard-sidenav">
+<section flex ng-controller="SettingsController as sCtrl" layout="row" layout-fill>
+  <div layout="column" class="dashboard-sidenav" hide-xs>
     <md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" layout-fill layout="column" layout-padding>
       <div flex></div>
-      <md-button ng-repeat="item in sCtrl.accountMenu.items" class="md-raised md-hue-1 md-dashboard-button" ui-sref="{{item.state}}" ui-sref-active="md-primary md-hue-2" aria-label="{{item.title | translate}}" ng-hide="item.state === 'settings.password' && sCtrl.user.provider !== 'local'">
-        <span class="mdi mdi-{{item.icon}} md-dashboard-icon"></span>
+      <md-button ng-repeat="item in sCtrl.accountMenu.items" class="md-raised md-hue-1 md-dashboard-button" ui-sref="{{item.state}}" ui-sref-active="md-primary md-hue-2" aria-label="{{item.title | translate}}" ng-if="item.state !== 'settings.password' || sCtrl.user.provider === 'local'">
+        <md-icon class="md-dashboard-icon" md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} icon"></md-icon>
         <span translate="{{item.title}}"></span>
       </md-button>
       <div flex></div>

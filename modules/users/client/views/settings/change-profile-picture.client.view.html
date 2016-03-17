@@ -27,17 +27,17 @@
   </div>
 </section> -->
 <section flex ng-controller="ChangeProfilePictureController as cPPCtrl" layout="row" layout-align="center">
-  <div layout="column" layout-align="center center" flex="35" flex-lg="60" flex-md="75" flex-sm="95">
+  <div layout="column" layout-align="center center" flex="35" flex-md="60" flex-sm="75" flex-xs="95">
     <md-card>
       <span><img ng-src="{{cPPCtrl.imageURL}}" alt="{{cPPCtrl.user.displayName}}"></span>
-      <div class="md-actions" layout="row" layout-align="space-around">
-        <div class="btn-file" ng-hide="cPPCtrl.uploader.queue.length">
+      <md-card-actions layout="row" layout-align="space-around">
+        <div class="btn-file" ng-hide="cPPCtrl.uploader.queue.length" layout="row" layout-align="center center">
           <input id="input-file" type="file" nv-file-select uploader="cPPCtrl.uploader" aria-label="Select image">
           <label for="input-file" class="md-button md-raised" translate="SELECT_IMAGE"></label>
         </div>
         <md-button ng-show="cPPCtrl.uploader.queue.length" ng-click="cPPCtrl.cancelUpload()" class="md-raised" translate="CANCEL" aria-label="Cancel"></md-button>
         <md-button ng-show="cPPCtrl.uploader.queue.length"ng-click="cPPCtrl.uploadProfilePicture()" class="md-raised" translate="UPLOAD" aria-label="Upload"></md-button>
-      </div>
+      </md-card-actions>
     </md-card>
   </div>
 </section>

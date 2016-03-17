@@ -33,9 +33,9 @@
     .module('core')
     .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['$scope', '$window', '$state', 'Authentication', 'Menus', '$mdSidenav', '$mdDialog', '$translate', '$mdComponentRegistry'];
+  HeaderController.$inject = ['$scope', '$window', '$state', 'Authentication', 'Menus', '$mdSidenav', '$mdDialog', '$translate', '$mdComponentRegistry', '$mdMedia'];
   
-  function HeaderController ($scope, $window ,$state, Authentication, Menus, $mdSidenav, $mdDialog, $translate, $mdComponentRegistry) {
+  function HeaderController ($scope, $window ,$state, Authentication, Menus, $mdSidenav, $mdDialog, $translate, $mdComponentRegistry, $mdMedia) {
     /* jshint validthis: true */
 
     var vm = this;
@@ -86,7 +86,8 @@
         templateUrl: 'modules/users/client/views/authentication/authentication.client.view.html',
         parent: angular.element(document.body),
         targetEvent: ev,
-        clickOutsideToClose:true
+        clickOutsideToClose:true,
+        fullscreen: $mdMedia('xs')
       });
     };
 

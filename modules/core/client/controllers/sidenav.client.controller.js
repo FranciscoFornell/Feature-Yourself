@@ -13,7 +13,12 @@
     var vm = this;
     // This provides Authentication context.
     vm.authentication = Authentication;
-    vm.menu = Menus.getMenu('topbar');
+    vm.topbarMenu = Menus.getMenu('topbar');
+    vm.accountMenu = Menus.getMenu('account').items[0];
+
+    vm.checkStateContains = function(state){
+      return ($state.current.name.indexOf(state) !== -1);
+    };
 
     vm.closeSidenav = function(){
       $mdSidenav('left-sidenav').close();

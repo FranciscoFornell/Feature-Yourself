@@ -11,7 +11,7 @@
   </div>
   <div ui-view></div>
 </section> -->
-<md-dialog aria-label="Sign in form" ng-cloak data-ng-controller="AuthenticationController as autCtrl" layout="column">
+<md-dialog aria-label="Sign in form" data-ng-controller="AuthenticationController as autCtrl" layout="column">
   <form name="autForm" ng-submit="autCtrl.anyUserExists ? autCtrl.signin(autForm.$valid) : autCtrl.signup(autForm.$valid)">
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -35,7 +35,7 @@
       </div>
       <span class="md-headline" translate="{{autCtrl.loginType}}_LOCAL_MSG"></span>
       <md-content class="login-form" layout="row" layout-align="center center">
-        <div layout="column" flex="75" flex-sm="95" flex-md="85" layout-align="start center" ng-include="autCtrl.loginForm">
+        <div layout="column" flex="75" flex-sm="85" flex-xs="95" layout-align="start center" ng-include="autCtrl.loginForm" layout-margin>
         </div>
       </md-content>
       <p ng-show="autCtrl.error">
@@ -44,7 +44,7 @@
       </p>
       <span flex></span>
     </md-dialog-content>
-    <div class="md-actions" layout="row" layout-align="center center">
+    <md-dialog-actions layout="row" layout-align="center center">
       <md-button aria-label="Cancel button" type="button" class="md-raised" ng-click="autCtrl.cancel()"  ng-hide="cancelForbidden">
          <span translate="CANCEL"></span>
       </md-button>
@@ -52,6 +52,6 @@
       <md-button aria-label="Submit button" type="submit" class="md-raised md-primary">
         <span translate="{{autCtrl.loginType}}"></span>
       </md-button>
-    </div>
+    </md-dialog-actions>
   </form>  
 </md-dialog>

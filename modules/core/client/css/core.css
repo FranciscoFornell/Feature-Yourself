@@ -55,8 +55,14 @@ a:hover .header-profile-image {
 .centered-text{
   text-align: center;
 }
+.left-aligned-text{
+  text-align: left;
+}
 .capitalized-text{
   text-transform: capitalize;
+}
+.no-padding {
+  padding: 0;
 }
 .message-area{
   padding: 10px;
@@ -133,11 +139,14 @@ a:hover .header-profile-image {
   position: fixed;
   top: 0;
 }
+.main-toolbar > .md-toolbar-tools{
+  min-height: 64px;
+}
 .main-sidenav{
   position: fixed;
   margin-top: 64px;
-  min-width: 200px;
-  width: 200px;
+  min-width: 250px;
+  width: 250px;
 }
 .main-content{
   position: static;
@@ -176,7 +185,7 @@ a:hover .header-profile-image {
   height: 128px;
 }
 .md-subicon-128{
-  color: white;
+  fill: white;
   background-color: black; /*Fallback for older browsers*/
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
@@ -197,6 +206,7 @@ a:hover .header-profile-image {
   padding-top: 10px;
   /*min-height: 80px;*/
   flex-shrink: 0;
+  width: 250px;
 }
 .md-dashboard-icon {
   position: relative;
@@ -204,6 +214,8 @@ a:hover .header-profile-image {
   bottom: -4px;
   display: block;
   font-size: 70px;
+  width: 70px;
+  height: 70px;
 }
 
 /*Star rating styles*/
@@ -328,12 +340,6 @@ a:hover .header-profile-image {
   .md-square-icon-button {
     min-width: 0;
   }
-  md-dialog {
-    max-width: 100%;
-    max-height: 100%;
-    width: 98%;
-    height: 98%;
-  }
   .md-headline {    
     font-size: 18px;
     line-height: 22px;
@@ -349,11 +355,13 @@ a:hover .header-profile-image {
   }
   .md-dashboard-button {
     display: inline;
-    padding-top: 0;
+    padding: 0;
   }
   .md-dashboard-icon {
     display: inline-block;
-    font-size: 25px;
+    height: 25px;
+    width: 25px;
+    margin-top: -10px;
   }
   .dashboard-sidenav{
     /*height: auto;*/

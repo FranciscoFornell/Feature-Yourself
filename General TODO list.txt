@@ -1,6 +1,4 @@
 TODO: Implementar internacionalización i18n.
 TODO: Crear una vista de dashboard para administración y preferencias.
-TODO: Revisar sistema de menús, y hacer que salga en la barra superior y pase al sidenav cuando la pantalla sea demasiado estrecha
 TODO: Repaso masivo de ficheros .js del cliente, para adaptar a hottowel y poner los comentarios apropiados
-TODO: Actualizar a Angular Material 1.0.6?
 TODO: Notificación de uso de cookies

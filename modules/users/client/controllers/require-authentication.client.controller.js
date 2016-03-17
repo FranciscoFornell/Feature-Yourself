@@ -6,9 +6,9 @@
     .module('users')
     .controller('RequireAuthenticationController', RequireAuthenticationController);
 
-  RequireAuthenticationController.$inject = ['$scope', '$state', 'Authentication', '$mdDialog', '$translate', '$location'];
+  RequireAuthenticationController.$inject = ['$scope', '$state', 'Authentication', '$mdDialog', '$translate', '$location', '$mdMedia'];
   
-  function RequireAuthenticationController ($scope ,$state, Authentication, $mdDialog, $translate, $location) {
+  function RequireAuthenticationController ($scope ,$state, Authentication, $mdDialog, $translate, $location, $mdMedia) {
     /* jshint validthis: true */
 
     var vm = this;
@@ -27,6 +27,7 @@
         templateUrl: 'modules/users/client/views/authentication/authentication.client.view.html',
         parent: angular.element(document.body),
         clickOutsideToClose:false,
+        fullscreen: $mdMedia('xs'),
         escapeToClose: false,
         scope: $scope,
         onRemoving: redirect

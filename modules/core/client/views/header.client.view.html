@@ -50,12 +50,12 @@
 </div> -->
 <md-toolbar data-ng-controller="HeaderController as hdrCtrl" class="main-toolbar">
   <div class="md-toolbar-tools md-whiteframe-z1">
-    <md-button hide-gt-sm class="md-fab md-primary md-hue-2" aria-label="Show/hide sidenav" ng-click="hdrCtrl.toggleSidenav()">
+    <md-button hide-gt-xs class="md-fab md-primary md-hue-2" aria-label="Show/hide sidenav" ng-click="hdrCtrl.toggleSidenav()">
       <span class="hamburger-icon" ng-class="hdrCtrl.hamburguerIconClass()">
         <span></span>
       </span>
     </md-button>
-    <span layout="row" ng-repeat="item in hdrCtrl.menu.items" hide-sm ng-if="item.shouldRender(hdrCtrl.authentication.user);">
+    <span layout="row" ng-repeat="item in hdrCtrl.menu.items" hide-xs ng-if="item.shouldRender(hdrCtrl.authentication.user);">
       <md-button ng-if="item.type !== 'dropdown'" aria-label="{{item.title | translate}}" ui-sref="{{item.state}}" class="capitalized-text" ui-sref-active="md-raised md-primary md-hue-1">
         <md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} icon"></md-icon>
         <span translate="{{item.title}}"></span>
@@ -67,7 +67,7 @@
           <md-icon md-svg-icon="chevron-down" aria-label="dropdown icon"></md-icon>
         </md-button>
         <md-menu-content>
-          <md-menu-item ng-repeat="subitem in item.items" layout-padding><md-button ui-sref="{{subitem.state}}" aria-label="{{subitem.title | translate}}" ui-sref-active="md-primary md-raised md-hue-1">
+          <md-menu-item ng-repeat="subitem in item.items"><md-button ui-sref="{{subitem.state}}" aria-label="{{subitem.title | translate}}" ui-sref-active="md-primary md-raised md-hue-1">
             <md-icon ng-if="subitem.icon" md-svg-icon="{{subitem.icon}}" aria-label="{{subitem.title | translate}} icon"></md-icon>
             <span translate="{{subitem.title}}"></span>
           </md-button></md-menu-item>
@@ -83,7 +83,7 @@
         <md-tooltip md-delay="0" md-direction="down">{{hdrCtrl.traslateButtonText}}</md-tooltip>
       </md-button>
       <div data-ng-hide="hdrCtrl.authentication.user">
-        <md-button class="md-fab md-icon-button md-primary md-hue-2"
+        <md-button class="md-fab md-primary md-hue-2 no-padding"
           aria-label="Login options"
           ng-click="hdrCtrl.showLoginDialog($event)">
           <md-tooltip md-delay="0" md-direction="down">Login</md-tooltip>
@@ -94,7 +94,7 @@
         md-position-mode="target-right target"
         data-ng-show="hdrCtrl.authentication.user"
         ng-cloak>
-        <md-button class="md-fab md-icon-button md-accent md-hue-2"
+        <md-button class="md-fab md-accent md-hue-2 no-padding"
           aria-label="Login options"
           ng-click="$mdOpenMenu($event)">
           <md-tooltip md-delay="0" md-direction="left">{{hdrCtrl.authentication.user.displayName}}</md-tooltip>
@@ -104,7 +104,7 @@
           <span data-ng-bind="hdrCtrl.authentication.user.displayName"></span><b class="caret"></b>
         </md-button> -->
         <md-menu-content>
-          <md-menu-item ng-repeat="item in hdrCtrl.accountMenu.items" ng-hide="item.state === 'settings.password' && hdrCtrl.authentication.user.provider !== 'local'">
+          <md-menu-item ng-repeat="item in hdrCtrl.accountMenu.items" ng-if="item.state !== 'settings.password' || hdrCtrl.authentication.user.provider === 'local'">
             <md-button aria-label="{{item.title | translate}}" class="md-primary md-hue-2" ui-sref="{{item.state}}">
               <md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} Icon"></md-icon>
               <span translate="{{item.title}}"></span>

@@ -15,6 +15,7 @@
 .btn-file {
   position: relative;
   overflow: hidden;
+  padding: 5px;
 }
 .btn-file input[type=file] {
   position: absolute;
@@ -44,7 +45,6 @@
   width: 100%;
 }
 .login-form > div > md-input-container{
-  margin-bottom: -10px;
   width: 100%;
 }
 .login-form .md-subheader {

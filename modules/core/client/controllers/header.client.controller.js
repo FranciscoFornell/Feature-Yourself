@@ -56,8 +56,8 @@
     langButton.language = vm.currentLanguage === 'en' ? 'es' : 'en';
     vm.traslateButtonText = langButton.text[langButton.language];
     vm.traslateButtonClass = langButton.class[langButton.language];
-    //TODO: Implementar que el menú de cuenta lo cargue de aquí
     vm.accountMenu = Menus.getMenu('account').items[0];
+    vm.menu = Menus.getMenu('topbar');
 
     vm.sidenavIsMoving = false;
 

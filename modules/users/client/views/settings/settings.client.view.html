@@ -28,22 +28,10 @@
 <section flex ng-controller="SettingsController as sCtrl" layout="row" layout-sm="column" layout-fill>
   <div layout="column" class="dashboard-sidenav">
     <md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" layout-fill layout="column" layout-padding>
-      <div flex></div>  
-      <md-button class="md-raised md-hue-1 md-dashboard-button" ui-sref="settings.profile" ui-sref-active="md-primary md-hue-2" aria-label="Edit profile">
-        <span class="mdi mdi-account-check md-dashboard-icon"></span>
-        <span translate="EDIT_PROFILE"></span>
-      </md-button>
-      <md-button class="md-raised md-hue-1 md-dashboard-button" ui-sref="settings.picture" ui-sref-active="md-primary md-hue-2" aria-label="Change Profile Picture">
-        <span class="mdi mdi-file-image md-dashboard-icon"></span>
-        <span translate="CHANGE_PROF_PIC"></span>
-      </md-button>
-      <md-button class="md-raised md-hue-1 md-dashboard-button" ui-sref="settings.password" ui-sref-active="md-primary md-hue-2" aria-label="Change Password" ng-show="sCtrl.user.provider === 'local'">
-        <span class="mdi mdi-account-key md-dashboard-icon"></span>
-        <span translate="CHANGE_PASSWORD"></span>
-      </md-button>
-      <md-button class="md-raised md-hue-1  md-dashboard-button" ui-sref="settings.accounts" ui-sref-active="md-primary md-hue-2" aria-label="Manage Social Accounts">
-        <span class="mdi mdi-account-multiple md-dashboard-icon"></span>
-        <span translate="MANAGE_SOCIAL"></span>
+      <div flex></div>
+      <md-button ng-repeat="item in sCtrl.accountMenu.items" class="md-raised md-hue-1 md-dashboard-button" ui-sref="{{item.state}}" ui-sref-active="md-primary md-hue-2" aria-label="{{item.title | translate}}" ng-hide="item.state === 'settings.password' && sCtrl.user.provider !== 'local'">
+        <span class="mdi mdi-{{item.icon}} md-dashboard-icon"></span>
+        <span translate="{{item.title}}"></span>
       </md-button>
       <div flex></div>
     </md-toolbar>

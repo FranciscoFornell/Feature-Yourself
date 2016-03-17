@@ -1,7 +1,7 @@
 {
   "name": "awesome-personal-page-app",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "meanjs-version": "0.5.0-beta",
   "private": false,
   "author": "Francisco Fornell Vázquez",

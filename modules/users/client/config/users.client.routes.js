@@ -1,4 +1,3 @@
-// NOTE: Creo que con dialogs hay rutas que no tienen sentido (TODO:)
 'use strict';
 
 // Setting up route
@@ -47,20 +46,21 @@ angular.module('users').config(['$stateProvider',
         url: '/authentication',
         templateUrl: 'modules/users/client/views/authentication/authentication.client.view.html'
       })
-      .state('authentication.signup', {
-        url: '/signup',
-        templateUrl: 'modules/users/client/views/authentication/signup.client.view.html',
-        data: {
-          pageTitle: 'Signup'
-        }
-      })
-      .state('authentication.signin', {
-        url: '/signin?err',
-        templateUrl: 'modules/users/client/views/authentication/signin.client.view.html',
-        data: {
-          pageTitle: 'Signin'
-        }
-      })
+      // NOTE: I don't need this routes anymore
+      // .state('authentication.signup', {
+      //   url: '/signup',
+      //   templateUrl: 'modules/users/client/views/authentication/signup.client.view.html',
+      //   data: {
+      //     pageTitle: 'Signup'
+      //   }
+      // })
+      // .state('authentication.signin', {
+      //   url: '/signin?err',
+      //   templateUrl: 'modules/users/client/views/authentication/signin.client.view.html',
+      //   data: {
+      //     pageTitle: 'Signin'
+      //   }
+      // })
       .state('reqAuthentication', {
         url: '/require-authentication',
         templateUrl: 'modules/users/client/views/authentication/require-authentication.client.html',

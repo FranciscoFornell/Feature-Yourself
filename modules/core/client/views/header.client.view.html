@@ -48,36 +48,39 @@
     </ul>
   </nav>
 </div> -->
-<!-- TODO: Buscar una forma de que la opción de cambiar el idioma sea lo menos intrusiva posible -->
 <md-toolbar data-ng-controller="HeaderController as hdrCtrl" class="main-toolbar">
   <div class="md-toolbar-tools md-whiteframe-z1">
-    <md-button class="md-fab md-primary md-hue-2" aria-label="Show/hide sidenav" ng-click="hdrCtrl.toggleSidenav()">
+    <md-button hide-gt-sm class="md-fab md-primary md-hue-2" aria-label="Show/hide sidenav" ng-click="hdrCtrl.toggleSidenav()">
       <span class="hamburger-icon" ng-class="hdrCtrl.hamburguerIconClass()">
         <span></span>
       </span>
     </md-button>
-    <a href="/#!/" >Awesome Personal Page (APP)</a>
-    <!-- <md-menu-bar data-ng-if="hdrCtrl.menu.shouldRender(hdrCtrl.authentication.user);">
-      <md-menu data-ng-repeat="item in hdrCtrl.menu.items | orderBy: 'position'">
-        <md-button class="md-raised md-mini md-hue-1" ng-click="$mdOpenMenu()">
-          <span data-ng-bind="item.title"></span><b class="caret"></b>
+    <span layout="row" ng-repeat="item in hdrCtrl.menu.items" hide-sm ng-if="item.shouldRender(hdrCtrl.authentication.user);">
+      <md-button ng-if="item.type !== 'dropdown'" aria-label="{{item.title | translate}}" ui-sref="{{item.state}}" class="capitalized-text" ui-sref-active="md-raised md-primary md-hue-1">
+        <md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} icon"></md-icon>
+        <span translate="{{item.title}}"></span>
+      </md-button>
+      <md-menu layout="row" ng-if="item.type === 'dropdown'" md-offset="15 55">
+        <md-button class="capitalized-text" ng-click="$mdOpenMenu($event)" aria-label="{{item.title | translate}}" ui-sref="{{item.state}}" ui-sref-active="md-primary md-raised md-hue-1">
+          <md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} icon"></md-icon>
+          <span translate="{{item.title}}"></span>
+          <md-icon md-svg-icon="chevron-down" aria-label="dropdown icon"></md-icon>
         </md-button>
         <md-menu-content>
-          <md-menu-item data-ng-repeat="subitem in item.items | orderBy: 'position'">
-            <md-button class="md-primary md-hue-2" ng-href="/#!/{{subitem.link}}">
-              <span data-ng-bind="subitem.title"></span>
-            </md-button>
-          </md-menu-item>
+          <md-menu-item ng-repeat="subitem in item.items" layout-padding><md-button ui-sref="{{subitem.state}}" aria-label="{{subitem.title | translate}}" ui-sref-active="md-primary md-raised md-hue-1">
+            <md-icon ng-if="subitem.icon" md-svg-icon="{{subitem.icon}}" aria-label="{{subitem.title | translate}} icon"></md-icon>
+            <span translate="{{subitem.title}}"></span>
+          </md-button></md-menu-item>
         </md-menu-content>
       </md-menu>
-    </md-menu-bar> -->
+    </span>
     <span flex></span>
     <span layout="row" layout-align="center center">
-      <md-button class="md-raised md-hue-1" ng-class="hdrCtrl.traslateButtonClass" aria-label="Change language" ng-click="hdrCtrl.changeLanguage()">
-        <div layout="row" layout-align="center center">
-        <span ng-bind="hdrCtrl.traslateButtonText"></span>
-        <span class="flag-icon"></span>          
+      <md-button class="md-raised md-hue-1 md-fab md-mini" ng-class="hdrCtrl.traslateButtonClass" aria-label="{{hdrCtrl.traslateButtonText}}" ng-click="hdrCtrl.changeLanguage()">
+        <div layout="column" layout-align="center center">
+          <span class="flag-icon"></span>
         </div>
+        <md-tooltip md-delay="0" md-direction="down">{{hdrCtrl.traslateButtonText}}</md-tooltip>
       </md-button>
       <div data-ng-hide="hdrCtrl.authentication.user">
         <md-button class="md-fab md-icon-button md-primary md-hue-2"
@@ -101,29 +104,10 @@
           <span data-ng-bind="hdrCtrl.authentication.user.displayName"></span><b class="caret"></b>
         </md-button> -->
         <md-menu-content>
-        <!-- TODO: Implementar que el menú se cargue dinámicamente con un ng-repeat desde el modelo accountMenu -->
-          <md-menu-item>
-            <md-button aria-label="Edit profile" class="md-primary md-hue-2" ui-sref="settings.profile">
-              <md-icon md-svg-icon="account-check" aria-label="Edit Profile Icon"></md-icon>
-              <span translate="EDIT_PROFILE"></span>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button aria-label="Edit profile" class="md-primary md-hue-2" ui-sref="settings.picture">
-              <md-icon md-svg-icon="file-image" aria-label="Change Profile Picture Icon"></md-icon>
-              <span translate="CHANGE_PROF_PIC"></span>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item data-ng-show="hdrCtrl.authentication.user.provider === 'local'">
-            <md-button aria-label="Change Password" class="md-primary md-hue-2" ui-sref="settings.password">
-              <md-icon md-svg-icon="account-key" aria-label="Change Password Icon"></md-icon>
-              <span translate="CHANGE_PASSWORD"></span>
-            </md-button>
-          </md-menu-item>           
-          <md-menu-item>
-            <md-button aria-label="Manage social accounts" class="md-primary md-hue-2" ui-sref="settings.accounts">
-              <md-icon md-svg-icon="account-multiple" aria-label="Manage Social Accounts Icon"></md-icon>
-              <span translate="MANAGE_SOCIAL"></span>
+          <md-menu-item ng-repeat="item in hdrCtrl.accountMenu.items" ng-hide="item.state === 'settings.password' && hdrCtrl.authentication.user.provider !== 'local'">
+            <md-button aria-label="{{item.title | translate}}" class="md-primary md-hue-2" ui-sref="{{item.state}}">
+              <md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} Icon"></md-icon>
+              <span translate="{{item.title}}"></span>
             </md-button>
           </md-menu-item>
           <md-divider></md-divider>

@@ -14,12 +14,13 @@
   	.module('users')
   	.controller('SettingsController', SettingsController);
 
-  SettingsController.$inject = ['$scope', 'Authentication', '$translatePartialLoader', '$translate'];
+  SettingsController.$inject = ['$scope', 'Authentication', '$translatePartialLoader', '$translate', 'Menus'];
 
-  function SettingsController ($scope, Authentication, $translatePartialLoader, $translate) {
+  function SettingsController ($scope, Authentication, $translatePartialLoader, $translate, Menus) {
     /* jshint validthis: true */
     var vm = this;
     vm.user = Authentication.user;
+    vm.accountMenu = Menus.getMenu('account').items[0];
 
     $translatePartialLoader.addPart('users');
   }

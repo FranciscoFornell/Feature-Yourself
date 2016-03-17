@@ -52,6 +52,7 @@
     vm.user = Authentication.user;
     vm.providersArray = SocialProviders.providersArray;
     vm.providersCollection = SocialProviders.providersCollection;
+    vm.mainAccountName = (vm.user.provider === 'local') ? 'Local' : vm.providersCollection[vm.user.provider].name;
     vm.anyUnconnected = false;
 
     // Check if there are additional accounts

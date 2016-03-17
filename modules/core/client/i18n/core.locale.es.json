@@ -1,4 +1,7 @@
 {
+  "HOME": "Inicio",
+  "ADMIN": "Administración",
+  "MANAGE_USERS": "Administrar usuarios",
   "HELLO_WORLD": "¡Hola mundo!",
   "CANCEL": "Cancelar",
   "REQUIRED_FIELD": "¡Este campo es obligatorio!",

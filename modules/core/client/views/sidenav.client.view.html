@@ -1,19 +1,21 @@
-<md-sidenav flex md-component-id="left-sidenav" class="md-sidenav-left md-whiteframe-z5 main-sidenav" layout="column">
-	<md-toolbar class="md-theme-light md-hue-1 md-whiteframe-z1">
-		<h1 class="md-toolbar-tools">Admin options</h1>
-	</md-toolbar>
-	<md-menu data-ng-if="sNavCtrl.menu.shouldRender(sNavCtrl.authentication.user);" data-ng-repeat="item in sNavCtrl.menu.items | orderBy: 'position'">
-		<md-button
-			aria-label="{{item.title}}"
-			ng-click="$mdOpenMenu($event)">
-			<span ng-bind="item.title"></span>
-		</md-button>			
-		<md-menu-content>
-		   <md-menu-item data-ng-repeat="subitem in item.items | orderBy: 'position'">
-		   		<md-button aria-label="{{subitem.title}}" ui-sref="{{subitem.state}}">
-		   			<span ng-bind="subitem.title"></span>
-		   		</md-button>
-		   </md-menu-item>
-		</md-menu-content>
-	</md-menu>
+<md-sidenav hide-gt-sm flex md-component-id="left-sidenav" class="md-sidenav-left md-whiteframe-z5 main-sidenav" layout="column">
+	<span layout="column" ng-repeat="item in sNavCtrl.menu.items" ng-if="item.shouldRender(sNavCtrl.authentication.user);">
+      <md-button ng-if="item.type !== 'dropdown'" aria-label="{{item.title | translate}}" ng-click="sNavCtrl.closeSidenav()" ui-sref="{{item.state}}" class="capitalized-text" ui-sref-active="md-raised md-primary md-hue-1">
+        <md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} icon"></md-icon>
+        <span translate="{{item.title}}"></span>
+      </md-button>
+      <md-menu layout="column" ng-if="item.type === 'dropdown'" md-offset="180 0">
+        <md-button class="capitalized-text" ng-click="$mdOpenMenu($event)" aria-label="{{item.title | translate}}" ui-sref="{{item.state}}" ui-sref-active="md-primary md-raised md-hue-1">
+          <md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.title | translate}} icon"></md-icon>
+          <span translate="{{item.title}}"></span>
+          <md-icon md-svg-icon="chevron-right" aria-label="dropdown icon"></md-icon>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item ng-repeat="subitem in item.items" layout-padding><md-button ng-click="sNavCtrl.closeSidenav()" ui-sref="{{subitem.state}}" aria-label="{{subitem.title | translate}}" ui-sref-active="md-primary md-raised md-hue-1">
+            <md-icon ng-if="subitem.icon" md-svg-icon="{{subitem.icon}}" aria-label="{{subitem.title | translate}} icon"></md-icon>
+            <span translate="{{subitem.title}}"></span>
+          </md-button></md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </span>
 </md-sidenav>

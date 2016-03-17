@@ -14,7 +14,9 @@ angular.module('core').service('Menus', [
       if (!!~this.roles.indexOf('*')) {
         return true;
       } else {
-        if(!user) {
+        if(this.userNotRequired) {
+          return true;
+        } else if(!user) {
           return false;
         }
         for (var userRoleIndex in user.roles) {
@@ -90,10 +92,12 @@ angular.module('core').service('Menus', [
         state: options.state || '',
         type: options.type || 'item',
         class: options.class,
+        userNotRequired: options.userNotRequired || false,
         roles: ((options.roles === null || typeof options.roles === 'undefined') ? this.defaultRoles : options.roles),
         position: options.position || 0,
         items: [],
-        shouldRender: shouldRender
+        shouldRender: shouldRender,
+        icon: options.icon
       });
 
       // Add submenu items
@@ -121,9 +125,11 @@ angular.module('core').service('Menus', [
           this.menus[menuId].items[itemIndex].items.push({
             title: options.title || '',
             state: options.state || '',
+            userNotRequired: options.userNotRequired || false,
             roles: ((options.roles === null || typeof options.roles === 'undefined') ? this.menus[menuId].items[itemIndex].roles : options.roles),
             position: options.position || 0,
-            shouldRender: shouldRender
+            shouldRender: shouldRender,
+            icon: options.icon
           });
         }
       }
@@ -169,6 +175,14 @@ angular.module('core').service('Menus', [
     //Adding the topbar menu
     this.addMenu('topbar', {
       roles: ['*']
+    });
+
+    //Adding the home element to the topbar menu
+    this.addMenuItem('topbar', {
+      title: 'HOME',
+      state: 'home',
+      icon: 'home',
+      userNotRequired: true
     });
   }
 ]);

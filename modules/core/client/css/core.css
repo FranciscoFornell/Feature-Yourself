@@ -55,6 +55,9 @@ a:hover .header-profile-image {
 .centered-text{
   text-align: center;
 }
+.capitalized-text{
+  text-transform: capitalize;
+}
 .message-area{
   padding: 10px;
   margin: 10px;
@@ -133,6 +136,8 @@ a:hover .header-profile-image {
 .main-sidenav{
   position: fixed;
   margin-top: 64px;
+  min-width: 200px;
+  width: 200px;
 }
 .main-content{
   position: static;
@@ -296,20 +301,16 @@ a:hover .header-profile-image {
   width: 30px;
 }
 .translate-button-en {
-  font-size: 10px;
-  width: 170px;
+  margin: 0;
 }
 .translate-button-en > div > .flag-icon {
   background-image: url("../img/UK_flag.svg");
-  margin-left: 10px;
 }
 .translate-button-es {
-  font-size: 10px;
-  width: 170px;
+  margin: 0;
 }
 .translate-button-es > div > .flag-icon {
   background-image: url("../img/Spain_flag.svg");
-  margin-left: 10px;
 }
 
 /*Styles for small screens*/

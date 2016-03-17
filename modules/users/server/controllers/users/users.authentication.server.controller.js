@@ -19,35 +19,49 @@ var noReturnUrls = [
  * Signup
  */
 exports.signup = function (req, res) {
+  // NOTE: Changed to allow only one local user, which will always have admin role
   // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
-  // TODO: Mejor que compruebe que no haya usuarios locales, si no hay que le asigne el rol admin, y si los hay, que devuelva error
+  // delete req.body.roles;
+  var user;
+  
+  User.find({ provider: 'local' }).limit(1).count({},function(err, result){
+    // If there are no local users in the database, save it with admin role
+    if(!result){
+      // Init user and add missing fields
+      user = new User(req.body);
+      user.provider = 'local';
+      user.displayName = user.firstName + ' ' + user.lastName;
+      user.roles = ['user', 'admin'];
 
-  // Init user and add missing fields
-  var user = new User(req.body);
-  user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
-
-  // Then save the user
-  user.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      // Remove sensitive data before login
-      user.password = undefined;
-      user.salt = undefined;
-
-      req.login(user, function (err) {
+      // Then save the user
+      user.save(function (err) {
         if (err) {
-          res.status(400).send(err);
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
         } else {
-          res.json(user);
+          // Remove sensitive data before login
+          user.password = undefined;
+          user.salt = undefined;
+
+          req.login(user, function (err) {
+            if (err) {
+              res.status(400).send(err);
+            } else {
+              res.json(user);
+            }
+          });
         }
+      });
+    // Otherwise return an error
+    } else{
+      res.status(403).send({
+        message: 'An admin user already exists.'
       });
     }
   });
+
+  
 };
 
 /**

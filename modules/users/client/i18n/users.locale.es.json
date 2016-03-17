@@ -39,5 +39,6 @@
   "RESTORE_PASSWORD_EMAIL_SENT": "Se ha enviado un email con instrucciones a la dirección proporcionada",
   "RESET_PASSWORD_TOKEN_EXPIRED": "El identificador de restablecimiento de contraseña es inválido o ha expirado",
   "SOCIAL_UNCONNECTED": "Cuentas sociales desconectadas:",
-  "SOCIAL_CONNECTED": "Cuentas sociales conectadas:"
+  "SOCIAL_CONNECTED": "Cuentas sociales conectadas:",
+  "SOCIAL_MAIN_PROVIDER": "Cuenta principal:"
 }

@@ -21,23 +21,27 @@
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile',
-      state: 'settings.profile'
+      title: 'EDIT_PROFILE',
+      state: 'settings.profile',
+      icon: 'account-check'
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Edit Profile Picture',
-      state: 'settings.picture'
+      title: 'CHANGE_PROF_PIC',
+      state: 'settings.picture',
+      icon: 'file-image'
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Change Password',
-      state: 'settings.password'
+      title: 'CHANGE_PASSWORD',
+      state: 'settings.password',
+      icon: 'account-key'
     });
 
     Menus.addSubMenuItem('account', 'settings', {
-      title: 'Manage Social Accounts',
-      state: 'settings.accounts'
+      title: 'MANAGE_SOCIAL',
+      state: 'settings.accounts',
+      icon: 'account-multiple'
     });
 
   }

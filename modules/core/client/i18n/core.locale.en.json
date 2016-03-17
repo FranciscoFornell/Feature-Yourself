@@ -1,4 +1,7 @@
 {
+  "HOME": "Home",
+  "ADMIN": "Admin options",
+  "MANAGE_USERS": "Manage users",
   "HELLO_WORLD": "Hello world!",
   "CANCEL": "Cancel",
   "REQUIRED_FIELD": "This is required!",

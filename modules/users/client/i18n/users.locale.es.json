@@ -1,4 +1,5 @@
 {
+  "USERS": "Usuarios",
   "SIGNIN_SOCIAL_MSG": "Regístrese usando sus redes sociales",
   "SIGNIN_LOCAL_MSG": "O regístrese usando su cuenta local",
   "SIGNUP_LOCAL_MSG": "O cree ahora su cuenta local",
@@ -9,7 +10,10 @@
   "FORGOT_PASSWORD": "¿Olvidó su contraseña?",
   "FIRST_NAME": "Nombre",
   "LAST_NAME": "Apellidos",
-  "EMAIL": "Email",
+  "EMAIL": "Correo electrónico",
+  "ROLES": "Roles",
+  "PROVIDER": "Proveedor de la cuenta",
+  "CREATED": "Fecha de creación",
   "EDIT_PROFILE_TITLE": "Edite su perfil",
   "INVALID_EMAIL_MSG": "Esto no parece un email válido.",
   "OWASP_MIN_LENGHT": "La contraseña debe tener una longitud de al menos {{owaspValue}} caracteres.",
@@ -40,5 +44,10 @@
   "RESET_PASSWORD_TOKEN_EXPIRED": "El identificador de restablecimiento de contraseña es inválido o ha expirado",
   "SOCIAL_UNCONNECTED": "Cuentas sociales desconectadas:",
   "SOCIAL_CONNECTED": "Cuentas sociales conectadas:",
-  "SOCIAL_MAIN_PROVIDER": "Cuenta principal:"
+  "SOCIAL_MAIN_PROVIDER": "Cuenta principal:",
+  "ROLE_ADMIN": "Administrador",
+  "ROLE_USER": "Usuario",
+  "ROLE_USER_ADMIN": "Usuario y administrador",
+  "EDIT_USER": "Editar usuario",
+  "VIEW_USER": "Ver usuario"
 }

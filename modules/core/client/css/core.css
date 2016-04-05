@@ -157,7 +157,7 @@ a:hover .header-profile-image {
   margin-top: -64px;
   padding-top: 64px;
   overflow: auto;
-  height: 100vh;
+  min-height: 100vh;
 }
 .dashboard-sidenav{
   height: 100vh;
@@ -175,7 +175,7 @@ a:hover .header-profile-image {
   margin-top: -64px;
   padding-top: 64px;
 }
-/*Material design icon sizes*/
+/*Material design icon and images sizes*/
 .md-icon-48{
   width: 48px;
   height: 48px;
@@ -193,6 +193,24 @@ a:hover .header-profile-image {
   left: 15px;
   padding: 2px;
   border-radius: 5px;
+}
+.md-fab-img-40{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.md-fab-img-128{
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+}
+.md-fab-img-subicon{
+  margin-bottom: -2px;
+  margin-left: -18px;
+  background-color: white;
+  border-radius: 3px;
+  width: 18px;
+  height: 18px;
 }
 
 /*Custom button styles*/
@@ -260,6 +278,18 @@ a:hover .header-profile-image {
   opacity: 0;
   transform: scale(0.9);
 }
+.expand-left {
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.expand-left.ng-hide {
+  transform: scale(0, 1);
+  transform-origin: 100%;
+
+}
+
 .opaque {
   opacity: 1;
 }
@@ -268,6 +298,7 @@ a:hover .header-profile-image {
 .editor-form{
   /*height: 200px;*/
   width: 370px;
+  padding-top: 35px;
   padding-bottom: 35px;
 }
 .editor-form > div > md-input-container{

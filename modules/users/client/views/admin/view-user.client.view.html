@@ -1,4 +1,5 @@
-<!-- TODO: Adaptar a Material Design -->
+<!-- NOTE: Dejo de momento la antigua vista comentada -->
+<!-- 
 <section>
   <div class="page-header">
     <div class="row">
@@ -50,3 +51,49 @@
     </div>
   </div>
 </section>
+ -->
+<md-dialog aria-label="View user dialog">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 translate="VIEW_USER"></h2>
+      <span flex></span>
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="vUDCtrl.cancel()">
+        <md-tooltip>
+          <span translate="CANCEL"></span>
+        </md-tooltip>
+        <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-margin>
+    <span layout="row" layout-align="space-between center" layout-margin>
+      <h2 ng-bind="vUDCtrl.user.username"></h2>
+      <img class="md-whiteframe-z1 md-fab-img-128" ng-src="{{vUDCtrl.user.profileImageURL}}" alt="{{vUDCtrl.user.displayName}}">
+    </span>
+    <p>
+      <strong><span translate="FIRST_NAME"></span>:</strong>
+      <span ng-bind="vUDCtrl.user.firstName"></span>
+    </p>
+    <p>
+      <strong><span translate="LAST_NAME"></span>:</strong>
+      <span ng-bind="vUDCtrl.user.lastName"></span>
+    </p>
+    <p>
+      <strong><span translate="EMAIL"></span>:</strong>
+      <span ng-bind="vUDCtrl.user.email"></span>
+    </p>
+    <p>
+      <strong><span translate="PROVIDER"></span>:</strong>
+      <md-icon ng-if="vUDCtrl.provider" md-svg-icon="{{vUDCtrl.provider.mdIcon}}" style="color: {{vUDCtrl.provider.color}};" aria-label="Provider Icon"></md-icon>
+      {{vUDCtrl.provider.name || vUDCtrl.user.provider.charAt(0).toUpperCase() + vUDCtrl.user.provider.slice(1)}}
+    </p>
+    <p>
+      <strong><span translate="CREATED"></span>:</strong>
+      {{'FORMATTED_DATE' | translate:{date:vUDCtrl.user.created} }}
+    </p>
+    <p>
+      <strong><span translate="ROLES"></span>:</strong>
+      <span translate="{{vUDCtrl.stringifyRoles(vUDCtrl.user)}}"></span>
+    </p>
+  </md-dialog-content>
+</md-dialog>

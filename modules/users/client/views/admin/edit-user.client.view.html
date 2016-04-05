@@ -1,4 +1,5 @@
-<!-- TODO: Adaptar a Material Design -->
+<!-- NOTE: Dejo de momento la antigua vista comentada -->
+<!-- 
 <section>
   <div class="page-header">
     <h1>User <span ng-bind="user.username"></span></h1>
@@ -39,3 +40,50 @@
     </form>
   </div>
 </section>
+ -->
+<md-dialog aria-label="Edit user dialog">
+  <form name="editUserForm" ng-submit="eUDCtrl.update(editUserForm.$valid)" novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 translate="EDIT_USER"></h2>
+        <span flex></span>
+        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="eUDCtrl.cancel()">
+          <md-tooltip>
+            <span translate="CANCEL"></span>
+          </md-tooltip>
+          <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content class="editor-form" layout="row" layout-align="center center">
+      <div layout="column">
+        <md-input-container>
+          <label translate="FIRST_NAME"></label>
+          <input required type="text" id="firstName" name="firstName" ng-model="eUDCtrl.user.firstName">
+          <div ng-messages="editUserForm.firstName.$error">
+            <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label translate="LAST_NAME"></label>
+          <input required type="text" id="lastName" name="lastName" ng-model="eUDCtrl.user.lastName">
+          <div ng-messages="editUserForm.lastName.$error">
+            <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label translate="ROLES"></label>
+          <md-select ng-model="eUDCtrl.user.rolesString" placeholder="Select role or roles" md-on-close="eUDCtrl.destringifyRoles(eUDCtrl.user, false)">
+            <md-option ng-value="rolesOption" ng-repeat="rolesOption in eUDCtrl.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
+          </md-select>
+        </md-input-container>
+        <md-subheader class="md-no-sticky md-warn" ng-show="eUDCtrl.error" ng-bind="eUDCtrl.error"></md-subheader>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button type="submit" class="md-raised md-primary" aria-label="Update User" md-autofocus>
+        <span translate="UPDATE"></span>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

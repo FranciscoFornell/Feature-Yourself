@@ -1,4 +1,5 @@
 {
+  "USERS": "Users",
   "SIGNIN_SOCIAL_MSG": "Sign in using your social accounts",
   "SIGNIN_LOCAL_MSG": "Or sign in with your local account",
   "SIGNUP_LOCAL_MSG": "Or sign up with your local account",
@@ -10,6 +11,9 @@
   "FIRST_NAME": "First Name",
   "LAST_NAME": "Last Name",
   "EMAIL": "Email",
+  "ROLES": "Roles",
+  "PROVIDER": "Account provider",
+  "CREATED": "Creation date",
   "EDIT_PROFILE_TITLE": "Edit your profile",
   "INVALID_EMAIL_MSG": "This doesn't look like a valid email.",
   "OWASP_MIN_LENGHT": "The password must be at least {{owaspValue}} characters long.",
@@ -40,5 +44,10 @@
   "RESET_PASSWORD_TOKEN_EXPIRED": "Password reset token is invalid or has expired",
   "SOCIAL_UNCONNECTED": "Unconnected social accounts:",
   "SOCIAL_CONNECTED": "Connected social accounts:",
-  "SOCIAL_MAIN_PROVIDER": "Main account:"
+  "SOCIAL_MAIN_PROVIDER": "Main account:",
+  "ROLE_ADMIN": "Admin",
+  "ROLE_USER": "User",
+  "ROLE_USER_ADMIN": "User and admin",
+  "EDIT_USER": "Edit user",
+  "VIEW_USER": "View user"
 }

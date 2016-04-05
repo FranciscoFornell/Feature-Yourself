@@ -5,9 +5,10 @@ module.exports = {
     lib: {
       css: [
         // bower:css
-        'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/angular-material/angular-material.css'
+        // 'public/lib/bootstrap/dist/css/bootstrap.css',
+        // 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/angular-material/angular-material.css',
+        'public/lib/angular-material-data-table/dist/md-data-table.css'
         // endbower
       ],
       js: [
@@ -21,6 +22,7 @@ module.exports = {
         'public/lib/angular-file-upload/dist/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-material/angular-material.js',
+        'public/lib/angular-material-data-table/dist/md-data-table.js',
         'public/lib/angular-aria/angular-aria.js',
         'public/lib/angular-translate/angular-translate.js',
         'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js',

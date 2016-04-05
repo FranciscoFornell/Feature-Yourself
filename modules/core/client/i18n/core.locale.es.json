@@ -24,5 +24,16 @@
   "403_FORBIDDEN_TITLE": "Prohibido",
   "403_FORBIDDEN_MESSAGE": "No tiene autorización para acceder a este recurso",
   "400_BAD_REQUEST_TITLE": "Solicitud incorrecta",
-  "400_BAD_REQUEST_MESSAGE": "Hizo una solicitud incorrecta"
+  "400_BAD_REQUEST_MESSAGE": "Hizo una solicitud incorrecta",
+  "PAG_LABEL_PAGE": "Página:",
+  "PAG_LABEL_ROWS_PER_PAGE": "Filas por página:",
+  "PAG_LABEL_OF": "de",
+  "TOGGLE_FILTER": "Activar/desactivar filtrado",
+  "CANCEL_SELECTION": "Cancelar selección",
+  "REMOVE": "Eliminar",
+  "SELECTED_ITEMS": "Elementos seleccionados",
+  "REMOVE_ELEMENTS_TITLE": "¿Eliminar todos los elementos seleccionados?",
+  "REMOVE_ELEMENTS_CONTENT": "Todos los elementos seleccionados serán permanentemente elininados.",
+  "UPDATE": "Actualizar",
+  "FORMATTED_DATE": "{{date|date:'d/M/yyyy h:mm a'}}"
 }

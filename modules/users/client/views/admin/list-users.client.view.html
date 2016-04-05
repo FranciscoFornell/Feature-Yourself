@@ -1,4 +1,5 @@
-<!-- TODO: Adaptar a Material Design -->
+<!-- NOTE: Dejo de momento la antigua vista comentada -->
+<!--
 <section>
   <div class="page-header">
     <div class="row">
@@ -20,3 +21,88 @@
 
   <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
 </section>
+-->
+<div layout="column" layout-align="center" class="child-content">
+  <div layout="row" layout-align="center" layout-padding>
+    <md-card layout-fill flex-gt-md="95" flex-gt-lg="70">
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <span translate="USERS"></span>
+          <span ng-show="uLCtrl.selected.length">: {{uLCtrl.selected.length}} <span translate="SELECTED_ITEMS"></span>
+          </span>
+          <span flex></span>
+          <span ng-hide="uLCtrl.selected.length">
+            <md-input-container style="top: 10px;" ng-show="uLCtrl.pager.filterEnabled" class="expand-left">
+              <input ng-show="uLCtrl.pager.filterEnabled" type="text" ng-model="uLCtrl.pager.search" aria-label="Filter Input" ng-change="uLCtrl.pager.page = 1" focus-on-show>
+            </md-input-container>
+            <md-button class="md-icon-button" aria-label="Toggle Filter Button" ng-click="uLCtrl.toggleFilter()">
+              <md-icon md-svg-icon="filter" aria-label="Filter Icon" ng-hide="uLCtrl.pager.filterEnabled"></md-icon>
+              <md-icon md-svg-icon="filter-remove" aria-label="Filter Icon" ng-show="uLCtrl.pager.filterEnabled"></md-icon>
+              <md-tooltip md-direction="bottom" md-autohide="true">
+                <span translate="TOGGLE_FILTER"></span>
+              </md-tooltip>
+            </md-button>
+          </span>
+          <span ng-show="uLCtrl.selected.length">
+            <md-button class="md-icon-button" aria-label="Cancel Selection Button" ng-click="uLCtrl.selected=[]">
+              <md-icon md-svg-icon="close-box-outline" aria-label="Cancel Selection Icon"></md-icon>
+              <md-tooltip md-direction="bottom" md-autohide="true">
+                <span translate="CANCEL_SELECTION"></span>
+              </md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Delete Selected Items Button" ng-click="uLCtrl.removeSelected($event)">
+              <md-icon md-svg-icon="delete" aria-label="Delete Icon"></md-icon>
+              <md-tooltip md-direction="bottom" md-autohide="true">
+                <span translate="REMOVE"></span>
+              </md-tooltip>
+            </md-button>
+          </span>
+        </div>
+      </md-toolbar>
+      <md-table-container>
+        <table md-table md-row-select md-progress="uLCtrl.promise" ng-model="uLCtrl.selected">
+          <thead md-head md-order="uLCtrl.pager.order">
+            <tr md-row>
+              <th md-column></th>
+              <th md-column md-order-by="username"><span translate="USERNAME"></span></th>
+              <th md-column md-order-by="username" hide-xs hide-sm hide-md><span translate="FIRST_NAME"></span></th>
+              <th md-column md-order-by="username" hide-xs hide-sm hide-md><span translate="LAST_NAME"></span></th>
+              <th md-column md-order-by="email" hide-xs hide-sm><span translate="EMAIL"></span></th>
+              <th md-column hide-xs hide-sm><span translate="ROLES"></span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-select="user" md-row md-auto-select ng-disabled="user.username === uLCtrl.Authentication.user.username" ng-repeat="user in filteredUsers = (uLCtrl.users | filter: uLCtrl.pager.search ) | orderBy: uLCtrl.pager.order | limitTo: uLCtrl.pager.limit : (uLCtrl.pager.page -1) * uLCtrl.pager.limit" ng-init="user.rolesString = uLCtrl.stringifyRoles(user); provider = uLCtrl.providersCollection[user.provider];">
+              <td md-cell>
+              <span layout="row">
+                <img class="md-whiteframe-z1 md-fab-img-40" ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}">
+                <md-icon ng-if="provider" md-svg-icon="{{provider.mdIcon}}" style="color: {{provider.color}};" aria-label="Provider Icon" class="md-fab-img-subicon"></md-icon>
+              </span>                
+              </td>
+              <td md-cell ng-bind="user.username"></td>
+              <td md-cell ng-bind="user.firstName" hide-xs hide-sm hide-md ng-click="uLCtrl.editFirstname($event, user)"></td>
+              <td md-cell ng-bind="user.lastName" hide-xs hide-sm hide-md ng-click="uLCtrl.editLastname($event, user)"></td>
+              <td md-cell ng-bind="user.email" hide-xs hide-sm></td>
+              <td md-cell hide-xs hide-sm>
+                <md-select ng-model="user.rolesString" placeholder="Select role or roles" md-on-close="uLCtrl.destringifyRoles(user, true)">
+                  <md-option ng-value="rolesOption" ng-repeat="rolesOption in uLCtrl.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
+                </md-select>
+              </td>
+              <td md-cell>
+                <span layout-gt-xs="row">
+                  <md-button class="md-icon-button" aria-label="View Item Button" ng-click="uLCtrl.showViewUserDialog($event, user, provider)">
+                    <md-icon md-svg-icon="eye" aria-label="View Icon"></md-icon>
+                  </md-button>
+                  <md-button class="md-icon-button" aria-label="Eduit Item Button" ng-click="uLCtrl.showEditUserDialog($event, user)">
+                    <md-icon md-svg-icon="pencil" aria-label="Edit Icon"></md-icon>
+                  </md-button>  
+                </span>                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-table-pagination md-limit="uLCtrl.pager.limit" md-page="uLCtrl.pager.page" md-total="{{filteredUsers.length}}" md-page-select md-boundary-links md-label="{{uLCtrl.pager.label}}"></md-table-pagination>
+    </md-card>
+  </div>
+</div>

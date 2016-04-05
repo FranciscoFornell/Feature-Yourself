@@ -24,5 +24,16 @@
   "403_FORBIDDEN_TITLE": "Forbidden",
   "403_FORBIDDEN_MESSAGE": "You are not authorized to access this resource",
   "400_BAD_REQUEST_TITLE": "Bad Request",
-  "400_BAD_REQUEST_MESSAGE": "You made a bad request"
+  "400_BAD_REQUEST_MESSAGE": "You made a bad request",
+  "PAG_LABEL_PAGE": "Page:",
+  "PAG_LABEL_ROWS_PER_PAGE": "Rows per page:",
+  "PAG_LABEL_OF": "of",
+  "TOGGLE_FILTER": "Toggle filter",
+  "CANCEL_SELECTION": "Cancel selection",
+  "REMOVE": "Remove",
+  "SELECTED_ITEMS": "Selected items",
+  "REMOVE_ELEMENTS_TITLE": "Remove the selected elements?",
+  "REMOVE_ELEMENTS_CONTENT": "All the selected elements will be permanently removed.",
+  "UPDATE": "Update",
+  "FORMATTED_DATE": "{{date|date:'M/d/yyyy h:mm a'}}"
 }

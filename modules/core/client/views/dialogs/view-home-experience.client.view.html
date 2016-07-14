@@ -1,0 +1,43 @@
+<md-dialog aria-label="View education dialog" style="max-width: 600px; width: 100%;">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 translate="{{::vHEXDCtrl.title}}"></h2>
+      <span></span>
+      <span flex></span>
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="vHEXDCtrl.cancel()">
+        <md-tooltip>
+          <span translate="CANCEL"></span>
+        </md-tooltip>
+        <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-margin>
+    <div layout="column" layout-gt-sm="row" layout-align="center center">
+      <md-icon md-svg-icon="{{::vHEXDCtrl.experience.icon}}" aria-label="Education Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
+      <div flex="100" layout="column" layout-align="start center">
+        <strong>{{::vHEXDCtrl.experience.name[vHEXDCtrl.currentLanguage]}}</strong>
+        <span>
+          <span ng-if="::vHEXDCtrl.durationInfo.yearsNumber > 0"><span ng-bind="::vHEXDCtrl.durationInfo.yearsNumber"></span> <span translate="PLURALIZED_YEARS" translate-values="{plural: vHEXDCtrl.durationInfo.yearsNumber > 1}"></span></span><span ng-if="::(vHEXDCtrl.durationInfo.yearsNumber > 0 && vHEXDCtrl.durationInfo.monthsNumber > 0)"> <span translate="AND"></span> </span><span ng-if="::vHEXDCtrl.durationInfo.monthsNumber > 0"><span ng-bind="::vHEXDCtrl.durationInfo.monthsNumber"></span> <span translate="PLURALIZED_MONTHS" translate-values="{plural: vHEXDCtrl.durationInfo.monthsNumber > 1}"></span></span>. (<span ng-if="::(vHEXDCtrl.durationInfo.startYear !== vHEXDCtrl.durationInfo.endYear)"><span ng-bind="::vHEXDCtrl.durationInfo.startYear"></span> - </span><span ng-bind="::vHEXDCtrl.durationInfo.endYear"></span>)
+        </span>
+        <span ng-if="::vHEXDCtrl.experience.position"><span translate="POSITION"></span>: {{::vHEXDCtrl.experience.position[vHEXDCtrl.currentLanguage]}}</span>
+        <span ng-if="::vHEXDCtrl.experience.company"><span translate="COMPANY"></span>: <a href="{{::vHEXDCtrl.experience.company.web}}" target="_blank">{{::vHEXDCtrl.experience.company.name}}</a></span>
+        <p class="multiline-justified-string">{{::vHEXDCtrl.experience.description[vHEXDCtrl.currentLanguage]}}</p>        
+      </div>
+    </div>
+    <div>
+      <span ng-if="::vHEXDCtrl.experience.mainAssignments">
+        <span translate="MAIN_ASSINGMENTS"></span>:
+        <ul>
+          <li ng-repeat="assingment in ::vHEXDCtrl.experience.mainAssignments" ng-bind="assingment[vHEXDCtrl.currentLanguage]"></li>
+        </ul>
+      </span>
+      <span ng-if="::vHEXDCtrl.experience.projects">
+        <span translate="MAIN_PROJECTS"></span>:
+        <ul>
+          <li ng-repeat="project in ::vHEXDCtrl.experience.projects" ng-bind="project"></li>
+        </ul>
+      </span>
+    </div>
+  </md-dialog-content>
+</md-dialog>

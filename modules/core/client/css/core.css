@@ -51,6 +51,9 @@ a:hover .header-profile-image {
 .multiline-justified-string{
   white-space: pre-line;
   text-align: justify;
+  text-indent: 2em;
+  line-height: normal;
+  text-transform: none;
 }
 .centered-text{
   text-align: center;
@@ -61,8 +64,14 @@ a:hover .header-profile-image {
 .capitalized-text{
   text-transform: capitalize;
 }
+.no-transform-text{
+  text-transform: none!important;
+}
 .no-padding {
   padding: 0;
+}
+.no-margin {
+  margin: 0;
 }
 .message-area{
   padding: 10px;
@@ -175,6 +184,40 @@ a:hover .header-profile-image {
   margin-top: -64px;
   padding-top: 64px;
 }
+.show-more-trigger{
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+  text-align: center;
+  background-image: linear-gradient(to bottom, transparent, white, white);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.show-more-content{
+  transition: max-height 0.7s;
+  transition-timing-function: cubic-bezier(0.5, 0, 1, 0); 
+  transition-delay: 0s;
+  overflow: hidden;
+  position: relative;
+  max-height: 20000px;
+}
+.show-more-content::after{
+  content: '.';
+  visibility: hidden;
+}
+.show-more-closed{
+  max-height: 210px;
+  transition: max-height .8s cubic-bezier(0, 1, 0, 1) -.1s;
+}
+.margin-padding-bso{
+  /*Margin and padding on big screens only*/
+    margin: 10px;
+    padding: 10px;
+  }
+.not-capitalized {
+    text-transform: none!important;
+}
 /*Material design icon and images sizes*/
 .md-icon-48{
   width: 48px;
@@ -212,6 +255,13 @@ a:hover .header-profile-image {
   width: 18px;
   height: 18px;
 }
+.fullsize{
+  width: 100%!important;
+  height: 100%!important;
+}
+.margin-10px{
+  margin: 10px;
+}
 
 /*Custom button styles*/
 .md-square-icon-button{
@@ -234,6 +284,10 @@ a:hover .header-profile-image {
   font-size: 70px;
   width: 70px;
   height: 70px;
+}
+.md-table-cell-button {
+  margin: 0;
+  padding: 0;
 }
 
 /*Star rating styles*/
@@ -296,12 +350,9 @@ a:hover .header-profile-image {
 
 /*Custom editor form*/
 .editor-form{
-  /*height: 200px;*/
-  width: 370px;
-  padding-top: 35px;
-  padding-bottom: 35px;
+  padding: 35px;
 }
-.editor-form > div > md-input-container{
+.editor-form md-input-container{
   margin-bottom: -10px;
   width: 280px;
 }
@@ -356,6 +407,10 @@ a:hover .header-profile-image {
   background-image: url("../img/Spain_flag.svg");
 }
 
+.md-table-toolbar md-input-container {
+  top: 12px;
+}
+
 /*Styles for small screens*/
 @media screen and (max-width:599px), screen and (max-height: 719px) {
   .md-square-icon-button > .md-icon-128 {
@@ -408,5 +463,9 @@ a:hover .header-profile-image {
 @media screen and (max-width:599px){
   .dashboard-sidenav{
     height: auto;
+  }
+  .margin-padding-bso{
+    margin: 0;
+    padding: 0;
   }
 }

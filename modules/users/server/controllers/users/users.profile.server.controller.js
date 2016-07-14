@@ -114,3 +114,30 @@ exports.changeProfilePicture = function (req, res) {
 exports.me = function (req, res) {
   res.json(req.user || null);
 };
+/**
+ * Send Public Local User Data
+ */
+exports.local = function (req, res) {
+  User.find({ provider: 'local' }).limit(1).exec(function(err, users){
+    var user = users[0],
+      data = { exists: false };
+    
+    if (!!user) {
+      data = {
+        exists: true,
+        displayName: user.displayName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profileImageURL: user.profileImageURL,
+        social: {}        
+      };
+      if (user.additionalProvidersData.google) {
+        data.social.google = user.additionalProvidersData.google.url;
+      }
+      // TODO: Añadir el resto de cuentas sociales)
+    }
+    
+    res.json(data);
+  });
+};

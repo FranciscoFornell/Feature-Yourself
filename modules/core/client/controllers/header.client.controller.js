@@ -33,9 +33,9 @@
     .module('core')
     .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['$scope', '$window', '$state', 'Authentication', 'Menus', '$mdSidenav', '$mdDialog', '$translate', '$mdComponentRegistry', '$mdMedia'];
+  HeaderController.$inject = ['$window', '$state', 'Authentication', 'Menus', '$mdSidenav', '$mdDialog', '$translate', '$mdComponentRegistry', '$mdMedia'];
   
-  function HeaderController ($scope, $window ,$state, Authentication, Menus, $mdSidenav, $mdDialog, $translate, $mdComponentRegistry, $mdMedia) {
+  function HeaderController ($window ,$state, Authentication, Menus, $mdSidenav, $mdDialog, $translate, $mdComponentRegistry, $mdMedia) {
     /* jshint validthis: true */
 
     var vm = this;

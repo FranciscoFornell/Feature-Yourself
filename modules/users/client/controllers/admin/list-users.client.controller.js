@@ -83,6 +83,10 @@
       vm.users = data;
     }).$promise;
 
+    vm.isScreenSize = function (screenSize) {
+      return $mdMedia(screenSize);
+    };
+
     vm.toggleFilter = function () {
       vm.pager.filterEnabled = !vm.pager.filterEnabled;
 
@@ -248,6 +252,7 @@
     };
 
     vm.showEditUserDialog = function (ev, user) {
+      var useFullscreen = $mdMedia('xs');
       ev.stopPropagation(); // in case autoselect is enabled
 
       $mdDialog.show({
@@ -258,7 +263,8 @@
         controllerAs: 'eUDCtrl',
         locals: {
           user: user
-        }
+        },
+        fullscreen: $mdMedia('xs')
       });
 
       function editUserDialogController ($scope, user) {
@@ -306,7 +312,8 @@
         locals: {
           user: user,
           provider: provider
-        }
+        },
+        fullscreen: $mdMedia('xs')
       });
 
       function viewUserDialogController ($scope, user) {

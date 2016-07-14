@@ -84,8 +84,8 @@
 
     $translatePartialLoader.addPart('users');
 
-    $http.get('/api/users/exists').
-      success(function(data, status, headers, config) {
+    $http.get('/api/users/exists')
+      .success(function(data, status, headers, config) {
         vm.anyUserExists = data;
         if(vm.anyUserExists){
           vm.loginForm = '/modules/users/client/views/authentication/signin.client.view.html';
@@ -94,8 +94,8 @@
           vm.loginForm = '/modules/users/client/views/authentication/signup.client.view.html';
           vm.loginType = 'SIGNUP';
         }
-      }).
-      error(function(data, status, headers, config) {
+      })
+      .error(function(data, status, headers, config) {
         vm.error = 'Error checking if there are any users in the database. Status: ' + status;
       });
 

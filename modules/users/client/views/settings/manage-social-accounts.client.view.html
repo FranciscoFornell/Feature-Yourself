@@ -53,26 +53,29 @@
     </div>
   </div>
 </section> -->
-<section flex ng-controller="SocialAccountsController as sACtrl" layout="row" layout-align="center">
-  <div layout="column" layout-align="center center" flex="35" flex-md="60" flex-sm="75" flex-xs="95">
-    <h3 class="md-headline"><span translate="SOCIAL_MAIN_PROVIDER"></span> <span ng-bind="sACtrl.mainAccountName"></span></h3>
-    <div class="md-whiteframe-z1" layout-padding layout="column" layout-align="center center">
-      <h3 ng-show="sACtrl.hasConnectedAdditionalSocialAccounts()" class="md-headline" translate="SOCIAL_CONNECTED"></h3>
-      <div layout="row" layout-padding layout-wrap layout-align="center center">
-        <md-button ng-repeat="(providerName, providerData) in sACtrl.user.additionalProvidersData" type="button" class="md-raised md-square-icon-button" ng-click="sACtrl.removeUserSocialAccount(providerName)" aria-label="Remove {{sACtrl.providersCollection[providerName].name}} account">
-          <md-tooltip><span ng-bind="sACtrl.providersCollection[providerName].name"></span></md-tooltip>
-          <md-icon md-svg-icon="{{sACtrl.providersCollection[providerName].mdIcon}}" style="color: {{sACtrl.providersCollection[providerName].color}};" aria-label="{{sACtrl.providersCollection[providerName].name}} Icon" class="md-icon-128"></md-icon>
-          <md-icon md-svg-icon="account-remove"  aria-label="Add account icon" class="md-subicon-128"></md-icon>
-        </md-button>
-      </div>
-      <h3 ng-show="sACtrl.anyUnconnected" class="md-headline" translate="SOCIAL_UNCONNECTED"></h3>
-      <div layout="row" layout-padding layout-wrap layout-align="center center">
-        <md-button ng-repeat="provider in sACtrl.providersArray" type="button" class="md-raised md-square-icon-button" href="/api/auth/{{provider.provider}}" target="_self" aria-label="Add {{provider.name}} account" ng-hide="sACtrl.isConnectedSocialAccount('{{provider.provider}}')">
-          <md-tooltip>{{provider.name}}</md-tooltip>
-          <md-icon md-svg-icon="{{provider.mdIcon}}" style="color: {{provider.color}};" aria-label="{{provider.name}} Icon" class="md-icon-128"></md-icon>
-          <md-icon md-svg-icon="account-plus"  aria-label="Add account icon" class="md-subicon-128"></md-icon>
-        </md-button>
-      </div>
-    </div>    
+<section flex ng-controller="SocialAccountsController as sACtrl" flex layout="row" layout-align="center center" flex="95" flex-sm="75" flex-md="60" flex-gt-md="35">
+  <div flex="100" class="md-hue-1">
+    <h3 class="md-headline centered-text"><span translate="SOCIAL_MAIN_PROVIDER"></span> <span ng-bind="::sACtrl.mainAccountName"></span></h3>
+    <md-card>
+      <md-card-content>
+        <h3 ng-show="sACtrl.hasConnectedAdditionalSocialAccounts()" class="md-headline centered-text" translate="SOCIAL_CONNECTED"></h3>
+        <div layout="row" layout-padding layout-wrap layout-align="center center">
+          <md-button ng-repeat="(providerName, providerData) in sACtrl.user.additionalProvidersData" type="button" class="md-raised md-square-icon-button" ng-click="sACtrl.removeUserSocialAccount(providerName)" aria-label="Remove {{sACtrl.providersCollection[providerName].name}} account">
+            <md-tooltip><span ng-bind="sACtrl.providersCollection[providerName].name"></span></md-tooltip>
+            <md-icon md-svg-icon="{{sACtrl.providersCollection[providerName].mdIcon}}" ng-style="{color: sACtrl.providersCollection[providerName].color}" aria-label="{{sACtrl.providersCollection[providerName].name}} Icon" class="md-icon-128"></md-icon>
+            <md-icon md-svg-icon="account-remove"  aria-label="Add account icon" class="md-subicon-128"></md-icon>
+          </md-button>
+        </div>
+        <h3 ng-show="sACtrl.anyUnconnected" class="md-headline centered-text" translate="SOCIAL_UNCONNECTED"></h3>
+        <div layout="row" layout-padding layout-wrap layout-align="center center">
+          <md-button ng-repeat="provider in ::sACtrl.providersArray" type="button" class="md-raised md-square-icon-button" href="/api/auth/{{::provider.provider}}" target="_self" aria-label="Add {{::provider.name}} account" ng-hide="sACtrl.isConnectedSocialAccount('{{::provider.provider}}')">
+            <md-tooltip>
+              <span ng-bind="::provider.name"></span>
+            </md-tooltip>
+            <md-icon md-svg-icon="{{::provider.mdIcon}}" ng-style="::{color: provider.color}" aria-label="{{::provider.name}} Icon" class="md-icon-128"></md-icon>
+            <md-icon md-svg-icon="account-plus"  aria-label="Add account icon" class="md-subicon-128"></md-icon>
+          </md-button>
+        </div>
+    </md-card>    
   </div>
 </section>

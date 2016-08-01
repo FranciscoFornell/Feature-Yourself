@@ -34,11 +34,34 @@ angular.module('users')
               ngModel.$setValidity('weakpassword', false);
               scope.popoverMsg = PasswordValidator.getPopoverMsg();
               scope.passwordErrors = result.errors;
-              for (var i = 0, len = scope.passwordErrors.length, prefix=''; i < len; i++) {
-                prefix = scope.passwordErrors[i].slice(0,16);
-                if (prefix === 'OWASP_MIN_LENGHT' || prefix === 'OWASP_MAX_LENGHT'){
-                  scope.owaspValue = scope.passwordErrors[i].slice(16,scope.passwordErrors[i].length);
-                  scope.passwordErrors[i] = prefix;
+              for (var i = 0, len = scope.passwordErrors.length; i < len; i++) {
+                if(scope.passwordErrors[i].slice(0,20) === 'The password must be'){
+                  var j, errorValue;
+                  if (scope.passwordErrors[i].slice(21,29) === 'at least'){
+                    for (j = 0, errorValue = ''; !isNaN(parseInt(scope.passwordErrors[i].slice(30 + j, 30 + j + 1), 10)); j++){
+                      errorValue += scope.passwordErrors[i].slice(30 + j, 30 + j + 1);
+                    }
+                    scope.passwordErrors[i] = 'OWASP_MIN_LENGHT';
+                    scope.owaspValue = errorValue;
+                  } else {
+                    for (j = 0, errorValue = ''; !isNaN(parseInt(scope.passwordErrors[i].slice(30 + j, 30 + j + 1), 10)); j++){
+                      errorValue += scope.passwordErrors[i].slice(30 + j, 30 + j + 1);
+                    }
+                    scope.passwordErrors[i] = 'OWASP_MAX_LENGHT';
+                    scope.owaspValue = errorValue;
+                  }
+                } else if (scope.passwordErrors[i].slice(0,38) === 'The password may not contain sequences'){
+                  scope.passwordErrors[i] = 'OWASP_REPEATED_CHARS';
+                } else if (scope.passwordErrors[i].slice(0,38) === 'The password must contain at least one'){
+                  if (scope.passwordErrors[i].slice(39,48) === 'lowercase'){
+                    scope.passwordErrors[i] = 'OWASP_REQ_LOWERCASE';
+                  } else if (scope.passwordErrors[i].slice(39,48) === 'uppercase'){
+                    scope.passwordErrors[i] = 'OWASP_REQ_UPPERCASE';
+                  } else if (scope.passwordErrors[i].slice(39,45) === 'number'){
+                    scope.passwordErrors[i] = 'OWASP_REQ_NUMBER';
+                  } else if (scope.passwordErrors[i].slice(39,46) === 'special'){
+                    scope.passwordErrors[i] = 'OWASP_REQ_SPECIAL';
+                  }
                 }
               }
               status = false;

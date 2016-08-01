@@ -88,157 +88,210 @@
  </div>
 </div>
  -->
-<div ng-controller="HomeController as hCtrl" layout="column" layout-align="center" flex="100">
+<md-content ng-controller="HomeController as hCtrl" layout="column" layout-align="center" flex="100" class="md-hue-1">
   <div layout="row" layout-align="center" layout-padding ng-if="!(hCtrl.localUserData && !hCtrl.error && !hCtrl.noUser)" class="loading-splash">
-    <div class="md-whiteframe-z1" layout-padding flex="35" flex-md="60" flex-sm="75" flex-xs="95">
-      <div layout="column" layout-align="center center" ng-hide="hCtrl.localUserData || hCtrl.error">
+    <md-content class="md-whiteframe-z1" layout-padding flex="35" flex-md="60" flex-sm="75" flex-xs="95">
+      <div layout="column" layout-align="center center" ng-if="!(hCtrl.localUserData || hCtrl.error)">
         <h1 class="md-headline centered-text" translate="LOADING"></h1>
-        <md-progress-circular md-mode="indeterminate" md-diameter="128"></md-progress-circular>  
+        <md-progress-circular md-mode="indeterminate" md-diameter="128"></md-progress-circular>
       </div>
       <div ng-if="hCtrl.error || hCtrl.noUser">
         <h1 class="md-headline centered-text" translate="ERROR"></h1>
         <md-subheader class="md-warn md-whiteframe-z2 message-area">
           <md-icon md-svg-icon="alert" class="md-warn" aria-label="Alert Icon"></md-icon>
           <span ng-if="hCtrl.noUser" translate="NO_LOCAL_USER"></span>
-          <span ng-if="hCtrl.error"><span translate="DATA_ERROR"></span> <span translate="LOCAL_USER_DATA"></span>. Status: {{hCtrl.error}}</span>
+          <span ng-if="hCtrl.error"><span translate="DATA_ERROR"></span> <span translate="LOCAL_USER_DATA"></span>. Status: <span ng-bind="hCtrl.error"></span></span>
         </md-subheader>
       </div>        
-    </div>
+    </md-content>
   </div>
-  <div layout="column" layout-align="start" flex="100" ng-if="::hCtrl.localUserData.exists"><div layout="row" layout-align="center" flex="100"><div class="md-whiteframe-z1" flex-lg="95" flex-xl="75" flex="100" layout="column">
+  <div layout="column" layout-align="start" flex="100" ng-if="::hCtrl.localUserData.exists"><div layout="row" layout-align="center" flex="100"><div flex-lg="95" flex-xl="75" flex="100" layout="column">
     <md-tabs md-center-tabs md-swipe-content flex="100">
       <md-tab md-active="hCtrl.params.profile === profile.label" ng-repeat="profile in hCtrl.profiles" label="{{profile.name[hCtrl.currentLanguage]}}" layout="column">
-        <md-tab-body style="overflow: scroll;">
-          <div layout="column" layout-gt-sm="row" layout-align="center center" layout-margin class="md-whiteframe-z2">
-            <div layout="column" layout-gt-sm="row" layout-align="center center" layout-padding >
-              <img class="md-fab-img-128" ng-src="{{::hCtrl.localUserData.profileImageURL}}" alt="Profile pic">
-              <div layout="column" layout-align="center center" layout-align-gt-sm="center start">
-                <h2 ng-bind="::hCtrl.localUserData.displayName"></h2>
-                <p ng-bind="profile.position[hCtrl.currentLanguage]"></p>
-                <span>          
+        <md-tab-body class="scrollable">
+          <md-content layout="column" layout-gt-sm="row" layout-align="start stretch" layout-margin class="md-whiteframe-z2 md-hue-2">
+            <div layout="column" class="no-margin" layout-align="start">
+              <md-content class="md-hue-3 visible-overflow" layout="row" layout-padding>
+                <img class="md-fab-img-128 md-whiteframe-z3 no-padding" style="margin: auto auto -72px auto;" ng-src="{{::hCtrl.localUserData.profileImageURL}}" alt="Profile pic">
+                <h2 flex="100" ng-bind="::hCtrl.localUserData.displayName"></h2>
+              </md-content>                
+              <div flex layout="column" layout-align="space-between">
+                <p style="margin-left: 144px; min-height: 40px;" ng-bind="profile.position[hCtrl.currentLanguage]"></p><br>
+                <md-content layout="row" layout-align="center" layout-margin>
                   <md-button class="md-icon-button" ng-href="mailto:{{::hCtrl.localUserData.email}}?subject={{'WEB_CONTACT' | translate}} - {{'PROFILE' | translate}}: {{profile.position[hCtrl.currentLanguage]}}" aria-label="Contact Email Button">
                     <md-icon md-svg-icon="contact-mail" aria-label="Contact Mail Icon"></md-icon>
                     <md-tooltip>
                       Email
                     </md-tooltip> 
                   </md-button>
-                  <md-button ng-repeat="(socialAccount, url) in ::hCtrl.localUserData.social" class="md-icon-button" ng-href="{{url}}" aria-label="{{hCtrl.providersCollection[socialAccount].name}} Profile Button">
-                    <md-icon md-svg-icon="{{::hCtrl.providersCollection[socialAccount].mdIcon}}" style="color: {{hCtrl.providersCollection[socialAccount].color}}" aria-label="{{::hCtrl.providersCollection[socialAccount].name}} Icon"></md-icon>
-                    <md-tooltip>{{hCtrl.providersCollection[socialAccount].name}}</md-tooltip> 
+                  <md-button ng-repeat="(socialAccount, url) in ::hCtrl.localUserData.social" class="md-icon-button" ng-href="{{::url}}" target="_blank" aria-label="{{::hCtrl.providersCollection[socialAccount].name}} Profile Button">
+                    <md-icon md-svg-icon="{{::hCtrl.providersCollection[socialAccount].mdIcon}}" ng-style="::{color: hCtrl.providersCollection[socialAccount].color}" aria-label="{{::hCtrl.providersCollection[socialAccount].name}} Icon"></md-icon>
+                    <md-tooltip>
+                      <span ng-bind="::hCtrl.providersCollection[socialAccount].name"></span>
+                    </md-tooltip> 
                   </md-button>
-                </span>
+                </md-content>
               </div>
             </div>
-            <md-content layout-padding flex="100" flex-gt-sm="50" class="md-whiteframe-z1">            
+            <md-content layout-padding flex="100" flex-gt-sm="50">            
               <strong translate="DESCRIPTION"></strong>
               <span class="multiline-justified-string" ng-bind-html="profile.bio[hCtrl.currentLanguage]"></span>
             </md-content>
-          </div>
-          <div ng-if="::profile.skills.length > 0" layout-padding layout-margin class="md-whiteframe-z2 show-more-content" ng-class="{'show-more-closed': hCtrl.showMoreStates.skills}">
-            <span layout="row" layout-align="center center"><md-icon md-svg-icon="wrench" aria-label="Wrench Icon" style="margin: 5px;"></md-icon><h1 translate="SKILLS"></h1></span>
-            <!-- <md-grid-list md-cols="2" md-cols-sm="4" md-cols-md="8" md-cols-gt-md="12" md-row-height="2:1" md-gutter="6px">
-              <md-grid-tile ng-repeat="skill in ::(profile.skills | orderBy:'-level')" md-colspan="2" md-rowspan="2" md-colspan-md="{{::skill.level === 5 ? 4 : 2}}" md-rowspan-md="{{::skill.level === 5 ? 4 : 2}}" md-colspan-gt-md="{{::skill.level >= 4 ? skill.level === 4 ? 3 : 4 : 2}}" md-rowspan-gt-md="{{::skill.level >= 4 ? skill.level === 4 ? 3 : 4 : 2}}">
-                <md-button class="fullsize no-margin no-padding md-whiteframe-z1" aria-label="Skill Button" layout-padding ng-click="hCtrl.viewSkill($event, skill)">
-                  <div layout="row" layout-align="center center">
-                    <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" flex class="fullsize"></md-icon>
-                    <div layout="column" flex="75" layout-align="center center">
-                      <strong class="no-transform-text">{{skill.name[hCtrl.currentLanguage]}}</strong>
-                      <star-rating ng-model="::skill.level" readonly="true"></star-rating>
-                      <span class="multiline-justified-string" ng-bind-html="skill.description[hCtrl.currentLanguage]" hide-xs hide-sm ng-hide="{{::skill.level < 5}}"></span>
+          </md-content>
+          <div class="margin-8px">
+            <md-expansion-panel-group md-component-id="panelGroup" multiple>
+              <md-expansion-panel md-component-id="skillsPanel" ng-if="::profile.skills.length > 0">
+                <md-expansion-panel-collapsed>
+                  <div class="md-title">
+                    <md-icon md-svg-icon="wrench" aria-label="Wrench Icon" class="margin-5px"></md-icon>
+                    <strong translate="SKILLS"></strong>
+                  </div>
+                  <div class="md-summary">
+                    <span hide-xs translate="CLICK_SHOW_DETAILS"></span>
+                  </div>
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                </md-expansion-panel-collapsed>
+                <md-expansion-panel-expanded>
+                  <md-expansion-panel-header ng-click="$panel.collapse()">
+                    <div class="md-title">
+                      <md-icon md-svg-icon="wrench" aria-label="Wrench Icon" class="margin-5px"></md-icon>
+                      <strong translate="SKILLS"></strong>
                     </div>
+                    <div class="md-summary" >
+                      <span hide-xs translate="CLICK_CLOSE_PANEL"></span>
+                    </div>
+                    <md-expansion-panel-icon></md-expansion-panel-icon>
+                  </md-expansion-panel-header>
+                  <md-expansion-panel-content>
+                    <div layout="column" layout-gt-sm="row" layout-align="space-around">
+                      <md-list ng-show="::profile.anyTopSkill" flex>
+                        <strong translate="SKILLS_TOP"></strong>
+                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 5})" ng-init="profile.anyTopSkill = true;" ng-click="hCtrl.viewSkill($event, skill)" aria-label="Top skills item">
+                          <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                          <div layout="column" layout-sm="row" layout-align="start start" flex="100">
+                            <span ng-bind="skill.name[hCtrl.currentLanguage]"></span>
+                            <span flex></span>
+                            <star-rating ng-model="::skill.level" readonly="true"></star-rating>
+                          </div>
+                        </md-list-item>
+                      </md-list>
+                      <md-list ng-show="::profile.anyHighSkill" flex>
+                        <strong translate="SKILLS_REMARKABLE"></strong>
+                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 4})" ng-init="profile.anyHighSkill = true;" ng-click="hCtrl.viewSkill($event, skill)" aria-label="Remarkable skills item">
+                          <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                          <div layout="column" layout-sm="row" layout-align="start start" flex="100">
+                            <span ng-bind="skill.name[hCtrl.currentLanguage]"></span>
+                            <span flex></span>
+                            <star-rating ng-model="::skill.level" readonly="true"></star-rating>
+                          </div>
+                        </md-list-item>
+                      </md-list>
+                      <md-list ng-show="::profile.anyNormalSkill" flex>
+                        <strong translate="SKILLS_REST"></strong>
+                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : { level: 4 } : hCtrl.filterLT)" ng-init="profile.anyNormalSkill = true;" ng-click="hCtrl.viewSkill($event, skill)" aria-label="Rest of skills item">
+                          <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                          <div layout="column" layout-sm="row" layout-align="start start" flex="100">
+                            <span ng-bind="skill.name[hCtrl.currentLanguage]"></span>
+                            <span flex></span>
+                            <star-rating ng-model="::skill.level" readonly="true"></star-rating>
+                          </div>
+                        </md-list-item>
+                      </md-list>
+                    </div>
+                  </md-expansion-panel-content>
+                </md-expansion-panel-expanded>
+              </md-expansion-panel>
+              <md-expansion-panel md-component-id="educationsPanel" ng-if="::profile.educations.length > 0">
+                <md-expansion-panel-collapsed>
+                  <div class="md-title">
+                    <md-icon md-svg-icon="school" aria-label="School Icon" class="margin-5px"></md-icon>
+                    <strong translate="EDUCATION"></strong>
                   </div>
-                </md-button>
-              </md-grid-tile>
-            </md-grid-list> -->
-            <div layout="column" layout-gt-sm="row" layout-align="space-around">
-              <md-list ng-show="::profile.anyTopSkill" flex>
-                <strong translate="SKILLS_TOP"></strong>
-                <md-list-item ng-repeat="skill in (profile.skills | filter : {level: 5})" ng-init="profile.anyTopSkill = true;" ng-click="hCtrl.viewSkill($event, skill)">
-                  <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
-                  <div layout="column" layout-sm="row" layout-align="start start" flex="100">
-                    <span>{{skill.name[hCtrl.currentLanguage]}}</span>
-                    <span flex></span>
-                    <star-rating ng-model="::skill.level" readonly="true"></star-rating>
+                  <div class="md-summary">
+                    <span hide-xs translate="CLICK_SHOW_DETAILS"></span>
                   </div>
-                </md-list-item>
-              </md-list>
-              <md-list ng-show="::profile.anyHighSkill" flex>
-                <strong translate="SKILLS_REMARKABLE"></strong>
-                <md-list-item ng-repeat="skill in (profile.skills | filter : {level: 4})" ng-init="profile.anyHighSkill = true;" ng-click="hCtrl.viewSkill($event, skill)">
-                  <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
-                  <div layout="column" layout-sm="row" layout-align="start start" flex="100">
-                    <span>{{skill.name[hCtrl.currentLanguage]}}</span>
-                    <span flex></span>
-                    <star-rating ng-model="::skill.level" readonly="true"></star-rating>
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                </md-expansion-panel-collapsed>
+                <md-expansion-panel-expanded>
+                  <md-expansion-panel-header ng-click="$panel.collapse()">
+                    <div class="md-title">
+                      <md-icon md-svg-icon="school" aria-label="School Icon" class="margin-5px"></md-icon>
+                      <strong translate="EDUCATION"></strong>
+                    </div>
+                    <div class="md-summary" >
+                      <span hide-xs translate="CLICK_CLOSE_PANEL"></span>
+                    </div>
+                    <md-expansion-panel-icon></md-expansion-panel-icon>
+                  </md-expansion-panel-header>
+                  <md-expansion-panel-content>
+                    <div layout="column" layout-gt-sm="row" layout-align="space-around">
+                      <md-list ng-show="::profile.anyCourse" flex>
+                        <strong translate="COURSES"></strong>
+                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'course'})" ng-init="profile.anyCourse = true;" ng-click="hCtrl.viewEducation($event, education)" aria-label="Courses item">
+                          <span flex>
+                            <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                            <span ng-bind="education.name[hCtrl.currentLanguage]"></span>
+                          </span>
+                        </md-list-item>
+                      </md-list>
+                      <md-list ng-show="::profile.anyAcademicEducation" flex>
+                        <strong translate="ACADEMIC"></strong>
+                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'academic'})" ng-init="profile.anyAcademicEducation = true;" ng-click="hCtrl.viewEducation($event, education)" aria-label="Academic education item">
+                          <span flex>
+                            <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                            <span ng-bind="education.name[hCtrl.currentLanguage]"></span>
+                          </span>
+                        </md-list-item>
+                      </md-list>
+                    </div>
+                  </md-expansion-panel-content>
+                </md-expansion-panel-expanded>
+              </md-expansion-panel>
+              <md-expansion-panel md-component-id="experiencesPanel" ng-if="::profile.experiences.length > 0">
+                <md-expansion-panel-collapsed>
+                  <div class="md-title">
+                    <md-icon md-svg-icon="worker" aria-label="Worker Icon" class="margin-5px"></md-icon>
+                    <strong translate="PROFESSIONAL_EXPERIENCE"></strong>
                   </div>
-                </md-list-item>
-              </md-list>
-              <md-list ng-show="::profile.anyNormalSkill" flex>
-                <strong translate="SKILLS_REST"></strong>
-                <md-list-item ng-repeat="skill in (profile.skills | filter : { level: 4 } : hCtrl.filterLT)" ng-init="profile.anyNormalSkill = true;" ng-click="hCtrl.viewSkill($event, skill)">
-                  <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
-                  <div layout="column" layout-sm="row" layout-align="start start" flex="100">
-                    <span>{{skill.name[hCtrl.currentLanguage]}}</span>
-                    <span flex></span>
-                    <star-rating ng-model="::skill.level" readonly="true"></star-rating>
+                  <div class="md-summary">
+                    <span hide-xs translate="CLICK_SHOW_DETAILS"></span>
                   </div>
-                </md-list-item>
-              </md-list>
-            </div>
-            <div class="show-more-trigger">
-              <md-button class="md-mini" aria-label="Show More Skills Button" ng-click="hCtrl.toggleShowMore('skills')" translate="{{hCtrl.showMoreStates.skills?'SHOW_MORE':'SHOW_LESS'}}"></md-button>
-            </div>
-          </div>
-          <div ng-if="::profile.educations.length > 0" layout-padding layout-margin class="md-whiteframe-z2 show-more-content" ng-class="{'show-more-closed': hCtrl.showMoreStates.education}">
-            <span layout="row" layout-align="center center"><md-icon md-svg-icon="school" aria-label="School Icon" style="margin: 5px;"></md-icon><h1 translate="EDUCATION"></h1></span>
-            <div layout="column" layout-gt-sm="row" layout-align="space-around">
-              <md-list ng-show="::profile.anyCourse" flex>
-                <strong translate="COURSES"></strong>
-                <md-list-item ng-repeat="education in (profile.educations | filter : {type: 'course'})" ng-init="profile.anyCourse = true;" ng-click="hCtrl.viewEducation($event, education)">
-                  <span flex>
-                    <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
-                    {{education.name[hCtrl.currentLanguage]}}
-                  </span>
-                </md-list-item>
-              </md-list>
-              <md-list ng-show="::profile.anyAcademicEducation" flex>
-                <strong translate="ACADEMIC"></strong>
-                <md-list-item ng-repeat="education in (profile.educations | filter : {type: 'academic'})" ng-init="profile.anyAcademicEducation = true;" ng-click="hCtrl.viewEducation($event, education)">
-                  <span flex>
-                    <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
-                    {{education.name[hCtrl.currentLanguage]}}
-                  </span>
-                </md-list-item>
-              </md-list>
-            </div>
-            <div class="show-more-trigger">
-              <md-button class="md-mini" aria-label="Show More Educations Button" ng-click="hCtrl.toggleShowMore('education')" translate="{{hCtrl.showMoreStates.education?'SHOW_MORE':'SHOW_LESS'}}"></md-button>
-            </div>
-          </div>
-          <div ng-if="::profile.experiences.length > 0" layout-padding layout-margin class="md-whiteframe-z2 show-more-content" ng-class="{'show-more-closed': hCtrl.showMoreStates.experiences}">
-            <span layout="row" layout-align="center center"><md-icon md-svg-icon="worker" aria-label="Worker Icon" style="margin: 5px;"></md-icon><h1 translate="PROFESSIONAL_EXPERIENCE"></h1></span>
-            <div layout="row" layout-align="space-around" layout-wrap>
-              <span class="md-button not-capitalized" ng-repeat="experience in ::profile.experiences" ng-click="hCtrl.viewExperience($event, experience)" flex="100" flex-md="45" flex-lg="30" flex-gt-lg="30">
-                <div layout="row" layout-align-gt-sm="column" layout-align="center center">
-                  <md-icon class="fullsize" md-svg-icon="{{::experience.icon}}" aria-label="Experience Icon" flex="20"></md-icon>
-                  <div layout="column" flex layout-align="center center">
-                    <h3 ng-if="experience.name || experience.position">
-                      <span ng-if="experience.name" ng-bind="experience.name[hCtrl.currentLanguage]"></span><br>
-                      <span ng-if="experience.position" ng-bind="experience.position[hCtrl.currentLanguage]"></span><br>
-                    </h3>
-                    <span ng-if="experience.company">
-                      {{::experience.company.name}}
-                    </span>
-                  </div>
-                </div>
-              </span>
-            </div>
-            <div class="show-more-trigger">
-              <md-button class="md-mini" aria-label="Show More Experiences Button" ng-click="hCtrl.toggleShowMore('experiences')" translate="{{hCtrl.showMoreStates.experiences?'SHOW_MORE':'SHOW_LESS'}}"></md-button>
-            </div>
+                  <md-expansion-panel-icon></md-expansion-panel-icon>
+                </md-expansion-panel-collapsed>
+                <md-expansion-panel-expanded>
+                  <md-expansion-panel-header ng-click="$panel.collapse()">
+                    <div class="md-title">
+                      <md-icon md-svg-icon="worker" aria-label="Worker Icon" class="margin-5px"></md-icon>
+                      <strong translate="PROFESSIONAL_EXPERIENCE"></strong>
+                    </div>
+                    <div class="md-summary" >
+                      <span hide-xs translate="CLICK_CLOSE_PANEL"></span>
+                    </div>
+                    <md-expansion-panel-icon></md-expansion-panel-icon>
+                  </md-expansion-panel-header>
+                  <md-expansion-panel-content>
+                    <div layout="row" layout-align="space-around" layout-wrap>
+                      <span class="md-button no-transform-text" ng-repeat="experience in ::profile.experiences" ng-click="hCtrl.viewExperience($event, experience)" flex="100" flex-md="45" flex-lg="30" flex-gt-lg="30">
+                        <div layout="row" layout-align-gt-sm="column" layout-align="center center">
+                          <md-icon class="fullsize" md-svg-icon="{{::experience.icon}}" aria-label="Experience Icon" flex="20"></md-icon>
+                          <div layout="column" flex layout-align="center center">
+                            <h3 ng-if="::(experience.name || experience.position)">
+                              <span ng-if="::experience.name" ng-bind="experience.name[hCtrl.currentLanguage]"></span><br>
+                              <span ng-if="::experience.position" ng-bind="experience.position[hCtrl.currentLanguage]"></span><br>
+                            </h3>
+                            <span ng-if="::experience.company" ng-bind="::experience.company.name">
+                            </span>
+                          </div>
+                        </div>
+                      </span>
+                    </div>
+                  </md-expansion-panel-content>
+                </md-expansion-panel-expanded>
+              </md-expansion-panel>
+            </md-expansion-panel-group>
           </div>
         </md-tab-body>
       </md-tab>
     </md-tabs>
   </div></div>
-</div>
+</md-content>

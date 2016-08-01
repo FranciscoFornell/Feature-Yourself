@@ -2,6 +2,7 @@
   "HOME": "Inicio",
   "ADMIN": "Administración",
   "MANAGE_USERS": "Administrar usuarios",
+  "NAVIGATION": "Navegación",
   "LOADING": "Cargando...",
   "ERROR": "Error",
   "CANCEL": "Cancelar",
@@ -37,7 +38,7 @@
   "REMOVE_ELEMENTS_CONTENT": "Todos los elementos seleccionados serán permanentemente elininados.",
   "UPDATE": "Actualizar",
   "FORMATTED_DATE": "{{date|date:'d/M/yyyy h:mm a'}}",
-  "NO_LOCAL_USER": "There is no local user in the database.",
+  "NO_LOCAL_USER": "No hay usuario local en la base de datos.",
   "DATA_ERROR": "Error obteniendo",
   "LOCAL_USER_DATA": "datos de usuario local",
   "PROFILE": "Perfil",
@@ -48,8 +49,6 @@
   "SKILLS_TOP": "Mejores habilidades",
   "SKILLS_REMARKABLE": "Habilidades destacables",
   "SKILLS_REST": "Resto de habilidades",
-  "SHOW_MORE": "Mostrar más",
-  "SHOW_LESS": "Mostrar menos",
   "EDUCATION": "Formación",
   "ACADEMIC": "Formación académica",
   "COURSES": "Cursos de formación",
@@ -63,5 +62,7 @@
   "MAIN_PROJECTS": "Principales proyectos",
   "PLURALIZED_YEARS": "año{{plural?'s':''}}",
   "PLURALIZED_MONTHS": "mes{{plural?'es':''}}",
-  "AND": "y"
+  "AND": "y",
+  "CLICK_SHOW_DETAILS": "Click para mostrar en detalle",
+  "CLICK_CLOSE_PANEL": "Click para cerrar el panel"
 }

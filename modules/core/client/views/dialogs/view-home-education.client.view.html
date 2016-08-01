@@ -1,5 +1,5 @@
-<md-dialog aria-label="View education dialog" style="max-width: 600px; width: 100%;">
-  <md-toolbar>
+<md-dialog aria-label="View education dialog" class="dialog-w600">
+  <md-toolbar flex="none">
     <div class="md-toolbar-tools">
       <h2 translate="{{::vHEDCtrl.title}}"></h2>
       <span></span>
@@ -16,10 +16,10 @@
     <div layout="column" layout-gt-sm="row" layout-align="center center">
       <md-icon md-svg-icon="{{::vHEDCtrl.education.icon}}" aria-label="Education Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
       <div flex="100" layout="column" layout-align="start center">
-        <strong>{{::vHEDCtrl.education.name[vHEDCtrl.currentLanguage]}}</strong>
-        <a href="{{::vHEDCtrl.education.issuingAuthority.web}}">{{::vHEDCtrl.education.issuingAuthority.name}}</a>
-        <p class="multiline-justified-string">{{::vHEDCtrl.education.description[vHEDCtrl.currentLanguage]}}</p>
-        <md-button ng-if="vHEDCtrl.education.certificate" class="md-mini" ng-href="{{vHEDCtrl.education.certificate}}" target="_blank" aria-label="View Certificate Button">
+        <strong ng-bind="::vHEDCtrl.education.name[vHEDCtrl.currentLanguage]"></strong>
+        <a href="{{::vHEDCtrl.education.issuingAuthority.web}}" ng-bind="::vHEDCtrl.education.issuingAuthority.name"></a>
+        <p class="multiline-justified-string" ng-bind="::vHEDCtrl.education.description[vHEDCtrl.currentLanguage]"></p>
+        <md-button ng-if="::vHEDCtrl.education.certificate" class="md-mini" ng-href="{{::vHEDCtrl.education.certificate}}" target="_blank" aria-label="View Certificate Button">
           <md-icon md-svg-icon="certificate" aria-label="Certificate Icon"></md-icon>
           <span translate="VIEW_CERTIFICATE"></span>
         </md-button>

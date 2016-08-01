@@ -22,13 +22,13 @@
   <uib-pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
 </section>
 -->
-<div layout="column" layout-align="center" class="child-content">
+<md-content layout="column" layout-align="center" class="child-content md-hue-1">
   <div layout="row" layout-align="center">
     <md-card layout-fill flex-gt-md="95" flex-gt-lg="70" class="margin-padding-bso">
       <md-toolbar class="md-table-toolbar md-default">
         <div class="md-toolbar-tools">
           <span translate="USERS" hide-xs></span>
-          <span ng-show="uLCtrl.selected.length"><span hide-xs>: </span>{{uLCtrl.selected.length}} <span translate="SELECTED_ITEMS"></span>
+          <span ng-show="uLCtrl.selected.length"><span hide-xs>: </span><span ng-bind="uLCtrl.selected.length"></span> <span translate="SELECTED_ITEMS"></span>
           </span>
           <span flex></span>
           <span ng-hide="uLCtrl.selected.length">
@@ -75,14 +75,14 @@
             <tr md-select="user" md-row md-auto-select ng-disabled="user.username === uLCtrl.Authentication.user.username" ng-repeat="user in filteredUsers = (uLCtrl.users | filter: uLCtrl.pager.search ) | orderBy: uLCtrl.pager.order | limitTo: uLCtrl.pager.limit : (uLCtrl.pager.page -1) * uLCtrl.pager.limit" ng-init="user.rolesString = uLCtrl.stringifyRoles(user); provider = uLCtrl.providersCollection[user.provider];">
               <td md-cell>
                 <span layout="row">
-                  <img class="md-whiteframe-z1 md-fab-img-40" ng-src="{{user.profileImageURL}}" alt="{{user.displayName}}">
-                  <md-icon ng-if="provider" md-svg-icon="{{provider.mdIcon}}" style="color: {{provider.color}};" aria-label="Provider Icon" class="md-fab-img-subicon"></md-icon>
+                  <img class="md-whiteframe-z1 md-fab-img-40" ng-src="{{::user.profileImageURL}}" alt="{{user.displayName}}">
+                  <md-icon ng-if="provider" md-svg-icon="{{::provider.mdIcon}}" ng-style="::{color: provider.color}" aria-label="Provider Icon" class="md-fab-img-subicon"></md-icon>
                 </span>                
               </td>
-              <td md-cell ng-bind="user.username"></td>
+              <td md-cell ng-bind="::user.username"></td>
               <td md-cell ng-bind="user.firstName" hide-xs hide-sm hide-md ng-click="uLCtrl.editFirstname($event, user)"></td>
               <td md-cell ng-bind="user.lastName" hide-xs hide-sm hide-md ng-click="uLCtrl.editLastname($event, user)"></td>
-              <td md-cell ng-bind="user.email" hide-xs hide-sm></td>
+              <td md-cell ng-bind="::user.email" hide-xs hide-sm></td>
               <td md-cell hide-xs hide-sm>
                 <md-select ng-model="user.rolesString" placeholder="Select role or roles" md-on-close="uLCtrl.destringifyRoles(user, true)">
                   <md-option ng-value="rolesOption" ng-repeat="rolesOption in uLCtrl.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
@@ -102,7 +102,7 @@
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-limit="uLCtrl.pager.limit"  md-page="uLCtrl.pager.page" md-total="{{filteredUsers.length}}" md-page-select="uLCtrl.isScreenSize('gt-xs')" md-boundary-links="uLCtrl.isScreenSize('gt-xs')" md-label="{{uLCtrl.pager.label}}"></md-table-pagination>
+      <md-table-pagination md-limit="uLCtrl.pager.limit"  md-page="uLCtrl.pager.page" md-total="{{filteredUsers.length}}" md-page-select="uLCtrl.isScreenSize('gt-xs')" md-boundary-links="uLCtrl.isScreenSize('gt-xs')" md-label="{{::uLCtrl.pager.label}}"></md-table-pagination>
     </md-card>
   </div>
-</div>
+</md-content>

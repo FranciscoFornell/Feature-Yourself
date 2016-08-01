@@ -26,8 +26,8 @@
     </form>
   </div>
 </section> -->
-<section flex ng-controller="ChangeProfilePictureController as cPPCtrl" layout="row" layout-align="center">
-  <div layout="column" layout-align="center center" flex="35" flex-md="60" flex-sm="75" flex-xs="95">
+<section flex ng-controller="ChangeProfilePictureController as cPPCtrl" flex layout="row" layout-align="center center"  flex="95" flex-sm="75" flex-md="60" flex-gt-md="35">
+  <div flex="100">
     <md-card>
       <span><img ng-src="{{cPPCtrl.imageURL}}" alt="{{cPPCtrl.user.displayName}}"></span>
       <md-card-actions layout="row" layout-align="space-around">

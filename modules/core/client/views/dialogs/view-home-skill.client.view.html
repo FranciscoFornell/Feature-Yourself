@@ -1,5 +1,5 @@
-<md-dialog aria-label="View skill dialog" style="max-width: 600px; width: 100%;">
-  <md-toolbar>
+<md-dialog aria-label="View skill dialog" class="dialog-w600">
+  <md-toolbar flex="none">
     <div class="md-toolbar-tools">
       <h2 translate="{{::vHSDCtrl.title}}"></h2>
       <span></span>
@@ -15,10 +15,10 @@
   <md-dialog-content layout-margin layout="column">
     <div layout="column" layout-gt-xs="row" layout-align="center center">
       <md-icon md-svg-icon="{{::vHSDCtrl.skill.icon}}" aria-label="Skill Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
-      <div flex="100" layout="column" layout-align="center center">
-        <strong>{{::vHSDCtrl.skill.name[vHSDCtrl.currentLanguage]}}</strong>
+      <div flex="100" layout="column" layout-align="start center">
+        <strong ng-bind="::vHSDCtrl.skill.name[vHSDCtrl.currentLanguage]"></strong>
         <star-rating ng-model="::vHSDCtrl.skill.level" readonly="true"></star-rating>
-        <p class="multiline-justified-string">{{::vHSDCtrl.skill.description[vHSDCtrl.currentLanguage]}}</p>
+        <p class="multiline-justified-string" ng-bind="::vHSDCtrl.skill.description[vHSDCtrl.currentLanguage]"></p>
       </div>
     </div>
   </md-dialog-content>

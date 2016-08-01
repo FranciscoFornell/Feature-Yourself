@@ -43,7 +43,7 @@
  -->
 <md-dialog aria-label="Edit user dialog" layout="column">
   <form name="editUserForm" ng-submit="eUDCtrl.update(editUserForm.$valid)" novalidate flex="100" layout="column">
-    <md-toolbar>
+    <md-toolbar flex="none">
       <div class="md-toolbar-tools">
         <h2 translate="EDIT_USER"></h2>
         <span flex></span>
@@ -74,7 +74,7 @@
         <md-input-container>
           <label translate="ROLES"></label>
           <md-select ng-model="eUDCtrl.user.rolesString" placeholder="Select role or roles" md-on-close="eUDCtrl.destringifyRoles(eUDCtrl.user, false)">
-            <md-option ng-value="rolesOption" ng-repeat="rolesOption in eUDCtrl.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
+            <md-option ng-value="rolesOption" ng-repeat="rolesOption in ::eUDCtrl.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
           </md-select>
         </md-input-container>
         <md-subheader class="md-no-sticky md-warn" ng-show="eUDCtrl.error" ng-bind="eUDCtrl.error"></md-subheader>

@@ -11,13 +11,13 @@
   </div>
   <div ui-view></div>
 </section> -->
-<md-dialog aria-label="Sign in form" data-ng-controller="AuthenticationController as autCtrl" layout="column">
+<md-dialog aria-label="Sign in form" data-ng-controller="AuthenticationController as autCtrl">
   <form name="autForm" ng-submit="autCtrl.anyUserExists ? autCtrl.signin(autForm.$valid) : autCtrl.signup(autForm.$valid)">
-    <md-toolbar>
+    <md-toolbar flex="none">
       <div class="md-toolbar-tools">
         <h2>Login</h2>
         <span flex></span>
-        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="autCtrl.cancel()" ng-hide="cancelForbidden">
+        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="autCtrl.cancel()" ng-if="::!cancelForbidden">
           <md-tooltip>
             <span translate="CANCEL"></span>
           </md-tooltip>
@@ -25,15 +25,15 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-dialog-content layout="column" layout-align="center center">
-      <span class="md-headline" translate="SIGNIN_SOCIAL_MSG"></span>
+    <md-dialog-content>
+      <div class="md-headline centered-text" translate="SIGNIN_SOCIAL_MSG" layout-padding></div>
       <div layout="row" layout-padding layout-wrap layout-align="center center">
         <!-- NOTE: Mejor evitar repeats innecesarios, para evitar watchers y mejorar el rendimiento -->
-        <md-button ng-repeat="provider in ::autCtrl.providersArray" type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/' + ::provider.provider)" aria-label="Login with {{::provider.name}}">
+        <!-- <md-button ng-repeat="provider in ::autCtrl.providersArray" type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/' + provider.provider)" aria-label="Login with {{::provider.name}}">
           <md-tooltip>{{::provider.name}}</md-tooltip>
           <md-icon md-svg-icon="{{::provider.mdIcon}}" style="color: {{::provider.color}};" aria-label="{{::provider.name}} Icon" class="md-icon-128"></md-icon>
-        </md-button>
-        <!-- <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/facebook')" aria-label="Login with Facebook">
+        </md-button> -->
+        <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/facebook')" aria-label="Login with Facebook">
           <md-tooltip>Facebook</md-tooltip>
           <md-icon md-svg-icon="facebook-box" style="color: #3b5998;" aria-label="Facebook Icon" class="md-icon-128"></md-icon>
         </md-button>
@@ -52,11 +52,11 @@
         <md-button type="button" class="md-raised md-square-icon-button" ng-click="autCtrl.callOauthProvider('/api/auth/github')" aria-label="Login with Github">
           <md-tooltip>Github</md-tooltip>
           <md-icon md-svg-icon="github-box" style="color: #333333;" aria-label="Github Icon" class="md-icon-128"></md-icon>
-        </md-button> -->
+        </md-button>
       </div>
-      <span class="md-headline" translate="{{autCtrl.loginType}}_LOCAL_MSG"></span>
+      <div class="md-headline centered-text" translate="{{::autCtrl.loginType}}_LOCAL_MSG" layout-padding></div>
       <md-content class="login-form" layout="row" layout-align="center center">
-        <div layout="column" flex="75" flex-sm="85" flex-xs="95" layout-align="start center" ng-include="autCtrl.loginForm" layout-margin>
+        <div layout="column" flex="75" flex-sm="85" flex-xs="95" layout-align="start center" ng-include="::autCtrl.loginForm" layout-margin>
         </div>
       </md-content>
       <p ng-show="autCtrl.error">
@@ -66,12 +66,12 @@
       <span flex></span>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="center center">
-      <md-button aria-label="Cancel button" type="button" class="md-raised" ng-click="autCtrl.cancel()"  ng-hide="cancelForbidden">
+      <md-button aria-label="Cancel button" type="button" class="md-raised" ng-click="autCtrl.cancel()"  ng-if="::!cancelForbidden">
          <span translate="CANCEL"></span>
       </md-button>
       <span flex></span>
       <md-button aria-label="Submit button" type="submit" class="md-raised md-primary">
-        <span translate="{{autCtrl.loginType}}"></span>
+        <span translate="{{::autCtrl.loginType}}"></span>
       </md-button>
     </md-dialog-actions>
   </form>  

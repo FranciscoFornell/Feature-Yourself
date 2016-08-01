@@ -2,6 +2,7 @@
   "HOME": "Home",
   "ADMIN": "Admin options",
   "MANAGE_USERS": "Manage users",
+  "NAVIGATION": "Navigation",
   "LOADING": "Loading...",
   "ERROR": "Error",
   "CANCEL": "Cancel",
@@ -48,8 +49,6 @@
   "SKILLS_TOP": "Top skills",
   "SKILLS_REMARKABLE": "Remarkable skills",
   "SKILLS_REST": "Rest of skills",
-  "SHOW_MORE": "Show more",
-  "SHOW_LESS": "Show less",
   "EDUCATION": "Education and training",
   "ACADEMIC": "Academic education",
   "COURSES": "Courses and training",
@@ -63,5 +62,7 @@
   "MAIN_PROJECTS": "Main projects",
   "PLURALIZED_YEARS": "year{{plural?'s':''}}",
   "PLURALIZED_MONTHS": "month{{plural?'s':''}}",
-  "AND": "and"
+  "AND": "and",
+  "CLICK_SHOW_DETAILS": "Click to show details",
+  "CLICK_CLOSE_PANEL": "Click to close panel"
 }

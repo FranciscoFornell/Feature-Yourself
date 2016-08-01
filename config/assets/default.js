@@ -8,7 +8,8 @@ module.exports = {
         // 'public/lib/bootstrap/dist/css/bootstrap.css',
         // 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/angular-material/angular-material.css',
-        'public/lib/angular-material-data-table/dist/md-data-table.css'
+        'public/lib/angular-material-data-table/dist/md-data-table.css',
+        'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.css'
         // endbower
       ],
       js: [
@@ -29,7 +30,8 @@ module.exports = {
         'public/lib/angular-translate-storage-local/angular-translate-storage-local.js',
         'public/lib/angular-translate-loader-partial/angular-translate-loader-partial.js',
         'public/lib/angular-cookies/angular-cookies.js',
-        'public/lib/angular-sanitize/angular-sanitize.js'
+        'public/lib/angular-sanitize/angular-sanitize.js',
+        'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.js'
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

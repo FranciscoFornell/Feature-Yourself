@@ -28,11 +28,6 @@
       vm.currentLanguage = $translate.proposedLanguage() || $translate.use();
     });    
     vm.params = $stateParams;
-    vm.showMoreStates = {
-      skills: true,
-      education: true,
-      experiences: true
-    };
     //NOTE: Hardcode que debe ser eliminado a medida que vaya implantando
     //      módulos reales para los datos.
     vm.profiles = [
@@ -314,10 +309,10 @@
               web: 'http://www.ayesa.com/'
             },
             projects: [
-              "SUR",
-              "NEOS",
-              "Desarrollo y mantenimiento SCE - Facturación",
-              "Desarrollo y mantenimiento SCE - Lecturas"
+              'SUR',
+              'NEOS',
+              'Desarrollo y mantenimiento SCE - Facturación',
+              'Desarrollo y mantenimiento SCE - Lecturas'
             ],
             duration: {
               start: new Date(2007, 11, 1),
@@ -357,8 +352,8 @@
               web: 'http://www.ayesa.com/'
             },
             projects: [
-              "Proyecto 1",
-              "Proyecto 2"
+              'Proyecto 1',
+              'Proyecto 2'
             ],
             duration: {
               start: new Date(2011, 2, 1),
@@ -501,9 +496,7 @@
       .success(function(data, status, headers, config) {
         vm.localUserData = data;
         if(!data.exists){
-          // TODO: Implementar i18n
           vm.noUser = true;
-          // 'No existe ningún usuario local del que mostrar datos';
         }        
       })
       .error(function(data, status, headers, config) {
@@ -592,10 +585,6 @@
     // "Less than" comparator for "filter" filters 
     vm.filterLT = function(actual, expected) {
       return actual < expected;
-    };
-
-    vm.toggleShowMore = function(section) {
-      vm.showMoreStates[section] = !vm.showMoreStates[section];
     };
 
     vm.getExperienceDurationInfo = function(duration) {

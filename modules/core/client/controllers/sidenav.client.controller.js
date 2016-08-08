@@ -1,27 +1,28 @@
-(function(){
+(function() {
   'use strict';
 
   angular
     .module('core')
     .controller('SidenavController', SidenavController);
 
-  SidenavController.$inject = ['$scope', 'Authentication', 'Menus', '$mdSidenav', '$state'];
+  SidenavController.$inject = ['$scope', 'authenticationService', 'menuService', '$mdSidenav', '$state'];
 
-  function SidenavController ($scope, Authentication, Menus, $mdSidenav, $state) {
-    /* jshint validthis: true */
-
+  function SidenavController ($scope, authenticationService, menuService, $mdSidenav, $state) {
     var vm = this;
-    // This provides Authentication context.
-    vm.authentication = Authentication;
-    vm.topbarMenu = Menus.getMenu('topbar');
-    vm.accountMenu = Menus.getMenu('account').items[0];
+    
+    vm.accountMenu = menuService.getMenu('account').items[0];
+    // This provides authentication context.
+    vm.authentication = authenticationService;
+    vm.checkStateContains = checkStateContains;
+    vm.closeSidenav = closeSidenav;
+    vm.topbarMenu = menuService.getMenu('topbar');
 
-    vm.checkStateContains = function(state){
+    function checkStateContains(state){
       return ($state.current.name.indexOf(state) !== -1);
-    };
+    }
 
-    vm.closeSidenav = function(){
+    function closeSidenav(){
       $mdSidenav('left-sidenav').close();
-    };
+    }
   }
 })();

@@ -9,7 +9,8 @@ module.exports = {
         // 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/angular-material/angular-material.css',
         'public/lib/angular-material-data-table/dist/md-data-table.css',
-        'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.css'
+        'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.css',
+        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.css'
         // endbower
       ],
       js: [
@@ -31,7 +32,8 @@ module.exports = {
         'public/lib/angular-translate-loader-partial/angular-translate-loader-partial.js',
         'public/lib/angular-cookies/angular-cookies.js',
         'public/lib/angular-sanitize/angular-sanitize.js',
-        'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.js'
+        'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.js',
+        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js'
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

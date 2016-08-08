@@ -1,10 +1,10 @@
 <md-dialog aria-label="View skill dialog" class="dialog-w600">
   <md-toolbar flex="none">
     <div class="md-toolbar-tools">
-      <h2 translate="{{::vHSDCtrl.title}}"></h2>
+      <h2 translate="{{::dialogVm.title}}"></h2>
       <span></span>
       <span flex></span>
-      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="vHSDCtrl.cancel()">
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
         <md-tooltip>
           <span translate="CANCEL"></span>
         </md-tooltip>
@@ -14,11 +14,11 @@
   </md-toolbar>
   <md-dialog-content layout-margin layout="column">
     <div layout="column" layout-gt-xs="row" layout-align="center center">
-      <md-icon md-svg-icon="{{::vHSDCtrl.skill.icon}}" aria-label="Skill Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
+      <md-icon md-svg-icon="{{::dialogVm.skill.icon}}" aria-label="Skill Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
       <div flex="100" layout="column" layout-align="start center">
-        <strong ng-bind="::vHSDCtrl.skill.name[vHSDCtrl.currentLanguage]"></strong>
-        <star-rating ng-model="::vHSDCtrl.skill.level" readonly="true"></star-rating>
-        <p class="multiline-justified-string" ng-bind="::vHSDCtrl.skill.description[vHSDCtrl.currentLanguage]"></p>
+        <strong ng-bind="::dialogVm.skill.name[dialogVm.currentLanguage]"></strong>
+        <star-rating ng-model="::dialogVm.skill.level" readonly="true"></star-rating>
+        <p class="multiline-justified-string" ng-bind="::dialogVm.skill.description[dialogVm.currentLanguage]"></p>
       </div>
     </div>
   </md-dialog-content>

@@ -1,63 +1,9 @@
-<!-- NOTE: Dejo de momento la antigua vista comentada -->
-<!-- 
-<section>
-  <div class="page-header">
-    <div class="row">
-      <div class="col-md-6">
-        <h1 ng-bind="user.username"></h1>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-primary" ui-sref="admin.user-edit({userId: user._id})">
-          <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" ng-click="remove();" ng-if="user._id !== authentication.user._id">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-3"><strong>First Name</strong></div>
-        <div class="col-md-6" ng-bind="user.firstName"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Last Name</strong></div>
-        <div class="col-md-6" ng-bind="user.lastName"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Email</strong></div>
-        <div class="col-md-6" ng-bind="user.email"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Provider</strong></div>
-        <div class="col-md-6" ng-bind="user.provider"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Created</strong></div>
-        <div class="col-md-6" ng-bind="user.created"></div>
-      </div>
-      <hr/>
-      <div class="row">
-        <div class="col-md-3"><strong>Roles</strong></div>
-        <div class="col-md-6" ng-bind="user.roles"></div>
-      </div>
-    </div>
-  </div>
-</section>
- -->
 <md-dialog aria-label="View user dialog">
   <md-toolbar flex="none">
     <div class="md-toolbar-tools">
       <h2 translate="VIEW_USER"></h2>
       <span flex></span>
-      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="vUDCtrl.cancel()">
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
         <md-tooltip>
           <span translate="CANCEL"></span>
         </md-tooltip>
@@ -67,33 +13,33 @@
   </md-toolbar>
   <md-dialog-content layout-margin>
     <span layout="column" layout-gt-xs="row" layout-align="space-between center" layout-margin>
-      <h2 ng-bind="::vUDCtrl.user.username"></h2>
-      <img flex-order-xs="-1" class="md-whiteframe-z1 md-fab-img-128" ng-src="{{::vUDCtrl.user.profileImageURL}}" alt="{{::vUDCtrl.user.displayName}}">
+      <h2 ng-bind="::dialogVm.user.username"></h2>
+      <img flex-order-xs="-1" class="md-whiteframe-z1 md-fab-img-128" ng-src="{{::dialogVm.user.profileImageURL}}" alt="{{::dialogVm.user.displayName}}">
     </span>
     <p>
       <strong><span translate="FIRST_NAME"></span>:</strong>
-      <span ng-bind="::vUDCtrl.user.firstName"></span>
+      <span ng-bind="::dialogVm.user.firstName"></span>
     </p>
     <p>
       <strong><span translate="LAST_NAME"></span>:</strong>
-      <span ng-bind="::vUDCtrl.user.lastName"></span>
+      <span ng-bind="::dialogVm.user.lastName"></span>
     </p>
     <p>
       <strong><span translate="EMAIL"></span>:</strong>
-      <span ng-bind="::vUDCtrl.user.email"></span>
+      <span ng-bind="::dialogVm.user.email"></span>
     </p>
     <p>
       <strong><span translate="PROVIDER"></span>:</strong>
-      <md-icon ng-if="::vUDCtrl.provider" md-svg-icon="{{::vUDCtrl.provider.mdIcon}}" ng-style="::{color: vUDCtrl.provider.color}" aria-label="Provider Icon"></md-icon>
-      <span ng-bind="::vUDCtrl.provider.name || vUDCtrl.user.provider.charAt(0).toUpperCase() + vUDCtrl.user.provider.slice(1)"></span>
+      <md-icon ng-if="::dialogVm.provider" md-svg-icon="{{::dialogVm.provider.mdIcon}}" ng-style="::{color: dialogVm.provider.color}" aria-label="Provider Icon"></md-icon>
+      <span ng-bind="::dialogVm.provider.name || dialogVm.user.provider.charAt(0).toUpperCase() + dialogVm.user.provider.slice(1)"></span>
     </p>
     <p>
       <strong><span translate="CREATED"></span>:</strong>
-      <span translate="FORMATTED_DATE" translate-values = "::{date:vUDCtrl.user.created}"></span>
+      <span translate="FORMATTED_DATE" translate-values = "::{date:dialogVm.user.created}"></span>
     </p>
     <p>
       <strong><span translate="ROLES"></span>:</strong>
-      <span translate="{{::vUDCtrl.stringifyRoles(vUDCtrl.user)}}"></span>
+      <span translate="{{::dialogVm.stringifyRoles(dialogVm.user)}}"></span>
     </p>
   </md-dialog-content>
 </md-dialog>

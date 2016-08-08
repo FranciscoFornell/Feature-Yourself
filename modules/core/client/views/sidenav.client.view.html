@@ -1,7 +1,7 @@
 <md-sidenav hide-gt-xs flex md-component-id="left-sidenav" class="md-sidenav-left md-whiteframe-z5 main-sidenav" layout="column">
   <md-toolbar class="md-hue-1 md-whiteframe-z1" layout="row" layout-align="center center" translate="NAVIGATION"></md-toolbar>
-  <span layout="column" ng-repeat="item in ::sNavCtrl.topbarMenu.items" ng-if="item.shouldRender(sNavCtrl.authentication.user);" flex="none">
-    <md-button ng-if="::item.type !== 'dropdown'" aria-label="{{::item.title}} button" ng-click="sNavCtrl.closeSidenav()" ui-sref="{{::item.state}}" class="capitalized-text left-aligned-text" ui-sref-active="md-raised md-primary md-hue-1">
+  <span layout="column" ng-repeat="item in ::vm.topbarMenu.items" ng-if="item.shouldRender(vm.authentication.user);" flex="none">
+    <md-button ng-if="::item.type !== 'dropdown'" aria-label="{{::item.title}} button" ng-click="vm.closeSidenav()" ui-sref="{{::item.state}}" class="capitalized-text left-aligned-text" ui-sref-active="md-raised md-primary md-hue-1">
       <md-icon md-svg-icon="{{::item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
       <span translate="{{::item.title}}"></span>
     </md-button>
@@ -12,16 +12,16 @@
         <md-icon md-svg-icon="chevron-right" aria-label="dropdown icon"></md-icon>
       </md-button>
       <md-menu-content>
-        <md-menu-item ng-repeat="subitem in ::item.items"><md-button ng-click="sNavCtrl.closeSidenav()" ui-sref="{{::subitem.state}}" aria-label="{{::subitem.title}} button" ui-sref-active="md-primary md-raised md-hue-1">
+        <md-menu-item ng-repeat="subitem in ::item.items"><md-button ng-click="vm.closeSidenav()" ui-sref="{{::subitem.state}}" aria-label="{{::subitem.title}} button" ui-sref-active="md-primary md-raised md-hue-1">
             <md-icon ng-if="subitem.icon" md-svg-icon="{{::subitem.icon}}" aria-label="{{::subitem.title}} icon"></md-icon>
             <span translate="{{::subitem.title}}"></span>
           </md-button></md-menu-item>
       </md-menu-content>
     </md-menu>
   </span>
-  <div ng-show="sNavCtrl.checkStateContains('settings')" layout="column">
+  <div ng-show="vm.checkStateContains('settings')" layout="column">
     <md-toolbar class="md-hue-1 md-whiteframe-z1" layout="row" layout-align="center center" translate="USER_SETTINGS"></md-toolbar>
-    <md-button ng-repeat="item in ::sNavCtrl.accountMenu.items" ng-if="item.state !== 'settings.password' || sNavCtrl.authentication.user.provider === 'local'" aria-label="{{::item.title}} button" ng-click="sNavCtrl.closeSidenav()" ui-sref="{{::item.state}}" class="capitalized-text left-aligned-text" ui-sref-active="md-raised md-primary md-hue-1">
+    <md-button ng-repeat="item in ::vm.accountMenu.items" ng-if="item.state !== 'settings.password' || vm.authentication.user.provider === 'local'" aria-label="{{::item.title}} button" ng-click="vm.closeSidenav()" ui-sref="{{::item.state}}" class="capitalized-text left-aligned-text" ui-sref-active="md-raised md-primary md-hue-1">
       <md-icon md-svg-icon="{{::item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
       <span translate="{{::item.title}}"></span>
     </md-button>

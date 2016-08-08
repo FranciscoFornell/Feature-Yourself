@@ -1,49 +1,47 @@
-(function () {
+(function() {
   'use strict';
 
   angular
-  .module('core')
-  .run(MenuConfig);
+    .module('core')
+    .run(MenuConfig);
 
-  MenuConfig.$inject = ['Menus'];
+  MenuConfig.$inject = ['menuService'];
 
-  function MenuConfig(Menus) {
+  function MenuConfig(menuService) {
 
-    Menus.addMenu('account', {
+    menuService.addMenu('account', {
       roles: ['user']
     });
 
-    Menus.addMenuItem('account', {
+    menuService.addMenuItem('account', {
       title: '',
       state: 'settings',
       type: 'dropdown',
       roles: ['user']
     });
 
-    Menus.addSubMenuItem('account', 'settings', {
+    menuService.addSubMenuItem('account', 'settings', {
       title: 'EDIT_PROFILE',
       state: 'settings.profile',
       icon: 'account-check'
     });
 
-    Menus.addSubMenuItem('account', 'settings', {
+    menuService.addSubMenuItem('account', 'settings', {
       title: 'CHANGE_PROF_PIC',
       state: 'settings.picture',
       icon: 'file-image'
     });
 
-    Menus.addSubMenuItem('account', 'settings', {
+    menuService.addSubMenuItem('account', 'settings', {
       title: 'CHANGE_PASSWORD',
       state: 'settings.password',
       icon: 'account-key'
     });
 
-    Menus.addSubMenuItem('account', 'settings', {
+    menuService.addSubMenuItem('account', 'settings', {
       title: 'MANAGE_SOCIAL',
       state: 'settings.accounts',
       icon: 'account-multiple'
     });
-
   }
-
 })();

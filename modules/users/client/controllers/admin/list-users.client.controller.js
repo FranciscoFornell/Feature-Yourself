@@ -1,101 +1,161 @@
-// 'use strict';
-
-// angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
-//   function ($scope, $filter, Admin) {
-//     Admin.query(function (data) {
-//       $scope.users = data;
-//       $scope.buildPager();
-//     });
-
-//     $scope.buildPager = function () {
-//       $scope.pagedItems = [];
-//       $scope.itemsPerPage = 15;
-//       $scope.currentPage = 1;
-//       $scope.figureOutItemsToDisplay();
-//     };
-
-//     $scope.figureOutItemsToDisplay = function () {
-//       $scope.filteredItems = $filter('filter')($scope.users, {
-//         $: $scope.search
-//       });
-//       $scope.filterLength = $scope.filteredItems.length;
-//       var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-//       var end = begin + $scope.itemsPerPage;
-//       $scope.pagedItems = $scope.filteredItems.slice(begin, end);
-//     };
-
-//     $scope.pageChanged = function () {
-//       $scope.figureOutItemsToDisplay();
-//     };
-//   }
-// ]);
-
-// NOTE: conservo de momento el controlador anterior comentado
-(function(){
+(function() {
   'use strict';
   
   angular
     .module('users.admin')
     .controller('UserListController', UserListController);
 
-  UserListController.$inject = ['$scope', '$filter', 'Admin', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', 'SocialProviders', 'Authentication'];
+  UserListController.$inject = ['$scope', '$filter', 'Admin', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', 'socialProvidersService', 'authenticationService'];
 
-  function UserListController ($scope, $filter, Admin, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, SocialProviders, Authentication) {
-    /* jshint validthis: true */
-
+  function UserListController ($scope, $filter, Admin, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, socialProvidersService, authenticationService) {
     var vm = this;
 
-    $translatePartialLoader.addPart('users');
+    vm.authentication = authenticationService;
+    vm.destringifyRoles = destringifyRoles;
+    vm.editFirstname = editFirstname;
+    vm.editLastname = editLastname;
+    vm.isScreenSize = isScreenSize;
+    vm.providersCollection = socialProvidersService.providersCollection;
+    vm.removeSelected = removeSelected;
+    vm.showEditUserDialog = showEditUserDialog;
+    vm.showViewUserDialog = showViewUserDialog;
+    vm.stringifyRoles = stringifyRoles;
+    vm.toggleFilter = toggleFilter;
 
-    vm.Authentication = Authentication;
+    activate();    
 
-    vm.pager = {
-      order: 'username',
-      limit: 5,
-      page: 1,
-      search: '',
-      filterEnabled: false,
-      label: {
-        page: 'PAG_LABEL_PAGE',
-        rowsPerPage: 'PAG_LABEL_ROWS_PER_PAGE',
-        of: 'PAG_LABEL_OF'
+    function activate() {
+      vm.pager = {
+        order: 'username',
+        limit: 5,
+        page: 1,
+        search: '',
+        filterEnabled: false,
+        label: {
+          page: 'PAG_LABEL_PAGE',
+          rowsPerPage: 'PAG_LABEL_ROWS_PER_PAGE',
+          of: 'PAG_LABEL_OF'
+        }
+      };
+      vm.selected = [];
+      vm.rolesOptions = [
+        'ROLE_USER',
+        'ROLE_ADMIN',
+        'ROLE_USER_ADMIN'
+      ];
+      
+      $translatePartialLoader.addPart('users');
+
+      // Automaticaly adjust the initial rows per page
+      if ($mdMedia('(min-height: 1010px)')){
+        vm.pager.limit = 15;
+      } else if ($mdMedia('(min-height: 800px)')){
+        vm.pager.limit = 10;
       }
-    };
 
-    vm.providersCollection = SocialProviders.providersCollection;
-
-    // Automaticaly adjust the initial rows per page
-    if ($mdMedia('(min-height: 1010px)')){
-      vm.pager.limit = 15;
-    } else if ($mdMedia('(min-height: 800px)')){
-      vm.pager.limit = 10;
+      vm.promise = Admin.query(function (data) {
+        vm.users = data;
+      }).$promise;
     }
 
-    vm.rolesOptions = [
-      'ROLE_USER',
-      'ROLE_ADMIN',
-      'ROLE_USER_ADMIN'
-    ];
+    function destringifyRoles(user, updateUser) {
+      var roles,
+        rolesString = user.rolesString;
 
-    vm.selected = [];
-
-    vm.promise = Admin.query(function (data) {
-      vm.users = data;
-    }).$promise;
-
-    vm.isScreenSize = function (screenSize) {
-      return $mdMedia(screenSize);
-    };
-
-    vm.toggleFilter = function () {
-      vm.pager.filterEnabled = !vm.pager.filterEnabled;
-
-      if (!vm.pager.filterEnabled) {
-        vm.pager.search = '';
+      switch (rolesString) {
+        case 'ROLE_USER':
+          roles = ['user'];
+          break;
+        case 'ROLE_ADMIN':
+          roles = ['admin'];
+          break;
+        case 'ROLE_USER_ADMIN':
+          roles = ['user', 'admin'];
+          break;
+        default:
+          break;
       }
-    };
 
-    vm.removeSelected = function (ev) {
+      if (!!roles) {
+        user.roles = roles;
+        if (updateUser) {
+          delete user.rolesString;
+          user.$update(function () {
+            user.rolesString = rolesString;
+          }, function (err) {
+            $mdToast.showSimple('ERROR:\n' + err.data);
+            vm.promise = Admin.query(function (data) {
+              vm.users = data;
+            }).$promise;
+          });  
+        }        
+      }      
+    }
+
+    function dialogCancel() {
+      $mdDialog.cancel();
+    }
+
+    function editFirstname(ev, user) {
+      var editDialog = {
+        modelValue: user.firstName,
+        save: function (input) {
+          var rolesString = user.rolesString;
+          delete user.rolesString;
+          user.firstName = input.$modelValue;
+          user.$update(function () {
+            user.rolesString = rolesString;
+          }, function (err) {
+            $mdToast.showSimple('ERROR:\n' + err.data);
+            vm.promise = Admin.query(function (data) {
+              vm.users = data;
+            }).$promise;
+          });
+        },
+        targetEvent: ev,
+        validators: {
+          'md-maxlength': 30,
+          'required': true
+        }
+      };
+
+      ev.stopPropagation(); // in case autoselect is enabled
+
+      $mdEditDialog.small(editDialog);
+    }
+
+    function editLastname(ev, user) {
+      var editDialog = {
+        modelValue: user.lastName,
+        save: function (input) {
+          var rolesString = user.rolesString;
+          delete user.rolesString;
+          user.lastName = input.$modelValue;
+          user.$update(function () {
+            user.rolesString = rolesString;
+          }, function (err) {
+            $mdToast.showSimple('ERROR:\n' + err.data);
+            vm.promise = Admin.query(function (data) {
+              vm.users = data;
+            }).$promise;
+          });
+        },
+        targetEvent: ev,
+        validators: {
+          'md-maxlength': 30
+        }
+      };
+
+      ev.stopPropagation(); // in case autoselect is enabled
+
+      $mdEditDialog.small(editDialog);
+    }
+
+    function isScreenSize(screenSize) {
+      return $mdMedia(screenSize);
+    }
+
+    function removeSelected(ev) {
       var titleText,
         contentText,
         cancelText,
@@ -137,65 +197,85 @@
             });
         });
       }
-    };
+    }
 
-    vm.editFirstname = function (ev, user) {
-      var editDialog = {
-        modelValue: user.firstName,
-        save: function (input) {
-          var rolesString = user.rolesString;
-          delete user.rolesString;
-          user.firstName = input.$modelValue;
-          user.$update(function () {
-            user.rolesString = rolesString;
-          }, function (err) {
-            $mdToast.showSimple('ERROR:\n' + err.data);
-            vm.promise = Admin.query(function (data) {
-              vm.users = data;
-            }).$promise;
-          });
-        },
-        targetEvent: ev,
-        validators: {
-          'md-maxlength': 30,
-          'required': true
-        }
-      };
-
+    function showEditUserDialog(ev, user) {
+      var useFullscreen = $mdMedia('xs');
       ev.stopPropagation(); // in case autoselect is enabled
 
-      $mdEditDialog.small(editDialog);
+      $mdDialog.show({
+        templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        controller: EditUserDialogController,
+        controllerAs: 'dialogVm',
+        locals: {
+          user: user
+        },
+        fullscreen: $mdMedia('xs')
+      });
 
-    };
-    vm.editLastname = function (ev, user) {
-      var editDialog = {
-        modelValue: user.lastName,
-        save: function (input) {
-          var rolesString = user.rolesString;
+      function EditUserDialogController ($scope, user) {
+        var dialogVm = this,
+          rolesString;
+
+        dialogVm.cancel = dialogCancel;
+        dialogVm.destringifyRoles = vm.destringifyRoles;
+        dialogVm.rolesOptions = vm.rolesOptions;
+        dialogVm.stringifyRoles = vm.stringifyRoles;
+        dialogVm.update = dialogUpdate;
+        dialogVm.user = angular.extend({}, user);
+        
+        function dialogUpdate(isValid) {
+          if (!isValid) {
+            $scope.$broadcast('show-errors-check-validity', 'editUserForm');
+
+            return false;
+          }
+
+          angular.extend(user, dialogVm.user);
+
+          rolesString = user.rolesString;
           delete user.rolesString;
-          user.lastName = input.$modelValue;
           user.$update(function () {
             user.rolesString = rolesString;
-          }, function (err) {
-            $mdToast.showSimple('ERROR:\n' + err.data);
-            vm.promise = Admin.query(function (data) {
-              vm.users = data;
-            }).$promise;
+            $mdDialog.hide();
+          }, function (errorResponse) {
+            user.rolesString = rolesString;
+            dialogVm.error = errorResponse.data.message;
           });
-        },
-        targetEvent: ev,
-        validators: {
-          'md-maxlength': 30
         }
-      };
+      }
+    }
 
+    function showViewUserDialog(ev, user, provider) {
       ev.stopPropagation(); // in case autoselect is enabled
 
-      $mdEditDialog.small(editDialog);
+      $mdDialog.show({
+        templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        controller: ViewUserDialogController,
+        controllerAs: 'dialogVm',
+        locals: {
+          user: user,
+          provider: provider
+        },
+        fullscreen: $mdMedia('xs')
+      });
 
-    };
+      function ViewUserDialogController ($scope, user) {
+        var dialogVm = this,
+          rolesString;
 
-    vm.stringifyRoles = function (user) {
+        dialogVm.cancel = dialogCancel;
+        dialogVm.provider = provider;
+        dialogVm.stringifyRoles = vm.stringifyRoles;
+        dialogVm.user = user;
+      }
+    }
+
+    function stringifyRoles(user) {
       var rolesString;
 
       switch (user.roles.join()) {
@@ -215,118 +295,14 @@
       }
 
       return rolesString;
-    };
+    }
 
-    vm.destringifyRoles = function (user, updateUser) {
-      var roles,
-        rolesString = user.rolesString;
+    function toggleFilter() {
+      vm.pager.filterEnabled = !vm.pager.filterEnabled;
 
-      switch (rolesString) {
-        case 'ROLE_USER':
-          roles = ['user'];
-          break;
-        case 'ROLE_ADMIN':
-          roles = ['admin'];
-          break;
-        case 'ROLE_USER_ADMIN':
-          roles = ['user', 'admin'];
-          break;
-        default:
-          break;
+      if (!vm.pager.filterEnabled) {
+        vm.pager.search = '';
       }
-
-      if (!!roles) {
-        user.roles = roles;
-        if (updateUser) {
-          delete user.rolesString;
-          user.$update(function () {
-            user.rolesString = rolesString;
-          }, function (err) {
-            $mdToast.showSimple('ERROR:\n' + err.data);
-            vm.promise = Admin.query(function (data) {
-              vm.users = data;
-            }).$promise;
-          });  
-        }        
-      }      
-    };
-
-    vm.showEditUserDialog = function (ev, user) {
-      var useFullscreen = $mdMedia('xs');
-      ev.stopPropagation(); // in case autoselect is enabled
-
-      $mdDialog.show({
-        templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
-        targetEvent: ev,
-        clickOutsideToClose: true,
-        controller: editUserDialogController,
-        controllerAs: 'eUDCtrl',
-        locals: {
-          user: user
-        },
-        fullscreen: $mdMedia('xs')
-      });
-
-      function editUserDialogController ($scope, user) {
-        var editVm = this,
-          rolesString;
-
-        editVm.user = angular.extend({}, user);
-        editVm.rolesOptions = vm.rolesOptions;
-        editVm.stringifyRoles = vm.stringifyRoles;
-        editVm.destringifyRoles = vm.destringifyRoles;
-        editVm.update = function (isValid) {
-          if (!isValid) {
-            $scope.$broadcast('show-errors-check-validity', 'editUserForm');
-
-            return false;
-          }
-
-          angular.extend(user, editVm.user);
-
-          rolesString = user.rolesString;
-          delete user.rolesString;
-          user.$update(function () {
-            user.rolesString = rolesString;
-            $mdDialog.hide();
-          }, function (errorResponse) {
-            user.rolesString = rolesString;
-            editVm.error = errorResponse.data.message;
-          });
-        };
-        editVm.cancel = function () {
-          $mdDialog.cancel();
-        };
-      }
-    };
-
-    vm.showViewUserDialog = function (ev, user, provider) {
-      ev.stopPropagation(); // in case autoselect is enabled
-
-      $mdDialog.show({
-        templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
-        targetEvent: ev,
-        clickOutsideToClose: true,
-        controller: viewUserDialogController,
-        controllerAs: 'vUDCtrl',
-        locals: {
-          user: user,
-          provider: provider
-        },
-        fullscreen: $mdMedia('xs')
-      });
-
-      function viewUserDialogController ($scope, user) {
-        var viewVm = this,
-          rolesString;
-
-        viewVm.user = user;
-        viewVm.provider = provider;
-        viewVm.stringifyRoles = vm.stringifyRoles;
-        viewVm.cancel = function () {
-          $mdDialog.cancel();
-        };
-      }
-    };
+    }
   }
 })();

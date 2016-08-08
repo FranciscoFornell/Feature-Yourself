@@ -1,35 +1,8 @@
-<!-- NOTE: Dejo de momento el formulario antiguo comentado -->
-<!-- <section ng-controller="SettingsController">
-  <div class="page-header">
-    <h1>Settings</h1>
-  </div>
-  <div class="row">
-    <nav class="col-sm-3 col-md-3">
-      <ul class="nav nav-pills nav-stacked">
-        <li ui-sref-active="active">
-          <a ui-sref="settings.profile">Edit Profile</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="settings.picture">Change Profile Picture</a>
-        </li>
-        <li ui-sref-active="active" ng-show="user.provider === 'local'">
-          <a ui-sref="settings.password">Change Password</a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="settings.accounts">Manage Social Accounts</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="col-sm-9 col-md-8 settings-view">
-      <div ui-view></div>
-    </div>
-  </div>
-</section> -->
-<section flex ng-controller="SettingsController as sCtrl" layout="row" layout-fill>
+<section flex ng-controller="SettingsController as settingsVm" layout="row" layout-fill>
   <div layout="column" class="dashboard-sidenav" hide-xs>
     <md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" layout-fill layout="column" layout-padding>
       <div flex></div>
-      <md-button ng-repeat="item in ::sCtrl.accountMenu.items" class="md-raised md-hue-1 md-dashboard-button" ui-sref="{{::item.state}}" ui-sref-active="md-primary md-hue-2" aria-label="{{::item.title}} button" ng-if="::item.state !== 'settings.password' || sCtrl.user.provider === 'local'">
+      <md-button ng-repeat="item in ::settingsVm.accountMenu.items" class="md-raised md-hue-1 md-dashboard-button" ui-sref="{{::item.state}}" ui-sref-active="md-primary md-hue-2" aria-label="{{::item.title}} button" ng-if="::item.state !== 'settings.password' || settingsVm.user.provider === 'local'">
         <md-icon class="md-dashboard-icon" md-svg-icon="{{::item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
         <span translate="{{::item.title}}"></span>
       </md-button>

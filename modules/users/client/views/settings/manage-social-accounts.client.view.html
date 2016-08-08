@@ -1,74 +1,19 @@
-<!-- <section class="row" ng-controller="SocialAccountsController">
-  <h3 class="col-md-12 text-center" ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
-  <div class="col-md-12 text-center"> -->
-    <!-- If the user's provider field (primary) is a social account, show it here -->
-    <!-- <div ng-hide="user.provider === 'local'" class="social-account-container">
-      <img ng-src="/modules/users/client/img/buttons/{{user.provider}}.png">
-      <i class="glyphicon glyphicon-check text-success user-primary-account" data-toggle="popover" title="Primary: {{user.provider}}"></i>
-    </div>
-    <div ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="social-account-container">
-      <img ng-src="/modules/users/client/img/buttons/{{providerName}}.png">
-      <a class="btn btn-danger btn-remove-account" ng-click="removeUserSocialAccount(providerName)">
-        <i class="glyphicon glyphicon-trash"></i>
-      </a>
-    </div>
-  </div>
-  <h3 class="col-md-12 text-center" ng-show="hasConnectedAdditionalSocialAccounts()">Unconnected social accounts:</h3>
-  <div class="col-md-12 text-center">
-    <div class="social-account-container" ng-hide="isConnectedSocialAccount('facebook')">
-      <img ng-src="/modules/users/client/img/buttons/facebook.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/facebook" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </div>
-    <div class="social-account-container" ng-hide="isConnectedSocialAccount('twitter')">
-      <img ng-src="/modules/users/client/img/buttons/twitter.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/twitter" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </div>
-    <div class="social-account-container" ng-hide="isConnectedSocialAccount('google')">
-      <img ng-src="/modules/users/client/img/buttons/google.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/google" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </div>
-    <div class="social-account-container" ng-hide="isConnectedSocialAccount('linkedin')">
-      <img ng-src="/modules/users/client/img/buttons/linkedin.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/linkedin" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </div>
-    <div class="social-account-container" ng-hide="isConnectedSocialAccount('github')">
-      <img ng-src="/modules/users/client/img/buttons/github.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/github" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </div>
-    <div class="social-account-container" ng-hide="isConnectedSocialAccount('paypal')">
-      <img ng-src="/modules/users/client/img/buttons/paypal.png">
-      <a class="btn btn-success btn-remove-account" href="/api/auth/paypal" target="_self">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </div>
-  </div>
-</section> -->
-<section flex ng-controller="SocialAccountsController as sACtrl" flex layout="row" layout-align="center center" flex="95" flex-sm="75" flex-md="60" flex-gt-md="35">
+<section flex layout="row" layout-align="center center" flex="95" flex-sm="75" flex-md="60" flex-gt-md="35">
   <div flex="100" class="md-hue-1">
-    <h3 class="md-headline centered-text"><span translate="SOCIAL_MAIN_PROVIDER"></span> <span ng-bind="::sACtrl.mainAccountName"></span></h3>
+    <h3 class="md-headline centered-text"><span translate="SOCIAL_MAIN_PROVIDER"></span> <span ng-bind="::vm.mainAccountName"></span></h3>
     <md-card>
       <md-card-content>
-        <h3 ng-show="sACtrl.hasConnectedAdditionalSocialAccounts()" class="md-headline centered-text" translate="SOCIAL_CONNECTED"></h3>
+        <h3 ng-show="vm.hasConnectedAdditionalSocialAccounts()" class="md-headline centered-text" translate="SOCIAL_CONNECTED"></h3>
         <div layout="row" layout-padding layout-wrap layout-align="center center">
-          <md-button ng-repeat="(providerName, providerData) in sACtrl.user.additionalProvidersData" type="button" class="md-raised md-square-icon-button" ng-click="sACtrl.removeUserSocialAccount(providerName)" aria-label="Remove {{sACtrl.providersCollection[providerName].name}} account">
-            <md-tooltip><span ng-bind="sACtrl.providersCollection[providerName].name"></span></md-tooltip>
-            <md-icon md-svg-icon="{{sACtrl.providersCollection[providerName].mdIcon}}" ng-style="{color: sACtrl.providersCollection[providerName].color}" aria-label="{{sACtrl.providersCollection[providerName].name}} Icon" class="md-icon-128"></md-icon>
+          <md-button ng-repeat="(providerName, providerData) in vm.user.additionalProvidersData" type="button" class="md-raised md-square-icon-button" ng-click="vm.removeUserSocialAccount(providerName)" aria-label="Remove {{vm.providersCollection[providerName].name}} account">
+            <md-tooltip><span ng-bind="vm.providersCollection[providerName].name"></span></md-tooltip>
+            <md-icon md-svg-icon="{{vm.providersCollection[providerName].mdIcon}}" ng-style="{color: vm.providersCollection[providerName].color}" aria-label="{{vm.providersCollection[providerName].name}} Icon" class="md-icon-128"></md-icon>
             <md-icon md-svg-icon="account-remove"  aria-label="Add account icon" class="md-subicon-128"></md-icon>
           </md-button>
         </div>
-        <h3 ng-show="sACtrl.anyUnconnected" class="md-headline centered-text" translate="SOCIAL_UNCONNECTED"></h3>
+        <h3 ng-show="vm.anyUnconnected" class="md-headline centered-text" translate="SOCIAL_UNCONNECTED"></h3>
         <div layout="row" layout-padding layout-wrap layout-align="center center">
-          <md-button ng-repeat="provider in ::sACtrl.providersArray" type="button" class="md-raised md-square-icon-button" href="/api/auth/{{::provider.provider}}" target="_self" aria-label="Add {{::provider.name}} account" ng-hide="sACtrl.isConnectedSocialAccount('{{::provider.provider}}')">
+          <md-button ng-repeat="provider in ::vm.providersArray" type="button" class="md-raised md-square-icon-button" href="/api/auth/{{::provider.provider}}" target="_self" aria-label="Add {{::provider.name}} account" ng-hide="vm.isConnectedSocialAccount('{{::provider.provider}}')">
             <md-tooltip>
               <span ng-bind="::provider.name"></span>
             </md-tooltip>

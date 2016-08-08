@@ -1,4 +1,4 @@
-(function(){
+(function() {
   'use strict';
   
   angular
@@ -9,28 +9,33 @@
   
   function focusOnShow ($timeout) {
     /* jshint validthis: true */
-    return {
+
+    var directive = {
       restrict: 'A',
-      link: function($scope, $element, $attr) {
-        if ($attr.ngShow){
-          $scope.$watch($attr.ngShow, function(newValue){
-            if(newValue){
-              $timeout(function(){
-                $element[0].focus();
-              }, 50);
-            }
-          });
-        }
-        if ($attr.ngHide){
-          $scope.$watch($attr.ngHide, function(newValue){
-            if(!newValue){
-              $timeout(function(){
-                $element[0].focus();
-              }, 50);
-            }
-          });
-        }
-      }
+      link: linkFunc
     };
+
+    return directive;
+
+    function linkFunc(scope, $element, $attr) {
+      if ($attr.ngShow){
+        scope.$watch($attr.ngShow, function(newValue){
+          if(newValue){
+            $timeout(function(){
+              $element[0].focus();
+            }, 50);
+          }
+        });
+      }
+      if ($attr.ngHide){
+        scope.$watch($attr.ngHide, function(newValue){
+          if(!newValue){
+            $timeout(function(){
+              $element[0].focus();
+            }, 50);
+          }
+        });
+      }
+    }
   }
 })();

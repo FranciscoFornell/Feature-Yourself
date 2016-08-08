@@ -1,61 +1,11 @@
-<!-- <div class="container" ng-controller="HeaderController">
-  <div class="navbar-header">
-    <button class="navbar-toggle" type="button" ng-click="toggleCollapsibleMenu()">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a ui-sref="home" class="navbar-brand">MEAN.JS</a>
-  </div>
-  <nav class="navbar-collapse" uib-collapse="!isCollapsed" role="navigation">
-    <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
-      <li ng-repeat="item in menu.items | orderBy: 'position'" ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" uib-dropdown="item.type === 'dropdown'">
-        <a ng-switch-when="dropdown" class="dropdown-toggle" uib-dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
-        <ul ng-switch-when="dropdown" class="dropdown-menu">
-          <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
-            <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
-          </li>
-        </ul>
-        <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
-      <li ui-sref-active="active">
-        <a ui-sref="authentication.signup">Sign Up</a>
-      </li>
-      <li class="divider-vertical"></li>
-      <li ui-sref-active="active">
-        <a ui-sref="authentication.signin">Sign In</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
-      <li class="dropdown" uib-dropdown>
-        <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
-          <img ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-          <span ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li ui-sref-active="active" ng-repeat="item in accountMenu.items">
-            <a ui-sref="{{item.state}}" ng-bind="item.title"></a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="/api/auth/signout" target="_self">Signout</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-</div> -->
-<md-toolbar ng-controller="HeaderController as hdrCtrl" class="main-toolbar">
+<md-toolbar ng-controller="HeaderController as vm" class="main-toolbar">
   <div class="md-toolbar-tools md-whiteframe-z1">
-    <md-button hide-gt-xs class="md-fab md-primary md-hue-2" aria-label="Show/hide sidenav" ng-click="hdrCtrl.toggleSidenav()">
-      <span class="hamburger-icon" ng-class="hdrCtrl.hamburguerIconClass()">
+    <md-button hide-gt-xs class="md-fab md-primary md-hue-2" aria-label="Show/hide sidenav" ng-click="vm.toggleSidenav()">
+      <span class="hamburger-icon" ng-class="vm.hamburguerIconClass()">
         <span></span>
       </span>
     </md-button>
-    <span layout="row" ng-repeat="item in ::hdrCtrl.menu.items" hide-xs ng-if="item.shouldRender(hdrCtrl.authentication.user);">
+    <span layout="row" ng-repeat="item in ::vm.menu.items" hide-xs ng-if="item.shouldRender(vm.authentication.user);">
       <md-button ng-if="::item.type !== 'dropdown'" aria-label="{{::item.title}} button" ui-sref="{{::item.state}}" class="capitalized-text" ui-sref-active="md-raised md-primary md-hue-1">
         <md-icon md-svg-icon="{{::item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
         <span translate="{{::item.title}}"></span>
@@ -76,39 +26,39 @@
     </span>
     <span flex></span>
     <span layout="row" layout-align="center center">
-      <md-button class="md-raised md-hue-1 md-fab md-mini" ng-class="hdrCtrl.traslateButtonClass" aria-label="{{hdrCtrl.traslateButtonText}}" ng-click="hdrCtrl.changeLanguage()">
+      <md-button class="md-raised md-hue-1 md-fab md-mini" ng-class="vm.traslateButtonClass" aria-label="{{vm.traslateButtonText}}" ng-click="vm.changeLanguage()">
         <div layout="column" layout-align="center center">
           <span class="flag-icon"></span>
         </div>
         <md-tooltip md-delay="0" md-direction="down">
-          <span ng-bind="hdrCtrl.traslateButtonText"></span>
+          <span ng-bind="vm.traslateButtonText"></span>
         </md-tooltip>
       </md-button>
-      <div ng-hide="hdrCtrl.authentication.user">
+      <div ng-hide="vm.authentication.user">
         <md-button class="md-fab md-primary md-hue-2 no-padding"
           aria-label="Login options"
-          ng-click="hdrCtrl.showLoginDialog($event)">
+          ng-click="vm.showLoginDialog($event)">
           <md-tooltip md-delay="0" md-direction="down">Login</md-tooltip>
           <md-icon md-svg-icon="account-circle" aria-label="account circle" class="md-icon-48"></md-icon>
         </md-button>
       </div>
       <md-menu md-offset="0 66"
         md-position-mode="target-right target"
-        ng-show="hdrCtrl.authentication.user"
+        ng-show="vm.authentication.user"
         ng-cloak>
         <md-button class="md-fab md-accent md-hue-2 no-padding"
           aria-label="Login options"
           ng-click="$mdOpenMenu($event)">
           <md-tooltip md-delay="0" md-direction="bottom">
-            <span ng-bind="::hdrCtrl.authentication.user.displayName"></span>
+            <span ng-bind="::vm.authentication.user.displayName"></span>
           </md-tooltip>
-          <img ng-src="{{::hdrCtrl.authentication.user.profileImageURL}}" alt="Profile image" class="md-fab-img-48" style="margin-top: 4px;">
+          <img class="md-fab-img-48" style="margin-top: 4px;" ng-src="{{vm.authentication.user.profileImageURL}}" alt="Profile image">
         </md-button>
         <!-- <md-button class="md-raised md-mini md-hue-1" ng-click="$mdOpenMenu()" aria-label="User options">
-          <span ng-bind="hdrCtrl.authentication.user.displayName"></span><b class="caret"></b>
+          <span ng-bind="vm.authentication.user.displayName"></span><b class="caret"></b>
         </md-button> -->
         <md-menu-content>
-          <md-menu-item ng-repeat="item in ::hdrCtrl.accountMenu.items" ng-if="item.state !== 'settings.password' || hdrCtrl.authentication.user.provider === 'local'">
+          <md-menu-item ng-repeat="item in ::vm.accountMenu.items" ng-if="item.state !== 'settings.password' || vm.authentication.user.provider === 'local'">
             <md-button aria-label="{{::item.title}} button" class="md-primary md-hue-2" ui-sref="{{::item.state}}">
               <md-icon md-svg-icon="{{item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
               <span translate="{{::item.title}}"></span>
@@ -116,7 +66,7 @@
           </md-menu-item>
           <md-divider></md-divider>
           <md-menu-item>
-            <md-button aria-label="Sign out" class="md-primary md-hue-2" ng-click="hdrCtrl.signout()">
+            <md-button aria-label="Sign out" class="md-primary md-hue-2" ng-click="vm.signout()">
               <md-icon md-svg-icon="logout-variant" aria-label="Manage Social Accounts Icon"></md-icon>
               <span translate="SIGNOUT"></span>
             </md-button>

@@ -1,14 +1,20 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('core').factory('authInterceptor', ['$q', '$injector', 'Authentication',
-  function ($q, $injector, Authentication) {
+  angular
+    .module('core')
+    .factory('authInterceptor', authInterceptor);
+
+  authInterceptor.$inject = ['$q', '$injector', 'authenticationService'];
+
+  function authInterceptor ($q, $injector, authenticationService) {
     return {
       responseError: function(rejection) {
         if (!rejection.config.ignoreAuthModule) {
           switch (rejection.status) {
             case 401:
               // Deauthenticate the global user
-              Authentication.user = null;
+              authenticationService.user = null;
               $injector.get('$state').transitionTo('reqAuthentication');
               break;
             case 403:
@@ -21,4 +27,4 @@ angular.module('core').factory('authInterceptor', ['$q', '$injector', 'Authentic
       }
     };
   }
-]);
+})();

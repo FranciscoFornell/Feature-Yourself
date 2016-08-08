@@ -1,26 +1,17 @@
-// NOTE: Dejo de momento el controlador antiguo comentado
-// 'use strict';
-
-// angular.module('users').controller('SettingsController', ['$scope', 'Authentication',
-//   function ($scope, Authentication) {
-//     $scope.user = Authentication.user;
-//   }
-// ]);
-
-(function(){
+(function() {
   'use strict';
 
   angular
   	.module('users')
   	.controller('SettingsController', SettingsController);
 
-  SettingsController.$inject = ['$scope', 'Authentication', '$translatePartialLoader', '$translate', 'Menus'];
+  SettingsController.$inject = ['$scope', 'authenticationService', '$translatePartialLoader', '$translate', 'menuService'];
 
-  function SettingsController ($scope, Authentication, $translatePartialLoader, $translate, Menus) {
-    /* jshint validthis: true */
+  function SettingsController ($scope, authenticationService, $translatePartialLoader, $translate, menuService) {
     var vm = this;
-    vm.user = Authentication.user;
-    vm.accountMenu = Menus.getMenu('account').items[0];
+    
+    vm.user = authenticationService.user;
+    vm.accountMenu = menuService.getMenu('account').items[0];
 
     $translatePartialLoader.addPart('users');
   }

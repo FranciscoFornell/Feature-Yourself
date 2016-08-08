@@ -1,73 +1,26 @@
-<!-- NOTE: Dejo de momento la vista antigua comentada -->
-<!-- <section class="row" ng-controller="EditProfileController">
-  <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
-    <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" novalidate autocomplete="off">
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required>
-          <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
-          <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
-          <div ng-messages="userForm.email.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Email address is required.</p>
-            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" lowercase required>
-          <div ng-messages="userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
-          </div>
-        </div>
-        <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Save Profile</button>
-        </div>
-        <div ng-show="success" class="text-center text-success">
-          <strong>Profile Saved Successfully</strong>
-        </div>
-        <div ng-show="error" class="text-center text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</section> -->
-<section flex ng-controller="EditProfileController as ePCtrl" flex layout="row" layout-align="center center" flex="95" flex-sm="75" flex-md="60" flex-gt-md="35">
-  <form name="userForm" ng-submit="ePCtrl.updateUserProfile(userForm.$valid)" flex="100">
+<section flex layout="row" layout-align="center center" flex="95" flex-sm="75" flex-md="60" flex-gt-md="35">
+  <form name="userForm" ng-submit="vm.updateUserProfile(userForm.$valid)" flex="100">
     <md-card>
       <md-card-content>
         <h3 class="md-headline centered-text" translate="EDIT_PROFILE_TITLE"></h3>
         <div layout="column" layout-align="center" layout-margin>
           <md-input-container>
             <label translate="FIRST_NAME"></label>
-            <input required type="text" id="firstName" name="firstName" ng-model="ePCtrl.user.firstName">
+            <input required type="text" id="firstName" name="firstName" ng-model="vm.user.firstName">
             <div ng-messages="userForm.firstName.$error">
               <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
             </div>
           </md-input-container>
           <md-input-container>
             <label translate="LAST_NAME"></label>
-            <input required type="text" id="lastName" name="lastName" ng-model="ePCtrl.user.lastName">
+            <input required type="text" id="lastName" name="lastName" ng-model="vm.user.lastName">
             <div ng-messages="userForm.lastName.$error">
               <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
             </div>
           </md-input-container>
           <md-input-container>
             <label translate="EMAIL"></label>
-            <input required lowercase ng-pattern="/^.+@.+\..+$/" type="email" id="email" name="email" ng-model="ePCtrl.user.email">
+            <input required lowercase ng-pattern="/^.+@.+\..+$/" type="email" id="email" name="email" ng-model="vm.user.email">
             <div ng-messages="userForm.email.$error">
               <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
               <div ng-message="email"><span translate="INVALID_EMAIL_MSG"></span></div>
@@ -75,14 +28,14 @@
           </md-input-container>
           <md-input-container>
             <label translate="USERNAME"></label>
-            <input required lowercase type="text" id="username" name="username" ng-model="ePCtrl.user.username">
+            <input required lowercase type="text" id="username" name="username" ng-model="vm.user.username">
             <div ng-messages="userForm.username.$error">
               <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
             </div>
           </md-input-container>
         </div>
-        <md-subheader class="md-no-sticky md-warn" ng-show="ePCtrl.error" ng-bind="ePCtrl.error"></md-subheader>
-        <md-subheader class="md-no-sticky md-success" ng-show="ePCtrl.success" translate="SAVE_PROFILE_SUCCESS"></md-subheader>
+        <md-subheader class="md-no-sticky md-warn" ng-show="vm.error" ng-bind="vm.error"></md-subheader>
+        <md-subheader class="md-no-sticky md-success" ng-show="vm.success" translate="SAVE_PROFILE_SUCCESS"></md-subheader>
       </md-card-content>
       <md-actions layout="row" layout-align="center">
         <md-button type="submit" class="md-raised md-primary" aria-label="Save profile" md-autofocus>

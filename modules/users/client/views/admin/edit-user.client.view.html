@@ -1,53 +1,10 @@
-<!-- NOTE: Dejo de momento la antigua vista comentada -->
-<!-- 
-<section>
-  <div class="page-header">
-    <h1>User <span ng-bind="user.username"></span></h1>
-  </div>
-  <div class="col-md-12">
-    <form name="userForm" ng-submit="update(userForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required />
-          <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required />
-          <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
-          </div>
-        </div>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="roles">Roles</label>
-          <div class="controls">
-            <input class="form-control" type="text" name="roles" ng-model="user.roles" id="roles" ng-list required />
-            <div ng-messages="userForm.roles.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">At least one role is required.</p>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Update" class="btn btn-default">
-        </div>
-        <div ng-show="error" class="text-danger">
-          <strong ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</section>
- -->
 <md-dialog aria-label="Edit user dialog" layout="column">
-  <form name="editUserForm" ng-submit="eUDCtrl.update(editUserForm.$valid)" novalidate flex="100" layout="column">
+  <form name="editUserForm" ng-submit="dialogVm.update(editUserForm.$valid)" novalidate flex="100" layout="column">
     <md-toolbar flex="none">
       <div class="md-toolbar-tools">
         <h2 translate="EDIT_USER"></h2>
         <span flex></span>
-        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="eUDCtrl.cancel()">
+        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
           <md-tooltip>
             <span translate="CANCEL"></span>
           </md-tooltip>
@@ -59,25 +16,25 @@
       <div layout="column" layout-align="center center">
         <md-input-container>
           <label translate="FIRST_NAME"></label>
-          <input required type="text" id="firstName" name="firstName" ng-model="eUDCtrl.user.firstName">
+          <input required type="text" id="firstName" name="firstName" ng-model="dialogVm.user.firstName">
           <div ng-messages="editUserForm.firstName.$error">
             <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
           </div>
         </md-input-container>
         <md-input-container>
           <label translate="LAST_NAME"></label>
-          <input required type="text" id="lastName" name="lastName" ng-model="eUDCtrl.user.lastName">
+          <input required type="text" id="lastName" name="lastName" ng-model="dialogVm.user.lastName">
           <div ng-messages="editUserForm.lastName.$error">
             <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
           </div>
         </md-input-container>
         <md-input-container>
           <label translate="ROLES"></label>
-          <md-select ng-model="eUDCtrl.user.rolesString" placeholder="Select role or roles" md-on-close="eUDCtrl.destringifyRoles(eUDCtrl.user, false)">
-            <md-option ng-value="rolesOption" ng-repeat="rolesOption in ::eUDCtrl.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
+          <md-select ng-model="dialogVm.user.rolesString" placeholder="Select role or roles" md-on-close="dialogVm.destringifyRoles(dialogVm.user, false)">
+            <md-option ng-value="rolesOption" ng-repeat="rolesOption in ::dialogVm.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
           </md-select>
         </md-input-container>
-        <md-subheader class="md-no-sticky md-warn" ng-show="eUDCtrl.error" ng-bind="eUDCtrl.error"></md-subheader>
+        <md-subheader class="md-no-sticky md-warn" ng-show="dialogVm.error" ng-bind="dialogVm.error"></md-subheader>
       </div>
     </md-dialog-content>
     <md-dialog-actions>

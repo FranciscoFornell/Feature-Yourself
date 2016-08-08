@@ -1,8 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-// Setting up route
-angular.module('core').config(['$stateProvider', '$urlRouterProvider',
-  function ($stateProvider, $urlRouterProvider) {
+  // Setting up route
+  angular
+    .module('core')
+    .config(routeConfig);
+
+  routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+  function routeConfig ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.rule(function ($injector, $location) {
       var path = $location.path();
@@ -26,7 +32,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     $stateProvider
       .state('home', {
         url: '/?profile',
-        templateUrl: 'modules/core/client/views/home.client.view.html'
+        templateUrl: 'modules/core/client/views/home.client.view.html',
+        controller: 'HomeController',
+        controllerAs: 'vm'
       })
       .state('not-found', {
         url: '/not-found',
@@ -53,4 +61,5 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         }
       });
   }
-]);
+    
+})();

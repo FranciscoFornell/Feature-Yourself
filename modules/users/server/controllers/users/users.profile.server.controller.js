@@ -82,7 +82,7 @@ exports.changeProfilePicture = function (req, res) {
           message: 'Error occurred while uploading profile picture'
         });
       } else {
-        user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
+        user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename + '?r=' + Math.round(Math.random() * 999999);
 
         user.save(function (saveError) {
           if (saveError) {
@@ -132,7 +132,7 @@ exports.local = function (req, res) {
         profileImageURL: user.profileImageURL,
         social: {}        
       };
-      if (user.additionalProvidersData.google) {
+      if (user.additionalProvidersData && user.additionalProvidersData.google) {
         data.social.google = user.additionalProvidersData.google.url;
       }
       // TODO: Añadir el resto de cuentas sociales)

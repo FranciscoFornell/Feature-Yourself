@@ -38,7 +38,7 @@
 <body class="ng-cloak" layout="column">
   <header ng-include="'/modules/core/client/views/header.client.view.html'"></header>
   <div flex layout="row" class="main-content">
-    <section ng-include="'/modules/core/client/views/sidenav.client.view.html'" ng-controller="SidenavController as sNavCtrl"></section>
+    <section ng-include="'/modules/core/client/views/sidenav.client.view.html'" ng-controller="SidenavController as vm"></section>
     <section flex layout="column">
       {% block content %}{% endblock %}
     </section>

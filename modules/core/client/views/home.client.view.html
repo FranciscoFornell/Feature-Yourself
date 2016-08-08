@@ -1,133 +1,43 @@
-<!-- NOTE: Dejo de momento la página original comentada -->
-<!-- 
-<div class="container" ng-controller="HomeController">
-  <div class="content">
-    <div class="jumbotron text-center">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-          <img alt="MEAN.JS" class="img-responsive text-center" src="modules/core/client/img/brand/logo.png" />
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <p class="lead">
-          Open-Source Full-Stack Solution For MEAN Applications
-        </p>
-      </div>
-      <div class="row">
-        <p>
-          <a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>
-        </p>
-      </div>
-    </div>
-    <div>
-      <h1 translate>HELLO_WORLD</h1>
-      <h2>Congrats! You've configured and run the sample application.</h2>
-      <p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
-      <p>This sample application tracks users and articles.</p>
-      <ul>
-        <li>
-          Click
-          <em>Sign Up</em> to get started.
-        </li>
-        <li>
-          Configure your app to work with your social accounts, by editing the
-          <em>/config/env/*.js</em> files.
-        </li>
-        <li>
-          Edit your users module.
-        </li>
-        <li>
-          Add new CRUD modules.
-        </li>
-        <li>
-          Have fun...
-        </li>
-      </ul>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
-        <h2><strong>M</strong>ongoDB</h2>
-        <p><a target="_blank" href="http://mongodb.org/">MongoDB</a> is a NoSQL database. MongoDB's <a target="_blank" href="http://docs.mongodb.org/manual/">great manual</a> is the place to get started with NoSQL and MongoDB.</p>
-      </div>
-      <div class="col-md-3">
-        <h2><strong>E</strong>xpress</h2>
-        <p><a target="_blank" href="http://expressjs.com/"> Express</a> is a NodeJS server-side application web framework. Check out <a target="_blank" href="http://expressjs.com/4x/api.html">The ExpressJS API reference for more information</a> or <a target="_blank" href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">StackOverflow</a> for more info.</p>
-      </div>
-      <div class="col-md-3">
-        <h2><strong>A</strong>ngularJS</h2>
-        <p><a target="_blank" href="http://angularjs.org/">AngularJS</a> is client-side web application framework. The <a target="_blank" href="http://www.thinkster.io/">Thinkster Popular Guide</a> and <a target="_blank" href="https://egghead.io/">Egghead Videos</a> are great resources.</p>
-      </div>
-      <div class="col-md-3">
-        <h2><strong>N</strong>ode.js</h2>
-        <p><a target="_blank" href="http://nodejs.org/">Node.js</a> is a JavaScript run-time, popular for being a web server platform. Node's website and this <a target="_blank" href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">stackOverflow thread</a> offer excellent starting points to get to grasps with node.</p>
-      </div>
-    </div>
-    <div class="well">
-      <h2>MEAN.JS Documentation</h2>
-      <p>
-        Once you're familiar with the foundation technology, check out the MEAN.JS Documentation:
-        <ul>
-          <li><a target="_blank" href="http://meanjs.org/docs.html">MEAN.JS Documentation</a>
-          </li>
-          <li><a target="_blank" href="http://meanjs.org/generator.html">Yeoman Generator</a>
-  				</li>
-          <li><a target="_blank" href="http://meanjs.org/modules.html">Modules</a>
-          </li>
-          <li><a target="_blank" href="http://meanjs.org/changelog.html">Changelog</a>
-          </li>
-          <li><a target="_blank" href="http://meanjs.org/community.html">Community</a>
-          </li>
-          <li><a target="_blank" href="http://blog.meanjs.org">Blog</a>
-          </li>
-        </ul>
-      </p>
-    </div>
-    <br>Enjoy &amp; Keep Us Updated,
-    <br>The MEAN.JS Team.
- </div>
-</div>
- -->
-<md-content ng-controller="HomeController as hCtrl" layout="column" layout-align="center" flex="100" class="md-hue-1">
-  <div layout="row" layout-align="center" layout-padding ng-if="!(hCtrl.localUserData && !hCtrl.error && !hCtrl.noUser)" class="loading-splash">
+<md-content layout="column" layout-align="center" flex="100" class="md-hue-1">
+  <div layout="row" layout-align="center" layout-padding ng-if="!(vm.localUserData && !vm.error && !vm.noUser)" class="loading-splash">
     <md-content class="md-whiteframe-z1" layout-padding flex="35" flex-md="60" flex-sm="75" flex-xs="95">
-      <div layout="column" layout-align="center center" ng-if="!(hCtrl.localUserData || hCtrl.error)">
+      <div layout="column" layout-align="center center" ng-if="!(vm.localUserData || vm.error)">
         <h1 class="md-headline centered-text" translate="LOADING"></h1>
         <md-progress-circular md-mode="indeterminate" md-diameter="128"></md-progress-circular>
       </div>
-      <div ng-if="hCtrl.error || hCtrl.noUser">
+      <div ng-if="vm.error || vm.noUser">
         <h1 class="md-headline centered-text" translate="ERROR"></h1>
         <md-subheader class="md-warn md-whiteframe-z2 message-area">
           <md-icon md-svg-icon="alert" class="md-warn" aria-label="Alert Icon"></md-icon>
-          <span ng-if="hCtrl.noUser" translate="NO_LOCAL_USER"></span>
-          <span ng-if="hCtrl.error"><span translate="DATA_ERROR"></span> <span translate="LOCAL_USER_DATA"></span>. Status: <span ng-bind="hCtrl.error"></span></span>
+          <span ng-if="vm.noUser" translate="NO_LOCAL_USER"></span>
+          <span ng-if="vm.error"><span translate="DATA_ERROR"></span> <span translate="LOCAL_USER_DATA"></span>. Status: <span ng-bind="vm.error"></span></span>
         </md-subheader>
       </div>        
     </md-content>
   </div>
-  <div layout="column" layout-align="start" flex="100" ng-if="::hCtrl.localUserData.exists"><div layout="row" layout-align="center" flex="100"><div flex-lg="95" flex-xl="75" flex="100" layout="column">
+  <div layout="column" layout-align="start" flex="100" ng-if="::vm.localUserData.exists"><div layout="row" layout-align="center" flex="100"><div flex-lg="95" flex-xl="75" flex="100" layout="column">
     <md-tabs md-center-tabs md-swipe-content flex="100">
-      <md-tab md-active="hCtrl.params.profile === profile.label" ng-repeat="profile in hCtrl.profiles" label="{{profile.name[hCtrl.currentLanguage]}}" layout="column">
+      <md-tab md-active="vm.params.profile === profile.label" ng-repeat="profile in vm.profiles" label="{{profile.name[vm.currentLanguage]}}" layout="column">
         <md-tab-body class="scrollable">
           <md-content layout="column" layout-gt-sm="row" layout-align="start stretch" layout-margin class="md-whiteframe-z2 md-hue-2">
             <div layout="column" class="no-margin" layout-align="start">
               <md-content class="md-hue-3 visible-overflow" layout="row" layout-padding>
-                <img class="md-fab-img-128 md-whiteframe-z3 no-padding" style="margin: auto auto -72px auto;" ng-src="{{::hCtrl.localUserData.profileImageURL}}" alt="Profile pic">
-                <h2 flex="100" ng-bind="::hCtrl.localUserData.displayName"></h2>
+                <img class="md-fab-img-128 md-whiteframe-z3 no-padding" style="margin: auto auto -72px auto;" ng-src="{{::vm.localUserData.profileImageURL}}" alt="Profile pic">
+                <h2 flex="100" ng-bind="::vm.localUserData.displayName"></h2>
               </md-content>                
               <div flex layout="column" layout-align="space-between">
-                <p style="margin-left: 144px; min-height: 40px;" ng-bind="profile.position[hCtrl.currentLanguage]"></p><br>
+                <p style="margin-left: 144px; min-height: 40px;" ng-bind="profile.position[vm.currentLanguage]"></p><br>
                 <md-content layout="row" layout-align="center" layout-margin>
-                  <md-button class="md-icon-button" ng-href="mailto:{{::hCtrl.localUserData.email}}?subject={{'WEB_CONTACT' | translate}} - {{'PROFILE' | translate}}: {{profile.position[hCtrl.currentLanguage]}}" aria-label="Contact Email Button">
+                  <md-button class="md-icon-button" ng-href="mailto:{{::vm.localUserData.email}}?subject={{'WEB_CONTACT' | translate}} - {{'PROFILE' | translate}}: {{profile.position[vm.currentLanguage]}}" aria-label="Contact Email Button">
                     <md-icon md-svg-icon="contact-mail" aria-label="Contact Mail Icon"></md-icon>
                     <md-tooltip>
                       Email
                     </md-tooltip> 
                   </md-button>
-                  <md-button ng-repeat="(socialAccount, url) in ::hCtrl.localUserData.social" class="md-icon-button" ng-href="{{::url}}" target="_blank" aria-label="{{::hCtrl.providersCollection[socialAccount].name}} Profile Button">
-                    <md-icon md-svg-icon="{{::hCtrl.providersCollection[socialAccount].mdIcon}}" ng-style="::{color: hCtrl.providersCollection[socialAccount].color}" aria-label="{{::hCtrl.providersCollection[socialAccount].name}} Icon"></md-icon>
+                  <md-button ng-repeat="(socialAccount, url) in ::vm.localUserData.social" class="md-icon-button" ng-href="{{::url}}" target="_blank" aria-label="{{::vm.providersCollection[socialAccount].name}} Profile Button">
+                    <md-icon md-svg-icon="{{::vm.providersCollection[socialAccount].mdIcon}}" ng-style="::{color: vm.providersCollection[socialAccount].color}" aria-label="{{::vm.providersCollection[socialAccount].name}} Icon"></md-icon>
                     <md-tooltip>
-                      <span ng-bind="::hCtrl.providersCollection[socialAccount].name"></span>
+                      <span ng-bind="::vm.providersCollection[socialAccount].name"></span>
                     </md-tooltip> 
                   </md-button>
                 </md-content>
@@ -135,7 +45,7 @@
             </div>
             <md-content layout-padding flex="100" flex-gt-sm="50">            
               <strong translate="DESCRIPTION"></strong>
-              <span class="multiline-justified-string" ng-bind-html="profile.bio[hCtrl.currentLanguage]"></span>
+              <span class="multiline-justified-string" ng-bind-html="profile.bio[vm.currentLanguage]"></span>
             </md-content>
           </md-content>
           <div class="margin-8px">
@@ -166,10 +76,10 @@
                     <div layout="column" layout-gt-sm="row" layout-align="space-around">
                       <md-list ng-show="::profile.anyTopSkill" flex>
                         <strong translate="SKILLS_TOP"></strong>
-                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 5})" ng-init="profile.anyTopSkill = true;" ng-click="hCtrl.viewSkill($event, skill)" aria-label="Top skills item">
+                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 5})" ng-init="profile.anyTopSkill = true;" ng-click="vm.viewSkill($event, skill)" aria-label="Top skills item">
                           <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
                           <div layout="column" layout-sm="row" layout-align="start start" flex="100">
-                            <span ng-bind="skill.name[hCtrl.currentLanguage]"></span>
+                            <span ng-bind="skill.name[vm.currentLanguage]"></span>
                             <span flex></span>
                             <star-rating ng-model="::skill.level" readonly="true"></star-rating>
                           </div>
@@ -177,10 +87,10 @@
                       </md-list>
                       <md-list ng-show="::profile.anyHighSkill" flex>
                         <strong translate="SKILLS_REMARKABLE"></strong>
-                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 4})" ng-init="profile.anyHighSkill = true;" ng-click="hCtrl.viewSkill($event, skill)" aria-label="Remarkable skills item">
+                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 4})" ng-init="profile.anyHighSkill = true;" ng-click="vm.viewSkill($event, skill)" aria-label="Remarkable skills item">
                           <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
                           <div layout="column" layout-sm="row" layout-align="start start" flex="100">
-                            <span ng-bind="skill.name[hCtrl.currentLanguage]"></span>
+                            <span ng-bind="skill.name[vm.currentLanguage]"></span>
                             <span flex></span>
                             <star-rating ng-model="::skill.level" readonly="true"></star-rating>
                           </div>
@@ -188,10 +98,10 @@
                       </md-list>
                       <md-list ng-show="::profile.anyNormalSkill" flex>
                         <strong translate="SKILLS_REST"></strong>
-                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : { level: 4 } : hCtrl.filterLT)" ng-init="profile.anyNormalSkill = true;" ng-click="hCtrl.viewSkill($event, skill)" aria-label="Rest of skills item">
+                        <md-list-item ng-repeat="skill in ::(profile.skills | filter : { level: 4 } : vm.filterLT)" ng-init="profile.anyNormalSkill = true;" ng-click="vm.viewSkill($event, skill)" aria-label="Rest of skills item">
                           <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
                           <div layout="column" layout-sm="row" layout-align="start start" flex="100">
-                            <span ng-bind="skill.name[hCtrl.currentLanguage]"></span>
+                            <span ng-bind="skill.name[vm.currentLanguage]"></span>
                             <span flex></span>
                             <star-rating ng-model="::skill.level" readonly="true"></star-rating>
                           </div>
@@ -227,19 +137,19 @@
                     <div layout="column" layout-gt-sm="row" layout-align="space-around">
                       <md-list ng-show="::profile.anyCourse" flex>
                         <strong translate="COURSES"></strong>
-                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'course'})" ng-init="profile.anyCourse = true;" ng-click="hCtrl.viewEducation($event, education)" aria-label="Courses item">
+                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'course'})" ng-init="profile.anyCourse = true;" ng-click="vm.viewEducation($event, education)" aria-label="Courses item">
                           <span flex>
                             <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
-                            <span ng-bind="education.name[hCtrl.currentLanguage]"></span>
+                            <span ng-bind="education.name[vm.currentLanguage]"></span>
                           </span>
                         </md-list-item>
                       </md-list>
                       <md-list ng-show="::profile.anyAcademicEducation" flex>
                         <strong translate="ACADEMIC"></strong>
-                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'academic'})" ng-init="profile.anyAcademicEducation = true;" ng-click="hCtrl.viewEducation($event, education)" aria-label="Academic education item">
+                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'academic'})" ng-init="profile.anyAcademicEducation = true;" ng-click="vm.viewEducation($event, education)" aria-label="Academic education item">
                           <span flex>
                             <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
-                            <span ng-bind="education.name[hCtrl.currentLanguage]"></span>
+                            <span ng-bind="education.name[vm.currentLanguage]"></span>
                           </span>
                         </md-list-item>
                       </md-list>
@@ -271,13 +181,13 @@
                   </md-expansion-panel-header>
                   <md-expansion-panel-content>
                     <div layout="row" layout-align="space-around" layout-wrap>
-                      <span class="md-button no-transform-text" ng-repeat="experience in ::profile.experiences" ng-click="hCtrl.viewExperience($event, experience)" flex="100" flex-md="45" flex-lg="30" flex-gt-lg="30">
+                      <span class="md-button no-transform-text" ng-repeat="experience in ::profile.experiences" ng-click="vm.viewExperience($event, experience)" flex="100" flex-md="45" flex-lg="30" flex-gt-lg="30">
                         <div layout="row" layout-align-gt-sm="column" layout-align="center center">
                           <md-icon class="fullsize" md-svg-icon="{{::experience.icon}}" aria-label="Experience Icon" flex="20"></md-icon>
                           <div layout="column" flex layout-align="center center">
                             <h3 ng-if="::(experience.name || experience.position)">
-                              <span ng-if="::experience.name" ng-bind="experience.name[hCtrl.currentLanguage]"></span><br>
-                              <span ng-if="::experience.position" ng-bind="experience.position[hCtrl.currentLanguage]"></span><br>
+                              <span ng-if="::experience.name" ng-bind="experience.name[vm.currentLanguage]"></span><br>
+                              <span ng-if="::experience.position" ng-bind="experience.position[vm.currentLanguage]"></span><br>
                             </h3>
                             <span ng-if="::experience.company" ng-bind="::experience.company.name">
                             </span>

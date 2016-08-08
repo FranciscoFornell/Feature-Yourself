@@ -1,26 +1,34 @@
 // Controller for the require authentication view
-(function(){
+(function() {
   'use strict';
   
   angular
     .module('users')
     .controller('RequireAuthenticationController', RequireAuthenticationController);
 
-  RequireAuthenticationController.$inject = ['$scope', '$state', 'Authentication', '$mdDialog', '$translate', '$location', '$mdMedia'];
+  RequireAuthenticationController.$inject = ['$scope', '$state', 'authenticationService', '$mdDialog', '$translate', '$location', '$mdMedia'];
   
-  function RequireAuthenticationController ($scope ,$state, Authentication, $mdDialog, $translate, $location, $mdMedia) {
-    /* jshint validthis: true */
-
+  function RequireAuthenticationController ($scope ,$state, authenticationService, $mdDialog, $translate, $location, $mdMedia) {
     var vm = this;
-    vm.authentication = Authentication;
 
-    // If user is signed in then redirect back home
-    if (vm.authentication.user){ 
-      $location.path('/');
-    } else {
-      $scope.cancelForbidden = true;    
-      showLoginDialog();
-    }    
+    vm.authentication = authenticationService;
+
+    activate();
+    
+    function activate () {
+      // If user is signed in then redirect back home
+      if (vm.authentication.user){ 
+        $location.path('/');
+      } else {
+        $scope.cancelForbidden = true;    
+        showLoginDialog();
+      }
+    }
+
+    function redirect(){
+    // Redirect to the previous or home page
+      $state.go($state.previous.state.name || 'home', $state.previous.params);
+    }
 
     function showLoginDialog(){
       $mdDialog.show({
@@ -32,11 +40,6 @@
         scope: $scope,
         onRemoving: redirect
       });
-    }
-
-    function redirect(){
-    // Redirect to the previous or home page
-      $state.go($state.previous.state.name || 'home', $state.previous.params);
     }
   }
 })();

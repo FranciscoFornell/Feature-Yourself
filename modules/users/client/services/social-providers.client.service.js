@@ -1,12 +1,12 @@
-(function(){
+(function() {
   'use strict';
 
   angular
     .module('users')
-    .factory('SocialProviders', SocialProviders);
+    .factory('socialProvidersService', socialProvidersService);
 
-  function SocialProviders(){
-    var _providersArray = [
+  function socialProvidersService(){
+    var providersArray = [
       {
         provider: 'facebook',
         name: 'Facebook',
@@ -37,21 +37,21 @@
         mdIcon: 'github-box',
         color: '#333333'
       }],
-      socialProviders = {
-        providersArray : _providersArray,
-        providersCollection: _generateProvidersCollection()
+      service = {
+        providersArray : providersArray,
+        providersCollection: generateProvidersCollection()
       };
 
-    return socialProviders;
+    return service;
 
-    function _generateProvidersCollection(){
-      var _collection = {};
+    function generateProvidersCollection(){
+      var collection = {};
 
-      for (var i = 0, l = _providersArray.length; i < l; i++){
-        _collection[_providersArray[i].provider] = _providersArray[i];
+      for (var i = 0, l = providersArray.length; i < l; i++){
+        collection[providersArray[i].provider] = providersArray[i];
       }
 
-      return _collection;
+      return collection;
     }
   }
 })();

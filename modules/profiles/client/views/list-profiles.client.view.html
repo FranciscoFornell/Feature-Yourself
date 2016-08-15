@@ -1,0 +1,75 @@
+<md-content layout="column" layout-align="center" class="child-content md-hue-1">
+  <div layout="row" layout-align="center">
+    <md-card layout-fill flex-gt-md="95" flex-gt-lg="70" class="card-with-floating-button">
+      <md-button class="md-fab" aria-label="Add new profile" ng-click="vm.newProfile($event)">
+        <md-icon md-svg-icon="plus" aria-label="Plus Icon"></md-icon>
+        <md-tooltip md-direction="right"><span translate="CREATE_PROFILE"></span></md-tooltip>
+      </md-button>
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <span translate="PROFILES" hide-xs></span>
+          <span ng-show="vm.selected.length"><span hide-xs>: </span><span ng-bind="vm.selected.length"></span> <span translate="SELECTED_ITEMS"></span>
+          </span>
+          <span flex></span>
+          <span ng-hide="vm.selected.length">
+            <md-input-container ng-show="vm.pager.filterEnabled" class="expand-left">
+              <input ng-show="vm.pager.filterEnabled" type="text" ng-model="vm.pager.search" aria-label="Filter Input" ng-change="vm.pager.page = 1" focus-on-show>
+            </md-input-container>
+            <md-button class="md-icon-button md-table-cell-button" aria-label="Toggle Filter Button" ng-click="vm.toggleFilter()">
+              <md-icon md-svg-icon="filter" aria-label="Filter Icon" ng-hide="vm.pager.filterEnabled"></md-icon>
+              <md-icon md-svg-icon="filter-remove" aria-label="Filter Icon" ng-show="vm.pager.filterEnabled"></md-icon>
+              <md-tooltip md-direction="bottom" md-autohide="true">
+                <span translate="TOGGLE_FILTER"></span>
+              </md-tooltip>
+            </md-button>
+          </span>
+          <span ng-show="vm.selected.length" layout="row">
+            <md-button class="md-icon-button" aria-label="Cancel Selection Button" ng-click="vm.selected=[]">
+              <md-icon md-svg-icon="close-box-outline" aria-label="Cancel Selection Icon"></md-icon>
+              <md-tooltip md-direction="bottom" md-autohide="true">
+                <span translate="CANCEL_SELECTION"></span>
+              </md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Delete Selected Items Button" ng-click="vm.removeSelected($event)">
+              <md-icon md-svg-icon="delete" aria-label="Delete Icon"></md-icon>
+              <md-tooltip md-direction="bottom" md-autohide="true">
+                <span translate="REMOVE"></span>
+              </md-tooltip>
+            </md-button>
+          </span>
+        </div>
+      </md-toolbar>
+      <md-table-container>
+        <table md-table md-row-select md-progress="vm.promise" ng-model="vm.selected">
+          <thead md-head md-order="vm.pager.order">
+            <tr md-row>
+              <th md-column md-order-by="name"><span translate="NAME"></span></th>
+              <th md-column hide show-gt-xs><span translate="DESCRIPTION"></span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-select="profile" md-row md-auto-select ng-repeat="profile in filteredProfiles = (vm.profiles | filter: vm.pager.search ) | orderBy: vm.pager.order | limitTo: vm.pager.limit : (vm.pager.page -1) * vm.pager.limit">
+              <td md-cell ng-bind="profile.name[vm.currentLanguage]" ng-click="vm.editName($event, profile)"></td>
+              <td md-cell hide show-gt-xs>
+                <div class="text-preview-40px">
+                  <span ng-bind-html="profile.bio[vm.currentLanguage]"></span>
+                </div>
+              </td>
+              <td md-cell>
+                <span layout="row" layout-align="end">
+                  <md-button class="md-icon-button md-table-cell-button" aria-label="View Item Button" ng-click="vm.showViewProfileDialog($event, profile)">
+                    <md-icon md-svg-icon="eye" aria-label="View Icon"></md-icon>
+                  </md-button>
+                  <md-button class="md-icon-button md-table-cell-button" aria-label="Eduit Item Button" ng-click="vm.showEditProfileDialog($event, profile)">
+                    <md-icon md-svg-icon="pencil" aria-label="Edit Icon"></md-icon>
+                  </md-button>  
+                </span>                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-table-pagination md-limit="vm.pager.limit"  md-page="vm.pager.page" md-total="{{filteredProfiles.length}}" md-page-select="vm.isScreenSize('gt-xs')" md-boundary-links="vm.isScreenSize('gt-xs')" md-label="{{::vm.pager.label}}"></md-table-pagination>
+    </md-card>
+  </div>
+</md-content>

@@ -45,12 +45,12 @@
       //   }
       // });
 
-    getUser.$inject = ['$stateParams', 'AdminService'];
+    // getUser.$inject = ['$stateParams', 'AdminService'];
 
-    function getUser($stateParams, AdminService) {
-      return AdminService.get({
-        userId: $stateParams.userId
-      }).$promise;
-    }
+    // function getUser($stateParams, AdminService) {
+    //   return AdminService.get({
+    //     userId: $stateParams.userId
+    //   }).$promise;
+    // }
   }
 }());

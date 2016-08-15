@@ -10,7 +10,9 @@ Thumbs.db
 .nodemonignore
 .sass-cache/
 node_modules/
-public/lib/
+public/lib/*
+!public/lib/tinymce-dist/js/langs
+!public/lib/md-data-table
 app/tests/coverage/
 .bower-*/
 .idea/

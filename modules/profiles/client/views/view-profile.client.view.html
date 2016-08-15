@@ -1,0 +1,30 @@
+<md-dialog aria-label="View profile dialog">
+  <md-toolbar flex="none">
+    <div class="md-toolbar-tools">
+      <h2 translate="VIEW_PROFILE"></h2>
+      <span flex></span>
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
+        <md-tooltip>
+          <span translate="CANCEL"></span>
+        </md-tooltip>
+        <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-margin>
+    <h2 ng-bind="::dialogVm.profile.name[
+        dialogVm.currentLanguage]"></h2>
+    <p>
+      <strong><span translate="DESCRIPTION"></span></strong>
+      <span ng-bind-html="dialogVm.profile.bio[dialogVm.currentLanguage]" class="indented-text"></span>
+    </p>
+    <p>
+      <strong><span translate="CREATED_DATE"></span>:</strong>
+      <span translate="FORMATTED_DATE" translate-values = "::{date:dialogVm.profile.created}"></span>
+    </p>
+    <p>
+      <strong><span translate="CREATED_BY"></span>:</strong>
+      <span ng-bind="::dialogVm.profile.user.displayName"></span>
+    </p>
+  </md-dialog-content>
+</md-dialog>

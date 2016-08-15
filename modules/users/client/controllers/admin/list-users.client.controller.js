@@ -5,9 +5,9 @@
     .module('users.admin')
     .controller('UserListController', UserListController);
 
-  UserListController.$inject = ['$scope', '$filter', 'Admin', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', 'socialProvidersService', 'authenticationService'];
+  UserListController.$inject = ['Admin', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', 'socialProvidersService', 'authenticationService'];
 
-  function UserListController ($scope, $filter, Admin, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, socialProvidersService, authenticationService) {
+  function UserListController (Admin, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, socialProvidersService, authenticationService) {
     var vm = this;
 
     vm.authentication = authenticationService;
@@ -215,7 +215,7 @@
         fullscreen: $mdMedia('xs')
       });
 
-      function EditUserDialogController ($scope, user) {
+      function EditUserDialogController (user) {
         var dialogVm = this,
           rolesString;
 
@@ -228,8 +228,6 @@
         
         function dialogUpdate(isValid) {
           if (!isValid) {
-            $scope.$broadcast('show-errors-check-validity', 'editUserForm');
-
             return false;
           }
 
@@ -264,7 +262,7 @@
         fullscreen: $mdMedia('xs')
       });
 
-      function ViewUserDialogController ($scope, user) {
+      function ViewUserDialogController (user) {
         var dialogVm = this,
           rolesString;
 

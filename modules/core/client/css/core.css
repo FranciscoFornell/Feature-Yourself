@@ -48,6 +48,9 @@ a:hover .header-profile-image {
 .ng-valid.ng-dirty {
   border-color: #78FA89;
 }
+.indented-text{
+  text-indent: 2em;
+}
 .multiline-justified-string{
   white-space: pre-line;
   text-align: justify;
@@ -67,6 +70,10 @@ a:hover .header-profile-image {
 .no-transform-text{
   text-transform: none!important;
 }
+.text-preview-40px {
+  height: 40px;
+  overflow: hidden;
+}
 .no-padding {
   padding: 0;
 }
@@ -79,7 +86,7 @@ a:hover .header-profile-image {
 .visible-overflow {
   overflow: visible;
 }
-.message-area{
+.message-area {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
@@ -197,8 +204,15 @@ a:hover .header-profile-image {
   max-width: 600px;
   width: 100%;
 }
+.card-with-floating-button {
+  margin-top: 40px; padding-top: 20px;
+}
+.card-with-floating-button > .md-fab{
+  margin-top: -48px; margin-left: 20px;
+}
+
+/*Margin and padding on big screens only*/
 .margin-padding-bso{
-  /*Margin and padding on big screens only*/
     margin: 10px;
     padding: 10px;
   }
@@ -347,9 +361,13 @@ a:hover .header-profile-image {
 .editor-form{
   padding: 35px;
 }
-.editor-form md-input-container{
+.editor-form md-input-container, .editor-form textarea{
   margin-bottom: -10px;
-  width: 280px;
+  width: 100%;
+  max-width: 550px;
+}
+.editor-form textarea {
+  height: 150px;
 }
 .editor-form .md-subheader {
   text-align: center;

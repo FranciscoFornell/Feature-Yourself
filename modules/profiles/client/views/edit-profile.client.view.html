@@ -1,0 +1,40 @@
+<md-dialog aria-label="Edit profile dialog" layout="column">
+  <form name="editProfileForm" ng-submit="dialogVm.update(editProfileForm.$valid)" novalidate flex="100" layout="column">
+    <md-toolbar flex="none">
+      <div class="md-toolbar-tools">
+        <h2 translate="CREATE_PROFILE" ng-if="::dialogVm.isNewProfile"></h2>
+        <h2 translate="EDIT_PROFILE" ng-if="::!dialogVm.isNewProfile"></h2>
+        <span flex></span>
+        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
+          <md-tooltip>
+            <span translate="CANCEL"></span>
+          </md-tooltip>
+          <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content class="editor-form" flex="100">
+      <div layout="column" layout-align="center center">
+        <md-input-container>
+          <label translate="NAME"></label>
+          <input required type="text" id="name" name="name" ng-model="dialogVm.profile.name[dialogVm.currentLanguage]" md-autofocus>
+          <div ng-messages="editProfileForm.name.$error">
+            <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label translate="DESCRIPTION"></label>
+          <textarea ng-hide="true">_</textarea>
+        </md-input-container>
+        <textarea ui-tinymce="dialogVm.tinymceOptions" ng-model="dialogVm.profile.bio[dialogVm.currentLanguage]"></textarea>
+        <md-subheader class="md-no-sticky md-warn" ng-show="dialogVm.error" ng-bind="dialogVm.error"></md-subheader>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button type="submit" class="md-raised md-primary" aria-label="Update Profile">
+        <span ng-if="::dialogVm.isNewProfile" translate="CREATE"></span>
+        <span ng-if="::!dialogVm.isNewProfile" translate="UPDATE"></span>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

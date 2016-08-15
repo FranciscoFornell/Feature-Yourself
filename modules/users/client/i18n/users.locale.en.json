@@ -13,7 +13,6 @@
   "EMAIL": "Email",
   "ROLES": "Roles",
   "PROVIDER": "Account provider",
-  "CREATED": "Creation date",
   "EDIT_PROFILE_TITLE": "Edit your profile",
   "INVALID_EMAIL_MSG": "This doesn't look like a valid email.",
   "OWASP_MIN_LENGHT": "The password must be at least {{owaspValue}} characters long.",

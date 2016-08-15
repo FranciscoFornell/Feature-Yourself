@@ -8,7 +8,7 @@ module.exports = {
         // 'public/lib/bootstrap/dist/css/bootstrap.css',
         // 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/angular-material/angular-material.css',
-        'public/lib/angular-material-data-table/dist/md-data-table.css',
+        'public/lib/md-data-table/md-data-table.css',
         'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.css',
         'public/lib/ng-img-crop/compile/unminified/ng-img-crop.css'
         // endbower
@@ -24,16 +24,19 @@ module.exports = {
         'public/lib/angular-file-upload/dist/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-material/angular-material.js',
-        'public/lib/angular-material-data-table/dist/md-data-table.js',
+        'public/lib/md-data-table/md-data-table.js',
         'public/lib/angular-aria/angular-aria.js',
         'public/lib/angular-translate/angular-translate.js',
         'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
         'public/lib/angular-translate-storage-local/angular-translate-storage-local.js',
         'public/lib/angular-translate-loader-partial/angular-translate-loader-partial.js',
         'public/lib/angular-cookies/angular-cookies.js',
-        'public/lib/angular-sanitize/angular-sanitize.js',
+        // 'public/lib/angular-sanitize/angular-sanitize.js',
+        'https://cdn.jsdelivr.net/angular.textangular/1.5.4/textAngular-sanitize.js',
         'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.js',
-        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js'
+        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
+        'public/lib/tinymce-dist/tinymce.js',
+        'public/lib/angular-ui-tinymce/src/tinymce.js'
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

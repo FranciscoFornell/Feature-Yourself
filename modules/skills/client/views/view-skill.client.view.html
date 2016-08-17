@@ -1,0 +1,43 @@
+<md-dialog aria-label="View skill dialog">
+  <md-toolbar flex="none">
+    <div class="md-toolbar-tools">
+      <h2 translate="VIEW_SKILL"></h2>
+      <span flex></span>
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
+        <md-tooltip>
+          <span translate="CANCEL"></span>
+        </md-tooltip>
+        <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-margin>
+    <div layout="column" layout-gt-xs="row" layout-align="center center">
+      <md-icon md-svg-icon="{{::dialogVm.skill.icon}}" aria-label="Skill Icon" class="md-icon-128 margin-10px"></md-icon>
+      <div layout="column" layout-align="start center">
+        <h2 ng-bind="::dialogVm.skill.name[dialogVm.currentLanguage]"></h2>
+        <star-rating ng-model="::dialogVm.skill.level" readonly="true"></star-rating>
+      </div>
+    </div>    
+    <p>
+      <strong><span translate="DESCRIPTION"></span></strong>
+      <span ng-bind-html="::dialogVm.skill.description[dialogVm.currentLanguage]" class="indented-text"></span>
+    </p>
+    <p>
+      <strong><span translate="PROFILES_ASSIGNED"></span></strong>
+      <md-chips ng-model="::dialogVm.skill.profiles" readonly="true">
+        <md-chip-template>
+          <strong ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></strong>
+        </md-chip-template>
+      </md-chips>
+    </p>
+    <p>
+      <strong><span translate="CREATED_DATE"></span>:</strong>
+      <span translate="FORMATTED_DATE" translate-values = "::{date:dialogVm.skill.created}"></span>
+    </p>
+    <p>
+      <strong><span translate="CREATED_BY"></span>:</strong>
+      <span ng-bind="::dialogVm.skill.user.displayName"></span>
+    </p>
+  </md-dialog-content>
+</md-dialog>

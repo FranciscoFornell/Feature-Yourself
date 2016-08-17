@@ -93,6 +93,37 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of Profiles, Name and ID only
+ * Covered query
+ */
+exports.listIDName = function(req, res) {
+  var profileIndex,
+    profileLength,
+    data = {};
+
+  Profile.find()
+    .sort('-created')
+    .select('_id name')
+    .exec(function(err, profiles) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        data.profilesArray = profiles;
+        data.profileIdsArray = [];
+        data.profilesCollection = {};
+        for (profileIndex = 0, profileLength = profiles.length; profileIndex < profileLength; profileIndex++) {
+          data.profilesCollection[profiles[profileIndex]._id] = profiles[profileIndex];
+          data.profileIdsArray.push(profiles[profileIndex]._id);
+        }
+
+        res.jsonp(data);
+      }
+    });
+};
+
+/**
  * Profile middleware
  */
 exports.profileByID = function(req, res, next, id) {

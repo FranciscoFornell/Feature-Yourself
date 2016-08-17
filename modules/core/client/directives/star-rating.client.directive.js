@@ -15,7 +15,7 @@
         '<li  ng-style="{color: stars[1].color}" ng-click="toggle(1)">&#9733</li>' +
         '<li  ng-style="{color: stars[2].color}" ng-click="toggle(2)">&#9733</li>' +
         '<li  ng-style="{color: stars[3].color}" ng-click="toggle(3)">&#9733</li>' +
-        '<li  ng-style="{color: stars[4].color}" ng-click="toggle(5)">&#9733</li>' +
+        '<li  ng-style="{color: stars[4].color}" ng-click="toggle(4)">&#9733</li>' +
       '</ul>\n' +
       '<ul ng-if="::(max !== 5 && readonly !== true)" class="star-rating" style="cursor: pointer;">\n' +
         '<li ng-repeat="star in stars" ng-style="{color: stars[$index].color}" ng-click="toggle($index)">&#9733</li>' +
@@ -32,7 +32,9 @@
       '</ul>');
   }
 
-  function starRating() {
+  starRating.$inject = ['$timeout'];
+
+  function starRating($timeout) {
     var directive = {
       restrict: 'E',
       templateUrl: 'star-rating-bar.html',
@@ -40,7 +42,8 @@
         ratingValue: '=ngModel',
         max: '=?', // optional (default is 5)
         onRatingSelect: '&?',
-        readonly: '=?'
+        readonly: '=?',
+        onUpdate: '&?'
       },
       link: linkFn
     };
@@ -66,6 +69,9 @@
             scope.onRatingSelect({
               rating: index + 1
             });
+          }
+          if (scope.onUpdate){
+            $timeout(scope.onUpdate, 300);
           }
         }
       };

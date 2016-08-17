@@ -71,7 +71,8 @@ a:hover .header-profile-image {
   text-transform: none!important;
 }
 .text-preview-40px {
-  height: 40px;
+  height: 30px;
+  margin-bottom: 10px;
   overflow: hidden;
 }
 .no-padding {
@@ -318,6 +319,7 @@ a:hover .header-profile-image {
   margin: 0;
   padding: 0;
   display: inline-block;
+  white-space: nowrap;
 }
 .star-rating li{
   padding: 1px;
@@ -361,8 +363,13 @@ a:hover .header-profile-image {
 .editor-form{
   padding: 35px;
 }
-.editor-form md-input-container, .editor-form textarea{
+.editor-form md-input-container {
   margin-bottom: -10px;
+  width: 100%;
+  max-width: 550px;
+}
+.editor-form textarea,
+.editor-form input[type=text] {
   width: 100%;
   max-width: 550px;
 }

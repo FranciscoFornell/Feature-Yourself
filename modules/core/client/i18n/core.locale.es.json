@@ -70,5 +70,11 @@
   "PLURALIZED_MONTHS": "mes{{plural?'es':''}}",
   "AND": "y",
   "CLICK_SHOW_DETAILS": "Click para mostrar en detalle",
-  "CLICK_CLOSE_PANEL": "Click para cerrar el panel"
+  "CLICK_CLOSE_PANEL": "Click para cerrar el panel",
+  "ICON": "Icono",
+  "FULL_ICON_LIST": "Lista completa de iconos Material Design aquí",
+  "PROFILES_ASSIGNED": "Perfiles asignados",
+  "ADD_PROFILE": "Añadir perfil",
+  "NO_MORE_PROFILES_TO_ASSIGN": "No hay más perfiles que asignar",
+  "SELECT_PROFILE_TO_ASSIGN": "Selecciona perfil a asisgnar"
 }

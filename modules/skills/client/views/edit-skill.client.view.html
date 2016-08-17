@@ -1,0 +1,72 @@
+<md-dialog aria-label="Edit skill dialog" layout="column" class="dialog-w600">
+  <form name="editSkillForm" ng-submit="dialogVm.update(editSkillForm.$valid)" novalidate flex="100" layout="column">
+    <md-toolbar flex="none">
+      <div class="md-toolbar-tools">
+        <h2 translate="CREATE_SKILL" ng-if="::dialogVm.isNewSkill"></h2>
+        <h2 translate="EDIT_SKILL" ng-if="::!dialogVm.isNewSkill"></h2>
+        <span flex></span>
+        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
+          <md-tooltip>
+            <span translate="CANCEL"></span>
+          </md-tooltip>
+          <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content class="editor-form" flex="100">
+      <div layout="column" layout-align="center center">
+        <md-input-container>
+          <label translate="NAME"></label>
+          <input required type="text" id="name" name="name" ng-model="dialogVm.skill.name[dialogVm.currentLanguage]" md-autofocus>
+          <div ng-messages="editSkillForm.name.$error">
+            <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label translate="LEVEL"></label>
+          <input type="text" ng-model="::dialogVm.skill.level" hide>
+          <star-rating ng-model="dialogVm.skill.level"></star-rating>
+        </md-input-container>
+        <md-input-container>
+          <label translate="DESCRIPTION"></label>
+          <textarea hide="true">_</textarea>
+        </md-input-container>
+        <textarea ui-tinymce="dialogVm.tinymceOptions" ng-model="dialogVm.skill.description[dialogVm.currentLanguage]"></textarea>
+        <div class="fullsize" layout="row">
+          <md-input-container flex="100">
+            <label translate="ICON"></label>
+            <input type="text" id="icon" name="icon" ng-model="dialogVm.skill.icon">
+          </md-input-container>
+          <md-icon md-svg-icon="{{dialogVm.skill.icon}}" aria-label="Skill Icon"></md-icon>
+        </div>
+        <a href="https://materialdesignicons.com/" target="_blank" translate="FULL_ICON_LIST"></a><br>
+        <md-input-container>
+          <label translate="PROFILES_ASSIGNED"></label>
+          <md-chips ng-model="dialogVm.skill.profiles" ng-disabled>
+            <md-chip-template>
+              <span ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></span>
+            </md-chip-template>
+            <input disabled hide value="_">            
+          </md-chips>
+        </md-input-container>
+        <md-input-container>
+          <label>
+            <span translate="{{dialogVm.selectLabel}}"></span>
+          </label>
+          <md-select class="fullsize" ng-model="dialogVm.selectedProfile" aria-label="Select profiles" ng-disabled="dialogVm.skill.profiles.length === dialogVm.profileIdsArray.length" ng-change="dialogVm.addProfile()">
+            <md-option ng-value="profile" ng-repeat="profile in dialogVm.profileIdsArray | filter : dialogVm.filterProfilesNotAssigned"
+              <span ng-bind="dialogVm.profilesCollection[profile].name[dialogVm.currentLanguage]"></span>
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-subheader class="md-no-sticky md-warn" ng-show="dialogVm.error" ng-bind="dialogVm.error"></md-subheader>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button type="submit" class="md-raised md-primary" aria-label="Update skill">
+        <span ng-if="::dialogVm.isNewSkill" translate="CREATE"></span>
+        <span ng-if="::!dialogVm.isNewSkill" translate="UPDATE"></span>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -48,6 +48,11 @@ var ProfileSchema = new Schema({
   }
 });
 
+ProfileSchema.index({
+  _id: 1,
+  name: 1
+});
+
 ProfileSchema.pre('validate', function (next) {
   if (this.name.en === '' && this.name.es !== '') {
     this.name.en = this.name.es;
@@ -70,6 +75,16 @@ ProfileSchema.pre('save', function (next) {
       .replace(/^-+|-+$/g, ''); // remove leading, trailing -;
   }
   next();
+});
+
+ProfileSchema.pre('remove', function (next) {
+  var profile = this;
+  mongoose.model('Skill').update(
+    { profiles: profile._id },
+    { $pull: { profiles: profile._id } },
+    { multi: true },
+    next
+  );
 });
 
 mongoose.model('Profile', ProfileSchema);

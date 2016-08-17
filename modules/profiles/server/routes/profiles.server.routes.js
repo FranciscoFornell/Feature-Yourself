@@ -12,6 +12,9 @@ module.exports = function(app) {
     .get(profiles.list)
     .post(profiles.create);
 
+  app.route('/api/profiles/id_name_list')
+    .get(profiles.listIDName);
+
   app.route('/api/profiles/:profileId').all(profilesPolicy.isAllowed)
     .get(profiles.read)
     .put(profiles.update)

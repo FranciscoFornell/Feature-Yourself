@@ -6,15 +6,23 @@
     .module('profiles')
     .factory('profilesService', profilesService);
 
-  profilesService.$inject = ['$resource'];
+  profilesService.$inject = ['$resource', '$http'];
 
-  function profilesService($resource) {
-    return $resource('api/profiles/:profileId', {
+  function profilesService($resource, $http) {
+    var service = $resource('api/profiles/:profileId', {
       profileId: '@_id'
     }, {
       update: {
         method: 'PUT'
       }
     });
+
+    service.getIDNameList = getIDNameList;
+
+    return service;
+
+    function getIDNameList() {
+      return $http.get('/api/profiles/id_name_list');
+    }
   }
 })();

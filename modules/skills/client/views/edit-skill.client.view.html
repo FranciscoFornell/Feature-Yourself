@@ -42,12 +42,13 @@
         <a href="https://materialdesignicons.com/" target="_blank" translate="FULL_ICON_LIST"></a><br>
         <md-input-container>
           <label translate="PROFILES_ASSIGNED"></label>
-          <md-chips ng-model="dialogVm.skill.profiles" ng-disabled>
+          <md-chips ng-if="dialogVm.skill.profiles.length" ng-model="dialogVm.skill.profiles" ng-disabled>
             <md-chip-template>
               <span ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></span>
             </md-chip-template>
             <input disabled hide value="_">            
           </md-chips>
+          <input disabled ng-if="!dialogVm.skill.profiles.length">
         </md-input-container>
         <md-input-container>
           <label>

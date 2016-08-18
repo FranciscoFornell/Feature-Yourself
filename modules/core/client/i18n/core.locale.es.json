@@ -4,6 +4,7 @@
   "MANAGE_USERS": "Administrar usuarios",
   "MANAGE_PROFILES": "Administrar perfiles",
   "MANAGE_SKILLS": "Administrar habilidades",
+  "MANAGE_EDUCATIONS": "Administrar formaciones",
   "NAVIGATION": "Navegación",
   "LOADING": "Cargando...",
   "ERROR": "Error",
@@ -76,5 +77,7 @@
   "PROFILES_ASSIGNED": "Perfiles asignados",
   "ADD_PROFILE": "Añadir perfil",
   "NO_MORE_PROFILES_TO_ASSIGN": "No hay más perfiles que asignar",
-  "SELECT_PROFILE_TO_ASSIGN": "Selecciona perfil a asisgnar"
+  "SELECT_PROFILE_TO_ASSIGN": "Selecciona perfil a asisgnar",
+  "TYPE": "Tipo",
+  "INVALID_URL": "URL inválida"
 }

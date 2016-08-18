@@ -4,6 +4,7 @@
   "MANAGE_USERS": "Manage users",
   "MANAGE_PROFILES": "Manage profiles",
   "MANAGE_SKILLS": "Manage skills",
+  "MANAGE_EDUCATIONS": "Manage educations",
   "NAVIGATION": "Navigation",
   "LOADING": "Loading...",
   "ERROR": "Error",
@@ -75,5 +76,7 @@
   "FULL_ICON_LIST": "Full list of Material Design icons here",
   "PROFILES_ASSIGNED": "Profiles assigned",
   "NO_MORE_PROFILES_TO_ASSIGN": "No more profiles to assign",
-  "SELECT_PROFILE_TO_ASSIGN": "Select profile to assign"
+  "SELECT_PROFILE_TO_ASSIGN": "Select profile to assign",
+  "TYPE": "Type",
+  "INVALID_URL": "invalid URL"
 }

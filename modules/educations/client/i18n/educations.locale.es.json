@@ -1,0 +1,13 @@
+{
+  "EDUCATIONS": "Formaciones",
+  "CREATE_EDUCATION": "Crear nueva formacion",
+  "EDIT_EDUCATION": "Editar formacion",
+  "VIEW_EDUCATION": "Ver formacion",
+  "EDUCATION_UPDATE_SUCCESS": "Formacion actualizada correctamente",
+  "ISSUING_AUTHORITY": "Autoridad emisora",
+  "ISSUING_AUTHORITY_NAME": "Nombre de la autoridad emisora",
+  "ISSUING_AUTHORITY_WEB": "Web de la autoridad emisora",
+  "ACADEMIC": "Académica",
+  "COURSE": "Curso",
+  "CERTIFICATE": "Certificado"
+}

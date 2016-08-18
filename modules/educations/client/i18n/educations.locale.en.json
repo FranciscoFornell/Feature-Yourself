@@ -1,0 +1,13 @@
+{
+  "EDUCATIONS": "Educations",
+  "CREATE_EDUCATION": "Create new education",
+  "EDIT_EDUCATION": "Edit education",
+  "VIEW_EDUCATION": "View education",
+  "EDUCATION_UPDATE_SUCCESS": "Education successfully updated",
+  "ISSUING_AUTHORITY": "Issuing authority",
+  "ISSUING_AUTHORITY_NAME": "Issuing authority name",
+  "ISSUING_AUTHORITY_WEB": "Issuing authority web",
+  "ACADEMIC": "Academic",
+  "COURSE": "Course",
+  "CERTIFICATE": "Certificate"
+}

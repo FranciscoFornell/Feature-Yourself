@@ -18,13 +18,13 @@
         <h2 ng-bind="::dialogVm.skill.name[dialogVm.currentLanguage]"></h2>
         <star-rating ng-model="::dialogVm.skill.level" readonly="true"></star-rating>
       </div>
-    </div>    
+    </div>   
     <p>
-      <strong><span translate="DESCRIPTION"></span></strong>
+      <strong><span translate="DESCRIPTION"></span>:</strong>
       <span ng-bind-html="::dialogVm.skill.description[dialogVm.currentLanguage]" class="indented-text"></span>
     </p>
     <p>
-      <strong><span translate="PROFILES_ASSIGNED"></span></strong>
+      <strong><span translate="PROFILES_ASSIGNED"></span>:</strong>
       <md-chips ng-model="::dialogVm.skill.profiles" readonly="true">
         <md-chip-template>
           <strong ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></strong>

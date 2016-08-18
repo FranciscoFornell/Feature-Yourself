@@ -1,0 +1,55 @@
+<md-dialog aria-label="View education dialog">
+  <md-toolbar flex="none">
+    <div class="md-toolbar-tools">
+      <h2 translate="VIEW_EDUCATION"></h2>
+      <span flex></span>
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
+        <md-tooltip>
+          <span translate="CANCEL"></span>
+        </md-tooltip>
+        <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-margin>
+    <div layout="column" layout-gt-xs="row" layout-align="center center">
+      <md-icon md-svg-icon="{{::dialogVm.education.icon}}" aria-label="Education Icon" class="md-icon-128 margin-10px"></md-icon>
+      <div layout="column" layout-align="start center">
+        <h2 ng-bind="::dialogVm.education.name[dialogVm.currentLanguage]"></h2>
+        <span><strong translate="ISSUING_AUTHORITY"></strong>:</span>
+        <a ng-if="::dialogVm.education.issuingAuthority.web !== ''" ng-href="{{::dialogVm.education.issuingAuthority.web}}" ng-bind="::dialogVm.education.issuingAuthority.name" target="_blank"></a>
+        <span ng-if="::dialogVm.education.issuingAuthority.web === ''" ng-bind="::dialogVm.education.issuingAuthority.name"></span>
+      </div>
+    </div>
+    <p>
+      <strong><span translate="TYPE"></span>:</strong>
+      <span translate="{{::dialogVm.education.educationType}}"></span>
+    </p>
+    <p>
+      <strong><span translate="DESCRIPTION"></span>:</strong>
+      <span ng-bind-html="::dialogVm.education.description[dialogVm.currentLanguage]" class="indented-text"></span>
+    </p>
+    <div layout="row" layout-align="center">
+      <md-button ng-if="::dialogVm.education.certificate !== ''" ng-href="{{::dialogVm.education.certificate}}" target="_blank" aria-label="View Certificate Button">
+        <md-icon md-svg-icon="certificate" aria-label="Certificate Icon"></md-icon>
+        <span translate="VIEW_CERTIFICATE"></span>
+      </md-button>
+    </div>
+    <p>
+      <strong><span translate="PROFILES_ASSIGNED"></span></strong>
+      <md-chips ng-model="::dialogVm.education.profiles" readonly="true">
+        <md-chip-template>
+          <strong ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></strong>
+        </md-chip-template>
+      </md-chips>
+    </p>
+    <p>
+      <strong><span translate="CREATED_DATE"></span>:</strong>
+      <span translate="FORMATTED_DATE" translate-values = "::{date:dialogVm.education.created}"></span>
+    </p>
+    <p>
+      <strong><span translate="CREATED_BY"></span>:</strong>
+      <span ng-bind="::dialogVm.education.user.displayName"></span>
+    </p>
+  </md-dialog-content>
+</md-dialog>

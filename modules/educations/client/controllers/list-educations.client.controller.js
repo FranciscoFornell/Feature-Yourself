@@ -2,22 +2,21 @@
   'use strict';
 
   angular
-    .module('skills')
-    .controller('SkillsListController', SkillsListController);
+    .module('educations')
+    .controller('EducationsListController', EducationsListController);
 
-  SkillsListController.$inject = ['$scope', 'skillsService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService'];
+  EducationsListController.$inject = ['$scope', 'educationsService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService'];
 
-  function SkillsListController($scope, skillsService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService) {
+  function EducationsListController($scope, educationsService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService) {
     var vm = this;
 
     vm.editName = editName;
     vm.isScreenSize = isScreenSize;
-    vm.newSkill = newSkill;
+    vm.newEducation = newEducation;
     vm.removeSelected = removeSelected;
-    vm.showEditSkillDialog = showEditSkillDialog;
-    vm.showViewSkillDialog = showViewSkillDialog;
+    vm.showEditEducationDialog = showEditEducationDialog;
+    vm.showViewEducationDialog = showViewEducationDialog;
     vm.toggleFilter = toggleFilter;
-    vm.updateSkill = updateSkill;
 
     activate();
 
@@ -35,7 +34,7 @@
         }
       };
       vm.selected = [];
-      $translatePartialLoader.addPart('skills');
+      $translatePartialLoader.addPart('educations');
       vm.currentLanguage = $translate.proposedLanguage() || $translate.use();
       $rootScope.$on('$translateChangeSuccess', function(){
         vm.currentLanguage = $translate.proposedLanguage() || $translate.use();
@@ -48,8 +47,8 @@
         vm.pager.limit = 10;
       }
 
-      vm.promise = skillsService.query(function (data) {
-        vm.skills = data;
+      vm.promise = educationsService.query(function (data) {
+        vm.educations = data;
       }).$promise;
 
       vm.profilesCollection = profileListService.data.profilesCollection;
@@ -60,12 +59,22 @@
       $mdDialog.cancel();
     }
 
-    function editName(ev, skill) {
+    function editName(ev, education) {
       var editDialog = {
-        modelValue: skill.name[vm.currentLanguage],
+        modelValue: education.name[vm.currentLanguage],
         save: function (input) {
-          skill.name[vm.currentLanguage] = input.$modelValue;
-          vm.updateSkill(skill);
+          education.name[vm.currentLanguage] = input.$modelValue;
+          education.$update(function () {
+            $translate('EDUCATION_UPDATE_SUCCESS')
+              .then(function(translation){
+                $mdToast.showSimple(translation);
+              });
+          }, function (err) {
+            $mdToast.showSimple('ERROR:\n' + err.data);
+            vm.promise = educationsService.query(function (data) {
+              vm.educations = data;
+            }).$promise;
+          });
         },
         targetEvent: ev,
         validators: {
@@ -83,11 +92,11 @@
       return $mdMedia(screenSize);
     }
 
-    function newSkill (ev) {
-      var Skill = skillsService,
-        skill = new Skill();
+    function newEducation (ev) {
+      var Education = educationsService,
+        education = new Education();
 
-      vm.showEditSkillDialog(ev, skill);
+      vm.showEditEducationDialog(ev, education);
     }
 
     function removeSelected(ev) {
@@ -124,8 +133,8 @@
             .then(function(){
               for(var i=0; i<vm.selected.length; i++){
                 vm.selected[i].$remove();
-                if (vm.skills.indexOf(vm.selected[i]) !== -1){
-                  vm.skills.splice(vm.skills.indexOf(vm.selected[i]), 1);
+                if (vm.educations.indexOf(vm.selected[i]) !== -1){
+                  vm.educations.splice(vm.educations.indexOf(vm.selected[i]), 1);
                 }
               }
               vm.selected = [];
@@ -134,23 +143,23 @@
       }
     }
 
-    function showEditSkillDialog(ev, skill) {
+    function showEditEducationDialog(ev, education) {
       var useFullscreen = $mdMedia('xs');
       ev.stopPropagation(); // in case autoselect is enabled
 
       $mdDialog.show({
-        templateUrl: 'modules/skills/client/views/edit-skill.client.view.html',
+        templateUrl: 'modules/educations/client/views/edit-education.client.view.html',
         targetEvent: ev,
         clickOutsideToClose: true,
-        controller: EditSkillDialogController,
+        controller: EditEducationDialogController,
         controllerAs: 'dialogVm',
         locals: {
-          skill: skill
+          education: education
         },
         fullscreen: $mdMedia('xs')
       });
 
-      function EditSkillDialogController ($scope, skill) {
+      function EditEducationDialogController ($scope, education) {
         var dialogVm = this;
 
         dialogVm.addProfile = addProfile;
@@ -160,12 +169,12 @@
 
         activateDialog();
 
-        function activateDialog () {
+        function activateDialog() {
           dialogVm.currentLanguage = vm.currentLanguage;
-          dialogVm.isNewSkill = !skill._id;
+          dialogVm.education = angular.merge({}, education);
+          dialogVm.isNewEducation = !education._id;
           dialogVm.profilesCollection = vm.profilesCollection;
           dialogVm.profileIdsArray = vm.profileIdsArray;
-          dialogVm.skill = angular.merge({}, skill);
 
           if (vm.currentLanguage === 'en') {
             dialogVm.tinymceLanguage = 'en_GB';
@@ -187,14 +196,14 @@
             content_style: 'p { text-indent: 2em; }'
           };
 
-          if(dialogVm.isNewSkill) {
-            dialogVm.skill.level = 1;
-            dialogVm.skill.profiles = [];
+          if(dialogVm.isNewEducation) {
+            dialogVm.education.educationType = 'ACADEMIC';
+            dialogVm.education.profiles = [];
           }
 
           updateSelectLabel();
           $scope.$watch(
-            'dialogVm.skill.profiles.length', 
+            'dialogVm.education.profiles.length', 
             function(newValue, oldValue) {
               updateSelectLabel();
             }
@@ -202,48 +211,48 @@
         }
 
         function addProfile () {
-          dialogVm.skill.profiles.push(dialogVm.selectedProfile);
+          dialogVm.education.profiles.push(dialogVm.selectedProfile);
           dialogVm.selectedProfile = '';
         }
-
+        
         function dialogUpdate(isValid) {
           if (!isValid) {
             return false;
           }
 
-          angular.merge(skill, dialogVm.skill);
-          skill.profiles = dialogVm.skill.profiles.slice();
+          angular.merge(education, dialogVm.education);
+          education.profiles = dialogVm.education.profiles.slice();
 
-          if (dialogVm.isNewSkill) {
-            skill.$save(saveSuccess, saveError);
+          if (dialogVm.isNewEducation) {
+            education.$save(saveSuccess, saveError);
           } else {
-            skill.$update(saveSuccess, saveError);            
-          }
+            education.$update(saveSuccess, saveError);            
+          }          
 
           function saveError(errorResponse) {
             dialogVm.error = errorResponse.data.message;
           }
 
           function saveSuccess(shouldRefresh) {
-            $translate('SKILL_UPDATE_SUCCESS')
+            $translate('EDUCATION_UPDATE_SUCCESS')
               .then(function(translation){
                 $mdToast.showSimple(translation);
               });
             $mdDialog.hide();
-            if (dialogVm.isNewSkill) {
-              vm.promise = skillsService.query(function (data) {
-                vm.skills = data;
+            if (dialogVm.isNewEducation) {
+              vm.promise = educationsService.query(function (data) {
+                vm.educations = data;
               }).$promise;
             }
           }
         }
 
         function filterProfilesNotAssigned (item) {
-          return (dialogVm.skill.profiles.indexOf(item) === -1);
+          return (dialogVm.education.profiles.indexOf(item) === -1);
         }
 
         function updateSelectLabel() {
-          if (dialogVm.skill.profiles.length === dialogVm.profileIdsArray.length) {
+          if (dialogVm.education.profiles.length === dialogVm.profileIdsArray.length) {
             dialogVm.selectLabel = 'NO_MORE_PROFILES_TO_ASSIGN';
           } else {
             dialogVm.selectLabel = 'SELECT_PROFILE_TO_ASSIGN';
@@ -252,31 +261,31 @@
       }
     }
 
-    function showViewSkillDialog(ev, skill) {
+    function showViewEducationDialog(ev, education) {
       ev.stopPropagation(); // in case autoselect is enabled
 
       $mdDialog.show({
-        templateUrl: 'modules/skills/client/views/view-skill.client.view.html',
+        templateUrl: 'modules/educations/client/views/view-education.client.view.html',
         targetEvent: ev,
         clickOutsideToClose: true,
-        controller: ViewSkillDialogController,
+        controller: ViewEducationDialogController,
         controllerAs: 'dialogVm',
         locals: {
-          skill: skill
+          education: education
         },
         fullscreen: $mdMedia('xs')
       });
 
-      function ViewSkillDialogController (skill) {
+      function ViewEducationDialogController (education) {
         var dialogVm = this;
 
         dialogVm.cancel = dialogCancel;
 
         activateDialog();
 
-        function activateDialog () {
+        function activateDialog() {
           dialogVm.profilesCollection = vm.profilesCollection;
-          dialogVm.skill = skill;
+          dialogVm.education = education;
           dialogVm.currentLanguage = vm.currentLanguage;
         }
       }
@@ -288,20 +297,6 @@
       if (!vm.pager.filterEnabled) {
         vm.pager.search = '';
       }
-    }
-
-    function updateSkill(skill) {
-      skill.$update(function () {
-        $translate('SKILL_UPDATE_SUCCESS')
-          .then(function(translation){
-            $mdToast.showSimple(translation);
-          });
-      }, function (err) {
-        $mdToast.showSimple('ERROR:\n' + err.data);
-        vm.promise = skillsService.query(function (data) {
-          vm.skills = data;
-        }).$promise;
-      });
     }
   }
 })();

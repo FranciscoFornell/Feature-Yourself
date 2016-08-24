@@ -3,7 +3,18 @@
 
   angular
     .module('core')
+    .run(localizationInit)
     .config(localizationConfig);
+
+  localizationInit.$inject = ['$translate', '$rootScope'];
+
+  function localizationInit ($translate, $rootScope) {
+    $rootScope.$on('$translatePartialLoaderStructureChanged', translatePartialLoaderStructureChanged);
+
+    function translatePartialLoaderStructureChanged() {
+      $translate.refresh();
+    }
+  }
 
   localizationConfig.$inject = ['$translateProvider', '$translatePartialLoaderProvider'];
 

@@ -11,7 +11,7 @@
     // Add the dropdown list item to the admin menu
     menuService.addSubMenuItem('topbar', 'admin', {
       title: 'MANAGE_EDUCATIONS',
-      state: 'educations.list'
+      state: 'admin.educations.list'
     });
   }
 })();

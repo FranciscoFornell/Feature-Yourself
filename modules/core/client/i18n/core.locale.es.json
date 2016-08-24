@@ -5,6 +5,7 @@
   "MANAGE_PROFILES": "Administrar perfiles",
   "MANAGE_SKILLS": "Administrar habilidades",
   "MANAGE_EDUCATIONS": "Administrar formaciones",
+  "MANAGE_EXPERIENCES": "Administrar experiencias",
   "NAVIGATION": "Navegación",
   "LOADING": "Cargando...",
   "ERROR": "Error",
@@ -79,5 +80,9 @@
   "NO_MORE_PROFILES_TO_ASSIGN": "No hay más perfiles que asignar",
   "SELECT_PROFILE_TO_ASSIGN": "Selecciona perfil a asisgnar",
   "TYPE": "Tipo",
-  "INVALID_URL": "URL inválida"
+  "INVALID_URL": "URL inválida",
+  "START": "Inicio",
+  "END": "Fin",
+  "INVALID_DATE": "Fecha inválida",
+  "DURATION": "Duración"
 }

@@ -36,7 +36,8 @@ module.exports = {
         'public/lib/angular-material-expansion-panel/dist/md-expansion-panel.js',
         'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
         'public/lib/tinymce-dist/tinymce.js',
-        'public/lib/angular-ui-tinymce/src/tinymce.js'
+        'public/lib/angular-ui-tinymce/src/tinymce.js',
+        'public/lib/angular-auto-focus/angular-auto-focus.js'
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

@@ -1,0 +1,68 @@
+<md-dialog aria-label="View experience dialog">
+  <md-toolbar flex="none">
+    <div class="md-toolbar-tools">
+      <h2 translate="VIEW_EXPERIENCE"></h2>
+      <span flex></span>
+      <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
+        <md-tooltip>
+          <span translate="CANCEL"></span>
+        </md-tooltip>
+        <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-margin>
+    <div layout="column" layout-gt-xs="row" layout-align="center center">
+      <md-icon md-svg-icon="{{::dialogVm.experience.icon}}" aria-label="Education Icon" class="md-icon-128 margin-10px" ng-if="::dialogVm.experience.icon"></md-icon>
+      <div layout="column" layout-align="start center">
+        <h2 ng-bind="::dialogVm.experience.name[dialogVm.currentLanguage]"></h2>
+        <span ng-if="::dialogVm.durationInfo">
+          <span ng-if="::dialogVm.durationInfo.yearsNumber > 0"><span ng-bind="::dialogVm.durationInfo.yearsNumber"></span> <span translate="PLURALIZED_YEARS" translate-values="{plural: dialogVm.durationInfo.yearsNumber > 1}"></span></span><span ng-if="::(dialogVm.durationInfo.yearsNumber > 0 && dialogVm.durationInfo.monthsNumber > 0)"> <span translate="AND"></span> </span><span ng-if="::dialogVm.durationInfo.monthsNumber > 0"><span ng-bind="::dialogVm.durationInfo.monthsNumber"></span> <span translate="PLURALIZED_MONTHS" translate-values="{plural: dialogVm.durationInfo.monthsNumber > 1}"></span></span>. (<span ng-if="::(dialogVm.durationInfo.startYear !== dialogVm.durationInfo.endYear)"><span ng-bind="::dialogVm.durationInfo.startYear"></span> - </span><span ng-bind="::dialogVm.durationInfo.endYear"></span>)
+        </span>
+      </div>
+    </div>
+    <p ng-if="::dialogVm.experience.position[dialogVm.currentLanguage]">
+      <strong><span translate="POSITION"></span>:</strong>
+      <span ng-bind="::dialogVm.experience.position[dialogVm.currentLanguage]"></span>
+    </p>
+    <p ng-if="::dialogVm.experience.company.name">
+      <strong><span translate="COMPANY"></span>:</strong>
+      <a ng-if="::dialogVm.experience.company.web !== ''" ng-href="{{::dialogVm.experience.company.web}}" ng-bind="::dialogVm.experience.company.name" target="_blank"></a>
+      <span ng-if="::dialogVm.experience.company.web === ''" ng-bind="::dialogVm.experience.company.name"></span>
+    </p>
+    <p ng-if="::dialogVm.experience.description[dialogVm.currentLanguage]">
+      <strong><span translate="DESCRIPTION"></span>:</strong>
+      <span ng-bind-html="::dialogVm.experience.description[dialogVm.currentLanguage]" class="indented-text"></span>
+    </p>
+    <div>
+      <span ng-if="::dialogVm.experience.mainAssignments.length > 0">
+        <strong><span translate="MAIN_ASSINGMENTS"></span>:</strong>
+        <ul>
+          <li ng-repeat="assingment in ::dialogVm.experience.mainAssignments" ng-bind="::assingment[dialogVm.currentLanguage]"></li>
+        </ul>
+      </span>
+      <span ng-if="::dialogVm.experience.projects.length > 0">
+        <strong><span translate="MAIN_PROJECTS"></span>:</strong>
+        <ul>
+          <li ng-repeat="project in ::dialogVm.experience.projects" ng-bind="::project"></li>
+        </ul>
+      </span>
+    </div>
+    <p ng-if="::dialogVm.experience.profiles.length > 0">
+      <strong><span translate="PROFILES_ASSIGNED"></span>:</strong>
+      <md-chips ng-model="::dialogVm.experience.profiles" readonly="true">
+        <md-chip-template>
+          <strong ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></strong>
+        </md-chip-template>
+      </md-chips>
+    </p>
+    <p>
+      <strong><span translate="CREATED_DATE"></span>:</strong>
+      <span translate="FORMATTED_DATE" translate-values = "::{date:dialogVm.experience.created}"></span>
+    </p>
+    <p>
+      <strong><span translate="CREATED_BY"></span>:</strong>
+      <span ng-bind="::dialogVm.experience.user.displayName"></span>
+    </p>
+  </md-dialog-content>
+</md-dialog>

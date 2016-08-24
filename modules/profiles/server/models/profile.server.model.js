@@ -80,23 +80,19 @@ ProfileSchema.pre('save', function (next) {
 ProfileSchema.pre('remove', function (next) {
   var profile = this;
 
-  removeProfileFrom('Skill',
-    profile._id,
-    function(){
-      removeProfileFrom('Education',
-      profile._id,
-      next);
-    }
-  );
+  Promise.all([
+    removeProfileFrom('Skill', profile._id),
+    removeProfileFrom('Education', profile._id),
+    removeProfileFrom('Experience', profile._id)
+  ]).then(next);
 });
 
-function removeProfileFrom (model, id, next) {
-  mongoose.model(model).update(
+function removeProfileFrom (model, id) {
+  return mongoose.model(model).update(
     { profiles: id },
     { $pull: { profiles: id } },
-    { multi: true },
-    next
-  ); 
+    { multi: true }
+  ).exec();
 }
 
 mongoose.model('Profile', ProfileSchema);

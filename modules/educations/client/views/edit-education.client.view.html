@@ -29,21 +29,21 @@
           </md-input-container>
           <md-icon md-svg-icon="{{dialogVm.education.icon}}" aria-label="Education Icon"></md-icon>
         </div>
-        <a href="https://materialdesignicons.com/" target="_blank" translate="FULL_ICON_LIST"></a><br>
-        <md-input-container>
+        <a href="https://materialdesignicons.com/" target="_blank" translate="FULL_ICON_LIST"></a>
+        <md-input-container class="margin-top-45px">
           <label translate="DESCRIPTION"></label>
           <textarea hide="true">_</textarea>
         </md-input-container>
         <textarea ui-tinymce="dialogVm.tinymceOptions" ng-model="dialogVm.education.description[dialogVm.currentLanguage]"></textarea>
-        <md-input-container>
+        <md-input-container class="margin-top-45px">
           <label translate="TYPE"></label>
           <md-select name="educationType" ng-model="dialogVm.education.educationType" ng-init="">
             <md-option ng-value="opt" ng-repeat="opt in ['ACADEMIC', 'COURSE']">
               <span translate="{{opt}}"></span>
             </md-option>
           </md-select>
-        </md-input-container><br>
-        <md-input-container>
+        </md-input-container>
+        <md-input-container class="margin-top-45px">
           <label translate="ISSUING_AUTHORITY_NAME"></label>
           <input type="text" id="issuingAuthorityName" name="issuingAuthorityName" ng-model="dialogVm.education.issuingAuthority.name">
         </md-input-container>
@@ -71,7 +71,7 @@
           </md-chips>
           <input disabled ng-if="!dialogVm.education.profiles.length"> 
         </md-input-container>
-        <md-input-container>
+        <md-input-container class="margin-top-45px">
           <label>
             <span translate="{{dialogVm.selectLabel}}"></span>
           </label>

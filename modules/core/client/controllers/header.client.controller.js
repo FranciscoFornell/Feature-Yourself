@@ -5,9 +5,9 @@
     .module('core')
     .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['$window', '$state', 'authenticationService', 'menuService', '$mdSidenav', '$mdDialog', '$translate', '$mdComponentRegistry', '$mdMedia'];
+  HeaderController.$inject = ['$window', '$state', 'authenticationService', 'menuService', '$mdSidenav', '$mdDialog', '$translate', '$mdComponentRegistry', '$mdMedia', 'dateTimeUtilsService'];
   
-  function HeaderController ($window ,$state, authenticationService, menuService, $mdSidenav, $mdDialog, $translate, $mdComponentRegistry, $mdMedia) {
+  function HeaderController ($window ,$state, authenticationService, menuService, $mdSidenav, $mdDialog, $translate, $mdComponentRegistry, $mdMedia, dateTimeUtilsService) {
     var vm = this,
       langButton = {
         text: {
@@ -45,6 +45,8 @@
       $mdComponentRegistry.when('left-sidenav').then(function(it){
         vm.leftSidenav = $mdSidenav('left-sidenav');
       });
+
+      dateTimeUtilsService.setDateLocale(vm.currentLanguage);
     }
 
     function changeLanguage() {
@@ -68,6 +70,7 @@
         vm.currentLanguage = $translate.use();
         vm.traslateButtonText = langButton.text[langButton.language];
         vm.traslateButtonClass = langButton.class[langButton.language];
+        dateTimeUtilsService.setDateLocale(langKey);
       });
     }
 

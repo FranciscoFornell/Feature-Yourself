@@ -1,4 +1,4 @@
-<md-content layout="column" layout-align="center" flex="100" class="md-hue-1">
+<md-content layout="column" layout-align="center" flex="100" md-colors="{background: 'default-primary-50'}">
   <div layout="row" layout-align="center" layout-padding ng-if="!(vm.localUserData && !vm.error && !vm.noUser)" class="loading-splash">
     <md-content class="md-whiteframe-z1" layout-padding flex="35" flex-md="60" flex-sm="75" flex-xs="95">
       <div layout="column" layout-align="center center" ng-if="!(vm.localUserData || vm.error)">
@@ -19,12 +19,12 @@
     <md-tabs md-center-tabs md-swipe-content flex="100">
       <md-tab md-active="vm.params.profile === profile.label" ng-repeat="profile in vm.profiles" label="{{profile.name[vm.currentLanguage]}}" layout="column">
         <md-tab-body class="scrollable">
-          <md-content layout="column" layout-gt-sm="row" layout-align="start stretch" layout-margin class="md-whiteframe-z2 md-hue-2">
-            <div layout="column" class="no-margin" layout-align="start">
-              <md-content class="md-hue-3 visible-overflow" layout="row" layout-padding>
+          <div layout="column" layout-gt-sm="row" layout-align="start stretch" layout-margin class="md-whiteframe-z2" md-colors="{background: 'default-primary-200'}">
+            <div layout="column" class="no-margin" layout-align="start" flex="noshrink">
+              <div class="visible-overflow" layout="row" layout-padding md-colors="{background: 'default-primary-600'}">
                 <img class="md-fab-img-128 md-whiteframe-z3 no-padding" style="margin: auto auto -72px auto;" ng-src="{{::vm.localUserData.profileImageURL}}" alt="Profile pic">
                 <h2 flex="100" ng-bind="::vm.localUserData.displayName"></h2>
-              </md-content>                
+              </div>                
               <div flex layout="column" layout-align="space-between">
                 <p style="margin-left: 144px; min-height: 40px;" ng-bind="profile.position[vm.currentLanguage]"></p><br>
                 <md-content layout="row" layout-align="center" layout-margin>
@@ -43,11 +43,11 @@
                 </md-content>
               </div>
             </div>
-            <md-content layout-padding flex="100" flex-gt-sm="50">            
+            <md-content layout-padding flex="100">
               <strong translate="DESCRIPTION"></strong>
               <span class="multiline-justified-string" ng-bind-html="profile.bio[vm.currentLanguage]"></span>
             </md-content>
-          </md-content>
+          </div>
           <div class="margin-8px">
             <md-expansion-panel-group md-component-id="panelGroup" multiple>
               <md-expansion-panel md-component-id="skillsPanel" ng-if="::profile.skills.length > 0">

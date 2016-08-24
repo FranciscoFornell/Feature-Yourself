@@ -5,14 +5,11 @@
     .module('core')
     .run(routeFilter);
 
-  routeFilter.$inject = ['$rootScope', '$state', 'authenticationService', '$translate'];
+  routeFilter.$inject = ['$rootScope', '$state', 'authenticationService'];
 
-  function routeFilter($rootScope, $state, authenticationService, $translate) {
+  function routeFilter($rootScope, $state, authenticationService) {
     $rootScope.$on('$stateChangeStart', stateChangeStart);
     $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
-    // NOTE: New
-    //Refresh angular-translate tables
-    $rootScope.$on('$translatePartialLoaderStructureChanged', translatePartialLoaderStructureChanged);
 
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {
       // Check authentication before changing state
@@ -31,7 +28,7 @@
           if (authenticationService.user !== undefined && typeof authenticationService.user === 'object') {
             $state.transitionTo('forbidden');
           } else {
-            $state.go('authentication.signin').then(function () {
+            $state.go('reqAuthentication').then(function () {
               // Record previous state
               storePreviousState(toState, toParams);
             });
@@ -55,10 +52,6 @@
           href: $state.href(state, params)
         };
       }
-    }
-
-    function translatePartialLoaderStructureChanged() {
-      $translate.refresh();
     }
   }
 }());

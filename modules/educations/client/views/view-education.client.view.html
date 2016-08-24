@@ -35,8 +35,8 @@
         <span translate="VIEW_CERTIFICATE"></span>
       </md-button>
     </div>
-    <p>
-      <strong><span translate="PROFILES_ASSIGNED"></span></strong>
+    <p ng-if="::dialogVm.education.profiles.length > 0">
+      <strong><span translate="PROFILES_ASSIGNED"></span>:</strong>
       <md-chips ng-model="::dialogVm.education.profiles" readonly="true">
         <md-chip-template>
           <strong ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></strong>

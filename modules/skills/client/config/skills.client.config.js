@@ -11,7 +11,7 @@
     // Add the dropdown list item to the admin menu
     menuService.addSubMenuItem('topbar', 'admin', {
       title: 'MANAGE_SKILLS',
-      state: 'skills.list'
+      state: 'admin.skills.list'
     });
   }
 })();

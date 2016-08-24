@@ -1,7 +1,7 @@
-<md-content layout="column" layout-align="center" class="child-content md-hue-1">
+<md-content layout="column" layout-align="center" class="child-content" md-colors="{background: 'default-primary-50'}">
   <div layout="row" layout-align="center">
     <md-card layout-fill flex-gt-md="95" flex-gt-lg="70" class="margin-padding-bso">
-      <md-toolbar class="md-table-toolbar md-default">
+      <div class="md-table-toolbar md-default">
         <div class="md-toolbar-tools">
           <span translate="USERS" hide-xs></span>
           <span ng-show="vm.selected.length"><span hide-xs>: </span><span ng-bind="vm.selected.length"></span> <span translate="SELECTED_ITEMS"></span>
@@ -34,7 +34,7 @@
             </md-button>
           </span>
         </div>
-      </md-toolbar>
+      </div>
       <md-table-container>
         <table md-table md-row-select md-progress="vm.promise" ng-model="vm.selected">
           <thead md-head md-order="vm.pager.order">

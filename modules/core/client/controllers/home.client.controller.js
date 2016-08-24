@@ -5,13 +5,12 @@
   	.module('core')
   	.controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$rootScope', 'usersService', '$translate', '$http', '$stateParams', 'socialProvidersService', '$mdDialog', '$mdMedia'];
+  HomeController.$inject = ['$rootScope', 'usersService', '$translate', '$http', '$stateParams', 'socialProvidersService', '$mdDialog', '$mdMedia', 'dateTimeUtilsService'];
 
-  function HomeController ($rootScope, usersService, $translate, $http, $stateParams, socialProvidersService, $mdDialog, $mdMedia) {
+  function HomeController ($rootScope, usersService, $translate, $http, $stateParams, socialProvidersService, $mdDialog, $mdMedia, dateTimeUtilsService) {
     var vm = this;
 
     vm.filterLT = filterLT;
-    vm.getExperienceDurationInfo = getExperienceDurationInfo;
     vm.params = $stateParams;
     vm.providersCollection = socialProvidersService.providersCollection;
     vm.viewEducation = viewEducation;
@@ -511,20 +510,6 @@
       return actual < expected;
     }
 
-    function getExperienceDurationInfo(duration) {
-      var msDifference = duration.end.getTime() - duration.start.getTime(),
-        totalDaysNumber = msDifference / (1000 * 60 * 60 * 24),
-        yearsNumber = Math.floor(totalDaysNumber / 365),
-        monthsNumber = Math.round((totalDaysNumber % 365) / 30);
-
-      return {
-        yearsNumber : yearsNumber,
-        monthsNumber: monthsNumber,
-        startYear: duration.start.getFullYear(),
-        endYear: duration.end.getFullYear()
-      };
-    }
-
     function viewEducation(ev, education) {
       $mdDialog.show({
         templateUrl: 'modules/core/client/views/dialogs/view-home-education.client.view.html',
@@ -568,7 +553,10 @@
         dialogVm.currentLanguage = vm.currentLanguage;
         dialogVm.experience = experience;
         dialogVm.title = 'EXPERIENCE_DETAIL';
-        dialogVm.durationInfo = vm.getExperienceDurationInfo(dialogVm.experience.duration);
+        dialogVm.durationInfo = dateTimeUtilsService.getDurationInfo(
+          dialogVm.experience.duration.start,
+          dialogVm.experience.duration.end
+        );
       }
     }
 

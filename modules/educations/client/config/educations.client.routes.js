@@ -9,12 +9,12 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('educations', {
+      .state('admin.educations', {
         abstract: true,
         url: '/educations',
         template: '<ui-view/>'
       })
-      .state('educations.list', {
+      .state('admin.educations.list', {
         url: '',
         templateUrl: 'modules/educations/client/views/list-educations.client.view.html',
         controller: 'EducationsListController',

@@ -1,0 +1,113 @@
+<md-dialog aria-label="Edit experience dialog" layout="column" class="dialog-w600">
+  <form name="editExperienceForm" ng-submit="dialogVm.update(editExperienceForm.$valid)" novalidate flex="100" layout="column">
+    <md-toolbar flex="none">
+      <div class="md-toolbar-tools">
+        <h2 translate="CREATE_EXPERIENCE" ng-if="::dialogVm.isNewExperience"></h2>
+        <h2 translate="EDIT_EXPERIENCE" ng-if="::!dialogVm.isNewExperience"></h2>
+        <span flex></span>
+        <md-button aria-label="Cancel button" type="button" class="md-icon-button" ng-click="dialogVm.cancel()">
+          <md-tooltip>
+            <span translate="CANCEL"></span>
+          </md-tooltip>
+          <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content class="editor-form" flex="100">
+      <div layout="column" layout-align="center center">
+        <md-input-container>
+          <label translate="NAME"></label>
+          <input required type="text" id="name" name="name" ng-model="dialogVm.experience.name[dialogVm.currentLanguage]" md-autofocus>
+          <div ng-messages="editExperienceForm.name.$error">
+            <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
+          </div>
+        </md-input-container>
+        <div class="fullsize" layout="row">
+          <md-input-container flex="100">
+            <label translate="ICON"></label>
+            <input type="text" id="icon" name="icon" ng-model="dialogVm.experience.icon">
+          </md-input-container>
+          <md-icon md-svg-icon="{{dialogVm.experience.icon}}" aria-label="Experience Icon"></md-icon>
+        </div>
+        <a href="https://materialdesignicons.com/" target="_blank" translate="FULL_ICON_LIST"></a>
+        <md-input-container class="margin-top-45px">
+          <label translate="COMPANY_NAME"></label>
+          <input type="text" id="companyName" name="companyName" ng-model="dialogVm.experience.company.name">
+        </md-input-container>
+        <md-input-container>
+          <label translate="COMPANY_WEB"></label>
+          <input type="url" id="companyWeb" name="companyWeb" ng-model="dialogVm.experience.company.web">
+          <div ng-messages="editExperienceForm.companyWeb.$error">
+            <div ng-message="url"><span translate="INVALID_URL"></span></div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label translate="POSITION"></label>
+          <input type="text" id="position" name="position" ng-model="dialogVm.experience.position[dialogVm.currentLanguage]">
+        </md-input-container>
+        <md-input-container>
+          <label translate="DURATION"></label>
+          <input disabled hide value="_">
+        </md-input-container>
+        <div layout="row" class="fullsize">
+          <md-input-container>
+            <label translate="START"></label>
+            <md-datepicker id="start" name="start" ng-model="dialogVm.experience.duration.start" md-open-on-focus md-max-date="dialogVm.experience.duration.end||false"></md-datepicker>
+            <div ng-messages="editExperienceForm.start.$error">
+              <div ng-message="valid"><span translate="INVALID_DATE"></span></div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <label translate="END"></label>
+            <md-datepicker id="end" name="end" ng-model="dialogVm.experience.duration.end" md-open-on-focus md-min-date="dialogVm.experience.duration.start||false"></md-datepicker>
+            <div ng-messages="editExperienceForm.end.$error">
+              <div ng-message="valid"><span translate="INVALID_DATE"></span></div>
+            </div>
+          </md-input-container>
+        </div>
+        <md-input-container>
+          <label translate="DESCRIPTION"></label>
+          <textarea hide>_</textarea>
+        </md-input-container>
+        <textarea ui-tinymce="dialogVm.tinymceOptions" ng-model="dialogVm.experience.description[dialogVm.currentLanguage]"></textarea>
+        <md-input-container class="margin-top-45px no-error-spacing">
+          <label translate="MAIN_ASSIGNMENTS"></label>
+          <md-chips ng-model="dialogVm.experience.mainAssignments" md-enable-chip-edit="true" ng-paste="dialogVm.preventDefaultEvent($event);">
+          </md-chips>
+        </md-input-container>
+        <md-input-container class="margin-top-45px no-error-spacing">
+          <label translate="PROJECTS"></label>
+          <md-chips ng-model="dialogVm.experience.projects" md-enable-chip-edit="true" ng-paste="dialogVm.preventDefaultEvent($event);">
+          </md-chips>
+        </md-input-container>
+        <md-input-container class="margin-top-45px">
+          <label translate="PROFILES_ASSIGNED"></label>
+          <md-chips ng-if="dialogVm.experience.profiles.length" ng-model="dialogVm.experience.profiles" ng-disabled>
+            <md-chip-template>
+              <span ng-bind="::dialogVm.profilesCollection[$chip].name[dialogVm.currentLanguage]"></span>
+            </md-chip-template>
+            <input disabled hide value="_">            
+          </md-chips>
+          <input disabled ng-if="!dialogVm.experience.profiles.length"> 
+        </md-input-container>
+        <md-input-container class="margin-top-45px">
+          <label>
+            <span translate="{{dialogVm.selectLabel}}"></span>
+          </label>
+          <md-select class="fullsize" ng-model="dialogVm.selectedProfile" aria-label="Select profiles" ng-disabled="dialogVm.experience.profiles.length === dialogVm.profileIdsArray.length" ng-change="dialogVm.addProfile()">
+            <md-option ng-value="profile" ng-repeat="profile in dialogVm.profileIdsArray | filter : dialogVm.filterProfilesNotAssigned"
+              <span ng-bind="dialogVm.profilesCollection[profile].name[dialogVm.currentLanguage]"></span>
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-subheader class="md-no-sticky md-warn" ng-show="dialogVm.error" ng-bind="dialogVm.error"></md-subheader>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+      <md-button type="submit" class="md-raised md-primary" aria-label="Update experience">
+        <span ng-if="::dialogVm.isNewExperience" translate="CREATE"></span>
+        <span ng-if="::!dialogVm.isNewExperience" translate="UPDATE"></span>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

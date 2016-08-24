@@ -81,6 +81,12 @@ a:hover .header-profile-image {
 .no-margin {
   margin: 0!important;
 }
+.margin-top-45px {
+  margin-top: 45px;
+}
+.no-error-spacing .md-errors-spacer {
+    min-height: 0;
+}
 .scrollable {
   overflow: scroll;
 }
@@ -187,7 +193,7 @@ a:hover .header-profile-image {
   margin-top: -64px;
   padding-top: 64px;
 }
-.dashboard-sidenav md-toolbar{
+.dashboard-sidenav-content{
   overflow-y: auto;
   height: auto;
   /*display: block;*/

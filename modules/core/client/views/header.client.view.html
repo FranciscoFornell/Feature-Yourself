@@ -26,9 +26,9 @@
     </span>
     <span flex></span>
     <span layout="row" layout-align="center center">
-      <md-button class="md-raised md-hue-1 md-fab md-mini" ng-class="vm.traslateButtonClass" aria-label="{{vm.traslateButtonText}}" ng-click="vm.changeLanguage()">
+      <md-button class="md-raised md-hue-1 md-fab md-mini no-margin" aria-label="{{vm.traslateButtonText}}" ng-click="vm.changeLanguage()">
         <div layout="column" layout-align="center center">
-          <span class="flag-icon"></span>
+          <span class="flag-icon" ng-style="{'background-image': vm.traslateButtonFlag}"></span>
         </div>
         <md-tooltip md-delay="0" md-direction="down">
           <span ng-bind="vm.traslateButtonText"></span>

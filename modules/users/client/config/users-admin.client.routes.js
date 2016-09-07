@@ -19,38 +19,5 @@
           pageTitle: 'Users List'
         }
       });
-      // NOTE: I think I don't need this routes anymore
-      // .state('admin.user', {
-      //   url: '/users/:userId',
-      //   templateUrl: 'modules/users/client/views/admin/view-user.client.view.html',
-      //   controller: 'UserController',
-      //   controllerAs: 'vm',
-      //   resolve: {
-      //     userResolve: getUser
-      //   },
-      //   data: {
-      //     pageTitle: 'Edit {{ userResolve.displayName }}'
-      //   }
-      // })
-      // .state('admin.user-edit', {
-      //   url: '/users/:userId/edit',
-      //   templateUrl: 'modules/users/client/views/admin/edit-user.client.view.html',
-      //   controller: 'UserController',
-      //   controllerAs: 'vm',
-      //   resolve: {
-      //     userResolve: getUser
-      //   },
-      //   data: {
-      //     pageTitle: 'Edit User {{ userResolve.displayName }}'
-      //   }
-      // });
-
-    // getUser.$inject = ['$stateParams', 'AdminService'];
-
-    // function getUser($stateParams, AdminService) {
-    //   return AdminService.get({
-    //     userId: $stateParams.userId
-    //   }).$promise;
-    // }
   }
 }());

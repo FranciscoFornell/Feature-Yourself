@@ -30,7 +30,7 @@
         </md-input-container>
         <md-input-container>
           <label translate="ROLES"></label>
-          <md-select ng-model="dialogVm.user.rolesString" placeholder="Select role or roles" md-on-close="dialogVm.destringifyRoles(dialogVm.user, false)">
+          <md-select ng-model="dialogVm.user.rolesString" placeholder="Select role or roles" md-on-close="dialogVm.destringifyRoles(dialogVm.user, false)" ng-disabled="dialogVm.user.username === dialogVm.authentication.user.username">
             <md-option ng-value="rolesOption" ng-repeat="rolesOption in ::dialogVm.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
           </md-select>
         </md-input-container>

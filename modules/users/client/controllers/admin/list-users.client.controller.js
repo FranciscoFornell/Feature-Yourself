@@ -219,6 +219,7 @@
         var dialogVm = this,
           rolesString;
 
+        dialogVm.authentication = vm.authentication;
         dialogVm.cancel = dialogCancel;
         dialogVm.destringifyRoles = vm.destringifyRoles;
         dialogVm.rolesOptions = vm.rolesOptions;

@@ -174,7 +174,7 @@
             dialogVm.tinymceLanguage = 'es';
           }
 
-          dialogVm.tinymceLanguageUrl = '/lib/tinymce-dist/js/langs/';
+          dialogVm.tinymceLanguageUrl = '/lib/tinymce-langs/';
           dialogVm.tinymceLanguageUrl += dialogVm.tinymceLanguage;
           dialogVm.tinymceLanguageUrl += '.js';
 

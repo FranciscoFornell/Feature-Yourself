@@ -44,9 +44,11 @@
     </section>
   </div>
 
-  <!--Embedding The User Object-->
+  <!--Embedding The User Object and needed environment variables-->
   <script type="text/javascript">
-    var user = {{ user | json | safe }};
+    var user = {{ user | json | safe }},
+      env = '{{ env }}',
+      configuredSocialProviders = {{ configuredSocialProviders | json | safe }};
   </script>
 
   <!--Load The Socket.io File-->

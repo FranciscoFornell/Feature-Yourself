@@ -46,13 +46,8 @@
       vm.imageURL = vm.user.profileImageURL;
     }
 
-    /**
-     * Converts data uri to Blob. Necessary for uploading.
-     * @see
-     *   http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
-     * @param  {String} dataURI
-     * @return {Blob}
-     */
+    // Converts data uri to Blob. Necessary for uploading.
+    // See: http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
     function dataURItoBlob(dataURI) {
       var binary = atob(dataURI.split(',')[1]);
       var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];

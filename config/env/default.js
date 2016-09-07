@@ -1,9 +1,11 @@
 'use strict';
 
+require('dotenv').config();
+
 module.exports = {
   app: {
-    title: 'APP -Awesome Personal Page',
-    description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
+    title: 'Feature yourself',
+    description: 'Personal page using Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
     keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
   },

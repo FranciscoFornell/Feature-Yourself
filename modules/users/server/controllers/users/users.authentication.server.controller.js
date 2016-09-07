@@ -131,6 +131,7 @@ exports.oauthCallback = function (strategy) {
           return res.redirect('/require-authentication');
         }
 
+        redirectURL = typeof redirectURL === 'string' ? redirectURL : undefined;
         return res.redirect(redirectURL || sessionRedirectURL || '/');
       });
     })(req, res, next);
@@ -255,7 +256,6 @@ exports.removeOAuthProvider = function (req, res, next) {
   });
 };
 
-// NOTE: Nuevo
 /**
  * Checks if any local user exists
  */

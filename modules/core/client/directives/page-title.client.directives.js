@@ -26,7 +26,7 @@
       }
 
       function getTitle(currentState) {
-        var applicationCoreTitle = 'Awesome Personal Page (APP)';
+        var applicationCoreTitle = 'Feature yourself';
         var workingState = currentState;
         if (currentState.data) {
           workingState = (typeof workingState.locals !== 'undefined') ? workingState.locals.globals : workingState;

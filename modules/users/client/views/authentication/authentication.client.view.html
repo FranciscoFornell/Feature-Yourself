@@ -13,27 +13,11 @@
       </div>
     </md-toolbar>
     <md-dialog-content>
-      <div class="md-headline centered-text" translate="SIGNIN_SOCIAL_MSG" layout-padding></div>
-      <div layout="row" layout-padding layout-wrap layout-align="center center">
-        <md-button type="button" class="md-raised md-square-icon-button" ng-click="dialogVm.callOauthProvider('/api/auth/facebook')" aria-label="Login with Facebook">
-          <md-tooltip>Facebook</md-tooltip>
-          <md-icon md-svg-icon="facebook-box" style="color: #3b5998;" aria-label="Facebook Icon" class="md-icon-128"></md-icon>
-        </md-button>
-        <md-button type="button" class="md-raised md-square-icon-button" ng-click="dialogVm.callOauthProvider('/api/auth/twitter')" aria-label="Login with Twitter">
-          <md-tooltip>Twitter</md-tooltip>
-          <md-icon md-svg-icon="twitter-box" style="color: #55acee;" aria-label="Twitter Icon" class="md-icon-128"></md-icon>
-        </md-button>
-        <md-button type="button" class="md-raised md-square-icon-button" ng-click="dialogVm.callOauthProvider('/api/auth/google')" aria-label="Login with Google+">
-          <md-tooltip>Google+</md-tooltip>
-          <md-icon md-svg-icon="google-plus-box" style="color: #dc4e41;" aria-label="Google+ Icon" class="md-icon-128"></md-icon>
-        </md-button>
-        <md-button type="button" class="md-raised md-square-icon-button" ng-click="dialogVm.callOauthProvider('/api/auth/linkedin')" aria-label="Login with Linkedin">
-          <md-tooltip>Linkedin</md-tooltip>
-          <md-icon md-svg-icon="linkedin-box" style="color: #0077b5;" aria-label="Linkedin Icon" class="md-icon-128"></md-icon>
-        </md-button>
-        <md-button type="button" class="md-raised md-square-icon-button" ng-click="dialogVm.callOauthProvider('/api/auth/github')" aria-label="Login with Github">
-          <md-tooltip>Github</md-tooltip>
-          <md-icon md-svg-icon="github-box" style="color: #333333;" aria-label="Github Icon" class="md-icon-128"></md-icon>
+      <div class="md-headline centered-text" translate="SIGNIN_SOCIAL_MSG" layout-padding ng-if="dialogVm.providersArray.length > 0"></div>
+      <div layout="row" layout-padding layout-wrap layout-align="center center" ng-if="dialogVm.providersArray.length > 0">
+        <md-button ng-repeat="provider in dialogVm.providersArray" type="button" class="md-raised md-square-icon-button" ng-click="dialogVm.callOauthProvider('/api/auth/' + provider.provider)" aria-label="Login with {{provider.name}}">
+          <md-tooltip>{{provider.name}}</md-tooltip>
+          <md-icon md-svg-icon="{{provider.mdIcon}}" ng-style="{color: provider.color}" aria-label="{{provider.name}} Icon" class="md-icon-128"></md-icon>
         </md-button>
       </div>
       <div class="md-headline centered-text" translate="{{::dialogVm.loginType}}_LOCAL_MSG" layout-padding></div>

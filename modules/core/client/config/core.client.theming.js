@@ -10,6 +10,7 @@
   function themingConfig ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue-grey')
-      .accentPalette('deep-orange');
+      .accentPalette('deep-orange')
+      .warnPalette('red');
   }
 })();

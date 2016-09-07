@@ -10,13 +10,17 @@
     .module(app.applicationModuleName)
     .config(bootstrapConfig);
 
-  function bootstrapConfig($locationProvider, $httpProvider) {
+  function bootstrapConfig($locationProvider, $httpProvider, $compileProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
 
     $httpProvider.interceptors.push('authInterceptor');
+
+    // Disable debug data for production environment
+    // @link https://docs.angularjs.org/guide/production
+    $compileProvider.debugInfoEnabled(app.applicationEnvironment === 'development');
   }
 
-  bootstrapConfig.$inject = ['$locationProvider', '$httpProvider'];
+  bootstrapConfig.$inject = ['$locationProvider', '$httpProvider', '$compileProvider'];
 
   // Then define the init function for starting up the application
   angular.element(document).ready(init);

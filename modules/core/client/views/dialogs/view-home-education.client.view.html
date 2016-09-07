@@ -12,18 +12,20 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-dialog-content layout-margin layout="column">
-    <div layout="column" layout-gt-sm="row" layout-align="center center">
-      <md-icon md-svg-icon="{{::dialogVm.education.icon}}" aria-label="Education Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
-      <div flex="100" layout="column" layout-align="start center">
-        <strong ng-bind="::dialogVm.education.name[dialogVm.currentLanguage]"></strong>
-        <a href="{{::dialogVm.education.issuingAuthority.web}}" target="_blank" ng-bind="::dialogVm.education.issuingAuthority.name"></a>
-        <p class="multiline-justified-string" ng-bind="::dialogVm.education.description[dialogVm.currentLanguage]"></p>
-        <md-button ng-if="::dialogVm.education.certificate" class="md-mini" ng-href="{{::dialogVm.education.certificate}}" target="_blank" aria-label="View Certificate Button">
-          <md-icon md-svg-icon="certificate" aria-label="Certificate Icon"></md-icon>
-          <span translate="VIEW_CERTIFICATE"></span>
-        </md-button>
-      </div>
+  <md-dialog-content layout="column" layout-gt-xs="row" layout-align="center center" layout-padding>
+    <div layout-align="center center" flex="noshrink">
+      <md-icon ng-if="::!dialogVm.education.icon" md-svg-icon="school" aria-label="Education Icon" class="md-icon-128"></md-icon>
+      <md-icon ng-if="::dialogVm.education.icon" md-svg-icon="{{::dialogVm.education.icon}}" aria-label="Education Icon" class="md-icon-128"></md-icon>
+    </div>
+    <div flex="100" layout="column" layout-align="start center" class="fullsize">
+      <strong ng-bind="::dialogVm.education.name[dialogVm.currentLanguage]"></strong>
+      <span ng-if="::dialogVm.education.issuingAuthority.web === ''" ng-bind="::dialogVm.education.issuingAuthority.name"></span>
+      <a ng-if="::dialogVm.education.issuingAuthority.web !== ''" href="{{::dialogVm.education.issuingAuthority.web}}" target="_blank" ng-bind="::dialogVm.education.issuingAuthority.name"></a>
+      <span ng-bind-html="::dialogVm.education.description[dialogVm.currentLanguage]" class="fullsize indented-text"></span>
+      <md-button ng-if="::dialogVm.education.certificate" class="md-mini" ng-href="{{::dialogVm.education.certificate}}" target="_blank" aria-label="View Certificate Button">
+        <md-icon md-svg-icon="certificate" aria-label="Certificate Icon"></md-icon>
+        <span translate="VIEW_CERTIFICATE"></span>
+      </md-button>
     </div>
   </md-dialog-content>
 </md-dialog>

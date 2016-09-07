@@ -202,7 +202,6 @@ exports.reset = function (req, res, next) {
 /**
  * Change Password
  */
-// TODO: Implementar i18 en los mensajes que se retornan
 exports.changePassword = function (req, res, next) {
   // Init Variables
   var passwordDetails = req.body;
@@ -250,12 +249,12 @@ exports.changePassword = function (req, res, next) {
       });
     } else {
       res.status(400).send({
-        message: 'Please provide a new password'
+        message: 'PROVIDE_NEW_PASSWORD'
       });
     }
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'USER_NOT_SIGNED_IN'
     });
   }
 };

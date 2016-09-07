@@ -1,13 +1,17 @@
 ---
 declared-services:
-  mean-mongo:
+  FY-mongo:
     label: mongodb
     plan: 100
+  FY-Object-Storage:
+    label: Object-Storage
+    plan: Free
 applications:
-- name: mean
-  host: mean-${random-word}
+- name: feature-yourself
+  host: feature-yourself
   memory: 128M
   services:
-  - mean-mongo
+    - FY-mongo
+    - FY-Object-Storage
   env:
     NODE_ENV: cloud-foundry

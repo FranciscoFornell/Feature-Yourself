@@ -30,7 +30,7 @@
       <span ng-bind-html="::dialogVm.education.description[dialogVm.currentLanguage]" class="indented-text"></span>
     </p>
     <div layout="row" layout-align="center">
-      <md-button ng-if="::dialogVm.education.certificate !== ''" ng-href="{{::dialogVm.education.certificate}}" target="_blank" aria-label="View Certificate Button">
+      <md-button ng-if="::dialogVm.education.certificate" ng-href="{{::dialogVm.education.certificate}}" target="_blank" aria-label="View Certificate Button">
         <md-icon md-svg-icon="certificate" aria-label="Certificate Icon"></md-icon>
         <span translate="VIEW_CERTIFICATE"></span>
       </md-button>

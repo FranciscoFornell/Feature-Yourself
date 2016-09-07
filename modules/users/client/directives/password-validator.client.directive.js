@@ -38,7 +38,6 @@
           scope.requirementsColor = requirementsMeter[requirementsIdx].color;
           scope.requirementsProgress = requirementsMeter[requirementsIdx].progress;
 
-          // NOTE: He añadido yo los $setValidity
           if (result.errors.length) {
             ngModel.$setValidity('weakpassword', false);
             scope.popoverMsg = passwordValidatorService.getPopoverMsg();

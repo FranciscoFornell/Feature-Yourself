@@ -1,34 +1,35 @@
-<md-content layout="column" layout-align="center" flex="100" md-colors="{background: 'default-primary-50'}">
-  <div layout="row" layout-align="center" layout-padding ng-if="!(vm.localUserData && !vm.error && !vm.noUser)" class="loading-splash">
-    <md-content class="md-whiteframe-z1" layout-padding flex="35" flex-md="60" flex-sm="75" flex-xs="95">
-      <div layout="column" layout-align="center center" ng-if="!(vm.localUserData || vm.error)">
+<md-content layout="column" layout-align="center" flex="100" md-colors="::{background: 'default-primary-50'}">
+  <div layout="row" layout-align="center" layout-padding ng-if="vm.showSplash" class="loading-splash">
+    <md-card class="md-whiteframe-z1" layout-padding flex="35" flex-md="60" flex-sm="75" flex-xs="95">
+      <div layout="column" layout-align="center center" ng-if="vm.loadingData">
         <h1 class="md-headline centered-text" translate="LOADING"></h1>
         <md-progress-circular md-mode="indeterminate" md-diameter="128"></md-progress-circular>
       </div>
-      <div ng-if="vm.error || vm.noUser">
+      <div ng-if="!vm.loadingData">
         <h1 class="md-headline centered-text" translate="ERROR"></h1>
-        <md-subheader class="md-warn md-whiteframe-z2 message-area">
+        <div class="md-whiteframe-z2 message-area" md-colors="::{color: 'default-warn'}">
           <md-icon md-svg-icon="alert" class="md-warn" aria-label="Alert Icon"></md-icon>
           <span ng-if="vm.noUser" translate="NO_LOCAL_USER"></span>
-          <span ng-if="vm.error"><span translate="DATA_ERROR"></span> <span translate="LOCAL_USER_DATA"></span>. Status: <span ng-bind="vm.error"></span></span>
-        </md-subheader>
-      </div>        
-    </md-content>
+          <span ng-if="vm.noProfiles" translate="NO_PROFILES"></span>
+          <span ng-if="vm.error"><span translate="DATA_ERROR"></span> Status: <span ng-bind="vm.error"></span></span>
+        </div>
+      </div>
+    </md-card>
   </div>
-  <div layout="column" layout-align="start" flex="100" ng-if="::vm.localUserData.exists"><div layout="row" layout-align="center" flex="100"><div flex-lg="95" flex-xl="75" flex="100" layout="column">
+  <div layout="column" layout-align="start" flex="100" ng-if="!vm.showSplash"><div layout="row" layout-align="center" flex="100"><div flex-lg="95" flex-xl="75" flex="100" layout="column">
     <md-tabs md-center-tabs md-swipe-content flex="100">
-      <md-tab md-active="vm.params.profile === profile.label" ng-repeat="profile in vm.profiles" label="{{profile.name[vm.currentLanguage]}}" layout="column">
+      <md-tab md-active="vm.params.profile === profile._id" ng-repeat="profile in vm.profiles" label="{{profile.name[vm.currentLanguage]}}" layout="column">
         <md-tab-body class="scrollable">
-          <div layout="column" layout-gt-sm="row" layout-align="start stretch" layout-margin class="md-whiteframe-z2" md-colors="{background: 'default-primary-200'}">
+          <div layout="column" layout-gt-sm="row" layout-align="start stretch" layout-margin class="md-whiteframe-z2" md-colors="{::background: 'default-primary-200'}">
             <div layout="column" class="no-margin" layout-align="start" flex="noshrink">
-              <div class="visible-overflow" layout="row" layout-padding md-colors="{background: 'default-primary-600'}">
-                <img class="md-fab-img-128 md-whiteframe-z3 no-padding" style="margin: auto auto -72px auto;" ng-src="{{::vm.localUserData.profileImageURL}}" alt="Profile pic">
+              <div class="visible-overflow" layout="row" layout-padding md-colors="::{background: 'default-primary-600'}">
+                <img class="md-fab-img-128 md-whiteframe-z3 no-padding md-button" style="margin: auto auto -72px auto; " ng-src="{{::vm.localUserData.profileImageURL}}" alt="Profile pic" ng-click="vm.viewProfilePic($event, vm.localUserData.profileImageURL)">
                 <h2 flex="100" ng-bind="::vm.localUserData.displayName"></h2>
               </div>                
               <div flex layout="column" layout-align="space-between">
-                <p style="margin-left: 144px; min-height: 40px;" ng-bind="profile.position[vm.currentLanguage]"></p><br>
+                <h1 style="margin-left: 144px; min-height: 40px;" ng-bind="profile.name[vm.currentLanguage]"></h1><br>
                 <md-content layout="row" layout-align="center" layout-margin>
-                  <md-button class="md-icon-button" ng-href="mailto:{{::vm.localUserData.email}}?subject={{'WEB_CONTACT' | translate}} - {{'PROFILE' | translate}}: {{profile.position[vm.currentLanguage]}}" aria-label="Contact Email Button">
+                  <md-button class="md-icon-button" ng-href="mailto:{{::vm.localUserData.email}}?subject={{'WEB_CONTACT' | translate}} - {{'PROFILE' | translate}}: {{profile.name[vm.currentLanguage]}}" aria-label="Contact Email Button">
                     <md-icon md-svg-icon="contact-mail" aria-label="Contact Mail Icon"></md-icon>
                     <md-tooltip>
                       Email
@@ -43,9 +44,11 @@
                 </md-content>
               </div>
             </div>
-            <md-content layout-padding flex="100">
-              <strong translate="DESCRIPTION"></strong>
-              <span class="multiline-justified-string" ng-bind-html="profile.bio[vm.currentLanguage]"></span>
+            <md-content layout-padding flex="100" ng-if="profile.bio[vm.currentLanguage]">
+              <div>
+                <strong translate="DESCRIPTION"></strong>
+                <span class="indented-text" ng-bind-html="profile.bio[vm.currentLanguage]"></span>
+              </div>
             </md-content>
           </div>
           <div class="margin-8px">
@@ -77,7 +80,8 @@
                       <md-list ng-show="::profile.anyTopSkill" flex>
                         <strong translate="SKILLS_TOP"></strong>
                         <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 5})" ng-init="profile.anyTopSkill = true;" ng-click="vm.viewSkill($event, skill)" aria-label="Top skills item">
-                          <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                          <md-icon ng-if="::!skill.icon" md-svg-icon="wrench" aria-label="Skill Icon" class="md-icon-48"></md-icon>
+                          <md-icon ng-if="::skill.icon" md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="md-icon-48"></md-icon>
                           <div layout="column" layout-sm="row" layout-align="start start" flex="100">
                             <span ng-bind="skill.name[vm.currentLanguage]"></span>
                             <span flex></span>
@@ -88,7 +92,8 @@
                       <md-list ng-show="::profile.anyHighSkill" flex>
                         <strong translate="SKILLS_REMARKABLE"></strong>
                         <md-list-item ng-repeat="skill in ::(profile.skills | filter : {level: 4})" ng-init="profile.anyHighSkill = true;" ng-click="vm.viewSkill($event, skill)" aria-label="Remarkable skills item">
-                          <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                          <md-icon ng-if="::!skill.icon" md-svg-icon="wrench" aria-label="Skill Icon" class="md-icon-48"></md-icon>
+                          <md-icon ng-if="::skill.icon" md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="md-icon-48"></md-icon>
                           <div layout="column" layout-sm="row" layout-align="start start" flex="100">
                             <span ng-bind="skill.name[vm.currentLanguage]"></span>
                             <span flex></span>
@@ -99,7 +104,8 @@
                       <md-list ng-show="::profile.anyNormalSkill" flex>
                         <strong translate="SKILLS_REST"></strong>
                         <md-list-item ng-repeat="skill in ::(profile.skills | filter : { level: 4 } : vm.filterLT)" ng-init="profile.anyNormalSkill = true;" ng-click="vm.viewSkill($event, skill)" aria-label="Rest of skills item">
-                          <md-icon md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                          <md-icon ng-if="::!skill.icon" md-svg-icon="wrench" aria-label="Skill Icon" class="md-icon-48"></md-icon>
+                          <md-icon ng-if="::skill.icon" md-svg-icon="{{::skill.icon}}" aria-label="Skill Icon" class="md-icon-48"></md-icon>
                           <div layout="column" layout-sm="row" layout-align="start start" flex="100">
                             <span ng-bind="skill.name[vm.currentLanguage]"></span>
                             <span flex></span>
@@ -137,18 +143,20 @@
                     <div layout="column" layout-gt-sm="row" layout-align="space-around">
                       <md-list ng-show="::profile.anyCourse" flex>
                         <strong translate="COURSES"></strong>
-                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'course'})" ng-init="profile.anyCourse = true;" ng-click="vm.viewEducation($event, education)" aria-label="Courses item">
+                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {educationType: 'course'})" ng-init="profile.anyCourse = true;" ng-click="vm.viewEducation($event, education)" aria-label="Courses item">
                           <span flex>
-                            <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                            <md-icon ng-if="::!education.icon" md-svg-icon="school" aria-label="Education Icon" class="md-icon-48"></md-icon>
+                            <md-icon ng-if="::education.icon" md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="md-icon-48"></md-icon>
                             <span ng-bind="education.name[vm.currentLanguage]"></span>
                           </span>
                         </md-list-item>
                       </md-list>
                       <md-list ng-show="::profile.anyAcademicEducation" flex>
                         <strong translate="ACADEMIC"></strong>
-                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {type: 'academic'})" ng-init="profile.anyAcademicEducation = true;" ng-click="vm.viewEducation($event, education)" aria-label="Academic education item">
+                        <md-list-item ng-repeat="education in ::(profile.educations | filter : {educationType: 'academic'})" ng-init="profile.anyAcademicEducation = true;" ng-click="vm.viewEducation($event, education)" aria-label="Academic education item">
                           <span flex>
-                            <md-icon md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="fullsize" flex="25" flex-sm="5" flex-gt-sm="10"></md-icon>
+                            <md-icon ng-if="::!education.icon" md-svg-icon="school" aria-label="Education Icon" class="md-icon-48"></md-icon>
+                            <md-icon ng-if="::education.icon" md-svg-icon="{{::education.icon}}" aria-label="Education Icon" class="md-icon-48"></md-icon>
                             <span ng-bind="education.name[vm.currentLanguage]"></span>
                           </span>
                         </md-list-item>
@@ -180,21 +188,17 @@
                     <md-expansion-panel-icon></md-expansion-panel-icon>
                   </md-expansion-panel-header>
                   <md-expansion-panel-content>
-                    <div layout="row" layout-align="space-around" layout-wrap>
-                      <span class="md-button no-transform-text" ng-repeat="experience in ::profile.experiences" ng-click="vm.viewExperience($event, experience)" flex="100" flex-md="45" flex-lg="30" flex-gt-lg="30">
-                        <div layout="row" layout-align-gt-sm="column" layout-align="center center">
-                          <md-icon class="fullsize" md-svg-icon="{{::experience.icon}}" aria-label="Experience Icon" flex="20"></md-icon>
-                          <div layout="column" flex layout-align="center center">
-                            <h3 ng-if="::(experience.name || experience.position)">
-                              <span ng-if="::experience.name" ng-bind="experience.name[vm.currentLanguage]"></span><br>
-                              <span ng-if="::experience.position" ng-bind="experience.position[vm.currentLanguage]"></span><br>
-                            </h3>
-                            <span ng-if="::experience.company" ng-bind="::experience.company.name">
-                            </span>
-                          </div>
-                        </div>
-                      </span>
-                    </div>
+                    <md-list>
+                      <md-list-item ng-repeat="experience in ::profile.experiences" ng-click="vm.viewExperience($event, experience)" aria-label="Experience item">
+                        <span flex class="text-ellipsis">
+                          <md-icon ng-if="::!experience.icon" class="md-icon-48" md-svg-icon="worker" aria-label="Experience Icon"></md-icon>
+                          <md-icon ng-if="::experience.icon" class="md-icon-48" md-svg-icon="{{::experience.icon}}" aria-label="Experience Icon"></md-icon>
+                          <strong ng-if="::experience.name" ng-bind="experience.name[vm.currentLanguage]"></strong>
+                          <span ng-if="experience.position[vm.currentLanguage]"> (<span ng-bind="experience.position[vm.currentLanguage]"></span>)</span>
+                          <span ng-if="::experience.company.name"> - <span ng-bind="::experience.company.name"></span></span>
+                        </span>
+                      </md-list-item>
+                    </md-list>
                   </md-expansion-panel-content>
                 </md-expansion-panel-expanded>
               </md-expansion-panel>

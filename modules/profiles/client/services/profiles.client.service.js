@@ -18,11 +18,16 @@
     });
 
     service.getIDNameList = getIDNameList;
+    service.getProfilesWithData = getProfilesWithData;
 
     return service;
 
     function getIDNameList() {
       return $http.get('/api/profiles/id_name_list');
+    }
+
+    function getProfilesWithData() {
+      return $http.get('/api/profiles/with_data');
     }
   }
 })();

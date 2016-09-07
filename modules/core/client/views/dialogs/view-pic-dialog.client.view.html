@@ -1,0 +1,12 @@
+<md-dialog aria-label="View picture dialog" class="transition-300ms dialog-4k" ng-style="{ 'border-radius': dialogVm.borderRadius.value }" layout="column">
+  <span layout="row" layout-align="end" style="height: 0; overflow: visible;">
+    <md-button class="md-fab md-mini md-primary" aria-label="Close image viewer" ng-click="dialogVm.cancel()">
+      <md-icon md-svg-icon="close" aria-label="Close Icon"></md-icon>
+      <md-tooltip>
+        <span translate="CANCEL"></span>
+      </md-tooltip> 
+    </md-button>
+  </span>
+  <md-dialog-content flex="100" layout="column" layout-align="center" ng-style="dialogVm.imageStyle">
+  </md-dialog-content>
+</md-dialog>

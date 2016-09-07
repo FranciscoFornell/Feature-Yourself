@@ -60,7 +60,7 @@
               <td md-cell ng-bind="user.lastName" hide-xs hide-sm hide-md ng-click="vm.editLastname($event, user)"></td>
               <td md-cell ng-bind="::user.email" hide-xs hide-sm></td>
               <td md-cell hide-xs hide-sm>
-                <md-select ng-model="user.rolesString" placeholder="Select role or roles" md-on-close="vm.destringifyRoles(user, true)">
+                <md-select ng-model="user.rolesString" placeholder="Select role or roles" md-on-close="vm.destringifyRoles(user, true)" ng-disabled="user.username === vm.authentication.user.username">
                   <md-option ng-value="rolesOption" ng-repeat="rolesOption in vm.rolesOptions"><span translate="{{rolesOption}}"></span></md-option>
                 </md-select>
               </td>

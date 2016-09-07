@@ -11,18 +11,21 @@ Thumbs.db
 .sass-cache/
 node_modules/
 public/lib/*
-!public/lib/tinymce-dist/js/langs
+!public/lib/tinymce-langs/
 !public/lib/md-data-table
+!public/lib/textAngular-sanitize
 app/tests/coverage/
 .bower-*/
 .idea/
 coverage/
+.env
 
 # MEAN.js app and assets
 # ======================
 public/dist/
 uploads
-modules/users/client/img/profile/uploads
+modules/users/client/img/profile/uploads/*
+!modules/users/client/img/profile/uploads/ignoreme.txt
 config/env/local.js
 config/env/local-*.js
 *.pem

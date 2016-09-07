@@ -3,11 +3,11 @@
 var cfenv = require('cfenv'),
   appEnv = cfenv.getAppEnv();
 var cfMongoUrl = (function() {
-  if (appEnv.getService('mean-mongo')) {
-    var mongoCreds = appEnv.getService('mean-mongo').credentials;
+  if (appEnv.getService('FY-mongo')) {
+    var mongoCreds = appEnv.getService('FY-mongo').credentials;
     return mongoCreds.uri || mongoCreds.url;
   } else {
-    throw new Error('No service names "mean-mongo" bound to the application.');
+    throw new Error('No service names "FY-mongo" bound to the application.');
   }
 }());
 
@@ -33,28 +33,28 @@ module.exports = {
     options: {}
   },
   facebook: {
-    clientID: getCred('mean-facebook', 'id') || 'APP_ID',
-    clientSecret: getCred('mean-facebook', 'secret') || 'APP_SECRET',
+    clientID: getCred('mean-facebook', 'id') || process.env.FACEBOOK_ID || 'APP_ID',
+    clientSecret: getCred('mean-facebook', 'secret') || process.env.FACEBOOK_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/facebook/callback'
   },
   twitter: {
-    clientID: getCred('mean-twitter', 'key') || 'CONSUMER_KEY',
-    clientSecret: getCred('mean-twitter', 'secret') || 'CONSUMER_SECRET',
+    clientID: getCred('mean-twitter', 'key') || process.env.TWITTER_KEY || 'CONSUMER_KEY',
+    clientSecret: getCred('mean-twitter', 'secret') || process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
     callbackURL: '/api/auth/twitter/callback'
   },
   google: {
-    clientID: getCred('mean-google', 'id') || 'APP_ID',
-    clientSecret: getCred('mean-google', 'secret') || 'APP_SECRET',
+    clientID: getCred('mean-google', 'id') || process.env.GOOGLE_ID || 'APP_ID',
+    clientSecret: getCred('mean-google', 'secret') || process.env.GOOGLE_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/google/callback'
   },
   linkedin: {
-    clientID: getCred('mean-linkedin', 'id') || 'APP_ID',
-    clientSecret: getCred('mean-linkedin', 'secret') || 'APP_SECRET',
+    clientID: getCred('mean-linkedin', 'id') || process.env.LINKEDIN_ID || 'APP_ID',
+    clientSecret: getCred('mean-linkedin', 'secret') || process.env.LINKEDIN_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/linkedin/callback'
   },
   github: {
-    clientID: getCred('mean-github', 'id') || 'APP_ID',
-    clientSecret: getCred('mean-github', 'secret') || 'APP_SECRET',
+    clientID: getCred('mean-github', 'id') || process.env.GITHUB_ID || 'APP_ID',
+    clientSecret: getCred('mean-github', 'secret') || process.env.GITHUB_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/github/callback'
   },
   paypal: {
@@ -64,12 +64,12 @@ module.exports = {
     sandbox: false
   },
   mailer: {
-    from: getCred('mean-mail', 'from') || 'MAILER_FROM',
+    from: getCred('mean-mail', 'from') || process.env.MAILER_FROM || 'MAILER_FROM',
     options: {
-      service: getCred('mean-mail', 'service') || 'MAILER_SERVICE_PROVIDER',
+      service: getCred('mean-mail', 'service') || process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
       auth: {
-        user: getCred('mean-mail', 'username') || 'MAILER_EMAIL_ID',
-        pass: getCred('mean-mail', 'password') || 'MAILER_PASSWORD'
+        user: getCred('mean-mail', 'username') || process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
+        pass: getCred('mean-mail', 'password') || process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
       }
     }
   },

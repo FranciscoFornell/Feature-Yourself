@@ -13,27 +13,39 @@
     </div>
   </md-toolbar>
   <md-dialog-content layout-margin>
-    <div layout="column" layout-gt-sm="row" layout-align="center center">
-      <md-icon md-svg-icon="{{::dialogVm.experience.icon}}" aria-label="Education Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
-      <div flex="100" layout="column" layout-align="start center">
-        <strong ng-bind="::dialogVm.experience.name[dialogVm.currentLanguage]"></strong>
-        <span>
+    <div layout="column" layout-gt-xs="row" layout-align="center">
+      <md-icon ng-if="::!dialogVm.experience.icon" md-svg-icon="worker" aria-label="Education Icon"  flex="noshrink" class="md-icon-128"></md-icon>
+      <md-icon ng-if="::dialogVm.experience.icon" md-svg-icon="{{::dialogVm.experience.icon}}" aria-label="Education Icon"  flex="noshrink" class="md-icon-128"></md-icon>
+      <div flex="100" layout="column" layout-align="start">
+        <h1 ng-bind="::dialogVm.experience.name[dialogVm.currentLanguage]" class="centered-text"></h1>
+        <span ng-if="::dialogVm.durationInfo">
+          <strong><span translate="DURATION"></span>:</strong>
           <span ng-if="::dialogVm.durationInfo.yearsNumber > 0"><span ng-bind="::dialogVm.durationInfo.yearsNumber"></span> <span translate="PLURALIZED_YEARS" translate-values="{plural: dialogVm.durationInfo.yearsNumber > 1}"></span></span><span ng-if="::(dialogVm.durationInfo.yearsNumber > 0 && dialogVm.durationInfo.monthsNumber > 0)"> <span translate="AND"></span> </span><span ng-if="::dialogVm.durationInfo.monthsNumber > 0"><span ng-bind="::dialogVm.durationInfo.monthsNumber"></span> <span translate="PLURALIZED_MONTHS" translate-values="{plural: dialogVm.durationInfo.monthsNumber > 1}"></span></span>. (<span ng-if="::(dialogVm.durationInfo.startYear !== dialogVm.durationInfo.endYear)"><span ng-bind="::dialogVm.durationInfo.startYear"></span> - </span><span ng-bind="::dialogVm.durationInfo.endYear"></span>)
+        </span><br hide-gt-xs>
+        <span ng-if="::dialogVm.experience.position[dialogVm.currentLanguage]">
+          <strong><span translate="POSITION"></span>:</strong>
+          <span ng-bind="::dialogVm.experience.position[dialogVm.currentLanguage]"></span>
+        </span><br hide-gt-xs>
+        <span ng-if="::dialogVm.experience.company.name">
+          <strong><span translate="COMPANY"></span>:</strong>
+          <a ng-if="::dialogVm.experience.company.web" ng-href="{{::dialogVm.experience.company.web}}" ng-bind="::dialogVm.experience.company.name" target="_blank"></a>
+          <span ng-if="::!dialogVm.experience.company.web" ng-bind="::dialogVm.experience.company.name"></span>
         </span>
-        <span ng-if="::dialogVm.experience.position"><span translate="POSITION"></span>: <span ng-bind="::dialogVm.experience.position[dialogVm.currentLanguage]"></span></span>
-        <span ng-if="::dialogVm.experience.company"><span translate="COMPANY"></span>: <a href="{{::dialogVm.experience.company.web}}" target="_blank" ng-bind="::dialogVm.experience.company.name"></a></span>
-        <p class="multiline-justified-string" ng-bind="::dialogVm.experience.description[dialogVm.currentLanguage]"></p>        
       </div>
     </div>
     <div>
-      <span ng-if="::dialogVm.experience.mainAssignments">
-        <span translate="MAIN_ASSINGMENTS"></span>:
+      <p ng-if="::dialogVm.experience.description[dialogVm.currentLanguage]">
+        <strong><span translate="DESCRIPTION"></span>:</strong>
+        <span ng-bind-html="::dialogVm.experience.description[dialogVm.currentLanguage]" class="indented-text"></span>
+      </p>
+      <span ng-if="::dialogVm.experience.mainAssignments.length > 0">
+        <strong><span translate="MAIN_ASSINGMENTS"></span>:</strong>
         <ul>
           <li ng-repeat="assingment in ::dialogVm.experience.mainAssignments" ng-bind="::assingment[dialogVm.currentLanguage]"></li>
         </ul>
       </span>
-      <span ng-if="::dialogVm.experience.projects">
-        <span translate="MAIN_PROJECTS"></span>:
+      <span ng-if="::dialogVm.experience.projects.length > 0">
+        <strong><span translate="MAIN_PROJECTS"></span>:</strong>
         <ul>
           <li ng-repeat="project in ::dialogVm.experience.projects" ng-bind="::project"></li>
         </ul>

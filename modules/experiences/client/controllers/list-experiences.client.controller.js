@@ -212,7 +212,7 @@
             dialogVm.tinymceLanguage = 'es';
           }
 
-          dialogVm.tinymceLanguageUrl = '/lib/tinymce-dist/js/langs/';
+          dialogVm.tinymceLanguageUrl = '/lib/tinymce-langs/';
           dialogVm.tinymceLanguageUrl += dialogVm.tinymceLanguage;
           dialogVm.tinymceLanguageUrl += '.js';
 
@@ -231,35 +231,43 @@
             dialogVm.experience.profiles = [];
             dialogVm.experience.duration = {};
             dialogVm.experience.mainAssignments = [];
+            dialogVm.experience.mainAssignmentsI18n = [];
           } else {
             dialogVm.experience.mainAssignments = experience.mainAssignments.map(convertI18nToString);
-            $scope.$watch(
-              'dialogVm.experience.mainAssignments.length', 
-              function(newValue, oldValue) {
-                var newElement = {},
-                  index;
+            dialogVm.experience.mainAssignmentsI18n = experience.mainAssignments.slice();
+            
+          }
+          
+          $scope.$watch(
+            'dialogVm.experience.mainAssignments', 
+            function(newValue, oldValue) {
+              var newElement = {},
+                i,
+                l1 = oldValue.length,
+                l2 = newValue.length;
 
-                if(newValue > oldValue) {
-                  newElement[dialogVm.currentLanguage] = dialogVm.experience.mainAssignments[newValue - 1];
-                  experience.mainAssignments.push(newElement);
-                } else {
-                  for(index = 0; index < newValue; index++) {
-                    if (dialogVm.experience.mainAssignments.indexOf(experience.mainAssignments[index][dialogVm.currentLanguage]) === -1) {
-                      experience.mainAssignments.splice(index, 1);
-                    }
+              if (l2 === 0) {
+                dialogVm.experience.mainAssignmentsI18n = [];
+              }else if(l1 < l2) {
+                newElement[dialogVm.currentLanguage] = dialogVm.experience.mainAssignments[l2 - 1];
+                dialogVm.experience.mainAssignmentsI18n.push(newElement);
+              } else if (l1 === l2) {
+                for(i = 0; i < l1; i++) {
+                  if (dialogVm.experience.mainAssignmentsI18n[i][dialogVm.currentLanguage] !== dialogVm.experience.mainAssignments[i]) {
+                    dialogVm.experience.mainAssignmentsI18n[i][dialogVm.currentLanguage] = dialogVm.experience.mainAssignments[i];
+                  }
+                }
+                dialogVm.experience.mainAssignments = dialogVm.experience.mainAssignments.filter(filterDuplicates);
+              } else {
+                for(i = 0; i < l1; i++) {
+                  if (dialogVm.experience.mainAssignments.indexOf(dialogVm.experience.mainAssignmentsI18n[i][dialogVm.currentLanguage]) !== i) {
+                    dialogVm.experience.mainAssignmentsI18n.splice(i, 1);
                   }
                 }
               }
-            );
-            $scope.$watch(
-              'dialogVm.experience.mainAssignments.length === 0', 
-              function(newValue, oldValue) {
-                if(newValue) {
-                  experience.mainAssignments = [];
-                }
-              }
-            );
-          }
+            },
+            true
+          );
 
           updateSelectLabel();
           $scope.$watch(
@@ -307,17 +315,10 @@
             return false;
           }
 
-          dialogVm.experience.mainAssignments = dialogVm.experience.mainAssignments.map(convertStringToI18n);
           angular.merge(experience, dialogVm.experience);
           experience.profiles = dialogVm.experience.profiles.slice();
-          experience.projects = dialogVm.experience.projects.slice();
-          if (dialogVm.isNewExperience) {
-            experience.mainAssignments = dialogVm.experience.mainAssignments.slice();
-          } else {
-            for(i = 0; i < l; i++) {
-              experience.mainAssignments[i][dialogVm.currentLanguage] = dialogVm.experience.mainAssignments[i][dialogVm.currentLanguage];
-            }
-          }
+          experience.projects = dialogVm.experience.projects.filter(filterDuplicates);
+          experience.mainAssignments = dialogVm.experience.mainAssignmentsI18n.slice();
 
           if (dialogVm.isNewExperience) {
             experience.$save(saveSuccess, saveError);
@@ -341,6 +342,10 @@
               }).$promise;
             }
           }
+        }
+
+        function filterDuplicates (item, pos, self) {
+          return self.indexOf(item) === pos;
         }
 
         function filterProfilesNotAssigned (item) {

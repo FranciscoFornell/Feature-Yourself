@@ -10,7 +10,15 @@ var _ = require('lodash'),
   mongoose = require('mongoose'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  cfenv = require('cfenv'),
+  appEnv = cfenv.getAppEnv(),
+  objectStorage = require(path.resolve('./modules/core/server/controllers/cf-object-storage.server.controller.js'));
+
+var getCred = function (serviceName, credProp) {
+  return appEnv.getService(serviceName) ?
+    appEnv.getService(serviceName).credentials[credProp] : undefined;
+};
 
 /**
  * Update user details
@@ -55,7 +63,6 @@ exports.update = function (req, res) {
  */
 exports.changeProfilePicture = function (req, res) {
   var user = req.user;
-  // NOTE: Cambiadas las opciones para que el nombre de archivo sea uno por usuario y se sobreescriba el fichero si existe
   var options = {
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
@@ -68,8 +75,6 @@ exports.changeProfilePicture = function (req, res) {
     limits: config.uploads.profileUpload.limits
   };
   var upload = multer(options).single('newProfilePicture');
-  // NOTE: Así estaba antes, por si tengo que volverlo a su estado anterior
-  // var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   
   // Filtering to upload only images
@@ -82,7 +87,22 @@ exports.changeProfilePicture = function (req, res) {
           message: 'Error occurred while uploading profile picture'
         });
       } else {
-        user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename + '?r=' + Math.round(Math.random() * 999999);
+        if (process.env.NODE_ENV === 'cloud-foundry' && getCred('FY-Object-Storage', 'projectId')) {
+          objectStorage.uploadToObjectStorage(
+            config.uploads.profileUpload.dest,
+            req.file.filename,
+            'user_pics',
+            function (err) {
+              if (err) {
+                return res.status(400).send({
+                  message: 'Error occurred while uploading profile picture'
+                });
+              }
+            }
+          );
+        }
+
+        user.profileImageURL = '/files/users/picture/' + req.file.filename + '?r=' + Math.round(Math.random() * 999999);
 
         user.save(function (saveError) {
           if (saveError) {
@@ -109,6 +129,43 @@ exports.changeProfilePicture = function (req, res) {
 };
 
 /**
+ * Get profile picture
+ */
+exports.getProfilePicture = function (req, res) {
+  var user = req.model,
+    path = config.uploads.profileUpload.dest,
+    filename = user._id;
+
+  fs.access(path + filename, fs.F_OK, function(err) {
+    if (!err) {
+      console.log('File exists. Serving file...');
+      res.sendFile(path + filename, { root: './' });            
+    } else {
+      if(process.env.NODE_ENV === 'cloud-foundry' && getCred('FY-Object-Storage', 'projectId')) {
+        console.log('File doesn\'t exist. Trying to download from Object Storage...');
+        objectStorage.downloadFromObjectStorage(path, filename, 'user_pics',
+          function (err, result) {
+            if (!err) {
+              console.log('File found in Object Storage. Serving file...');
+              res.sendFile(path + filename, { root: './' });
+            } else {
+              console.error('File not found in Object Storage.');
+              res.status(404).send({
+                message: 'File not found'
+              });
+            }            
+          });
+      } else {
+        console.error('File doesn\'t exist.');
+        res.status(404).send({
+          message: 'File not found'
+        });
+      }
+    }
+  });
+};
+
+/**
  * Send User
  */
 exports.me = function (req, res) {
@@ -132,10 +189,23 @@ exports.local = function (req, res) {
         profileImageURL: user.profileImageURL,
         social: {}        
       };
-      if (user.additionalProvidersData && user.additionalProvidersData.google) {
-        data.social.google = user.additionalProvidersData.google.url;
+      if (user.additionalProvidersData){
+        if (user.additionalProvidersData.google) {
+          data.social.google = user.additionalProvidersData.google.url;
+        }
+        if (user.additionalProvidersData.facebook) {
+          data.social.facebook = 'https://www.facebook.com/' + user.additionalProvidersData.facebook.id;
+        }
+        if (user.additionalProvidersData.github) {
+          data.social.github = user.additionalProvidersData.github.html_url;
+        }
+        if (user.additionalProvidersData.twitter) {
+          data.social.twitter = 'https://twitter.com/' + user.additionalProvidersData.twitter.screen_name;
+        }
+        if (user.additionalProvidersData.linkedin) {
+          data.social.linkedin = user.additionalProvidersData.linkedin.publicProfileUrl;
+        }
       }
-      // TODO: Añadir el resto de cuentas sociales)
     }
     
     res.json(data);

@@ -38,6 +38,14 @@ module.exports.initLocalVariables = function (app) {
   app.locals.livereload = config.livereload;
   app.locals.logo = config.logo;
   app.locals.favicon = config.favicon;
+  app.locals.env = process.env.NODE_ENV;
+  app.locals.configuredSocialProviders = {
+    facebook: config.facebook.clientID !== 'APP_ID',
+    twitter: config.twitter.clientID !== 'CONSUMER_KEY',
+    google: config.google.clientID !== 'APP_ID',
+    linkedin: config.linkedin.clientID !== 'APP_ID',
+    github: config.github.clientID !== 'APP_ID'
+  };
 
   // Passing the request url to environment locals
   app.use(function (req, res, next) {

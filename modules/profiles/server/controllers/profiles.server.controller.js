@@ -6,6 +6,9 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Profile = mongoose.model('Profile'),
+  Skill = mongoose.model('Skill'),
+  Education = mongoose.model('Education'),
+  Experience = mongoose.model('Experience'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -93,12 +96,66 @@ exports.list = function(req, res) {
 };
 
 /**
+ * List of Profiles with asociated data
+ */
+exports.listWithAsociatedData = function(req, res) { 
+  Promise.all([
+    Profile.find()
+      .sort('-created')
+      .select('name bio')
+      .lean()
+      .exec(),
+    Skill.find()
+      .sort('-created')
+      .select('name level description icon profiles')
+      .lean()
+      .exec(),
+    Education.find()
+      .sort('-created')
+      .select('name icon educationType certificate issuingAuthority description profiles')
+      .lean()
+      .exec(),
+    Experience.find()
+      .sort('-created')
+      .select('name icon duration position company mainAssignments projects description profiles')
+      .lean()
+      .exec()
+  ])
+    .then(function(results) {
+      var i, l,
+        profiles = results[0],
+        skills = results[1],
+        educations = results[2],
+        experiences = results[3];
+
+      for(i = 0, l = profiles.length; i < l; i++) {
+        profiles[i].skills = skills.filter(isAssociatedToProfile(profiles[i]._id));
+        profiles[i].educations = educations.filter(isAssociatedToProfile(profiles[i]._id));
+        profiles[i].experiences = experiences.filter(isAssociatedToProfile(profiles[i]._id));
+      }
+
+      res.jsonp(profiles);
+    })
+    .catch(function(err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
+
+  function isAssociatedToProfile(profileId) {
+    return function (e) {
+      return e.profiles.indexOf(profileId) !== -1;
+    };
+  }
+};
+
+/**
  * List of Profiles, Name and ID only
  * Covered query
  */
 exports.listIDName = function(req, res) {
-  var profileIndex,
-    profileLength,
+  var i,
+    l,
     data = {};
 
   Profile.find()
@@ -113,9 +170,9 @@ exports.listIDName = function(req, res) {
         data.profilesArray = profiles;
         data.profileIdsArray = [];
         data.profilesCollection = {};
-        for (profileIndex = 0, profileLength = profiles.length; profileIndex < profileLength; profileIndex++) {
-          data.profilesCollection[profiles[profileIndex]._id] = profiles[profileIndex];
-          data.profileIdsArray.push(profiles[profileIndex]._id);
+        for (i = 0, l = profiles.length; i < l; i++) {
+          data.profilesCollection[profiles[i]._id] = profiles[i];
+          data.profileIdsArray.push(profiles[i]._id);
         }
 
         res.jsonp(data);

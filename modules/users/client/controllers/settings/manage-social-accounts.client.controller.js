@@ -12,7 +12,7 @@
 
     vm.hasConnectedAdditionalSocialAccounts = hasConnectedAdditionalSocialAccounts;
     vm.isConnectedSocialAccount = isConnectedSocialAccount;
-    vm.providersArray = socialProvidersService.providersArray;
+    vm.providersArray = socialProvidersService.configuredProvidersArray;
     vm.providersCollection = socialProvidersService.providersCollection;
     vm.removeUserSocialAccount = removeUserSocialAccount;
     vm.user = authenticationService.user;

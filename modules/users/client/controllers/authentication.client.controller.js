@@ -8,14 +8,14 @@
   AuthenticationController.$inject = ['$scope', '$state', 'usersService', '$location', '$window', 'authenticationService', '$mdDialog', '$translatePartialLoader', '$translate', 'socialProvidersService'];
   
   function AuthenticationController ($scope, $state, usersService, $location, $window, authenticationService, $mdDialog, $translatePartialLoader, $translate, socialProvidersService) {
-    var vm = this;
+    var dialogVm = this;
     
-    vm.authentication = authenticationService;
-    vm.callOauthProvider = callOauthProvider;
-    vm.cancel = cancel;
-    vm.providersArray = socialProvidersService.providersArray;
-    vm.signin = signin;
-    vm.signup = signup;
+    dialogVm.authentication = authenticationService;
+    dialogVm.callOauthProvider = callOauthProvider;
+    dialogVm.cancel = cancel;
+    dialogVm.providersArray = socialProvidersService.configuredProvidersArray;
+    dialogVm.signin = signin;
+    dialogVm.signup = signup;
 
     activate();
 
@@ -24,21 +24,21 @@
 
       usersService.checkAnyLocalUser()
         .success(function(data, status, headers, config) {
-          vm.anyUserExists = data;
-          if(vm.anyUserExists){
-            vm.loginForm = '/modules/users/client/views/authentication/signin.client.view.html';
-            vm.loginType = 'SIGNIN';
+          dialogVm.anyUserExists = data;
+          if(dialogVm.anyUserExists){
+            dialogVm.loginForm = '/modules/users/client/views/authentication/signin.client.view.html';
+            dialogVm.loginType = 'SIGNIN';
           } else {
-            vm.loginForm = '/modules/users/client/views/authentication/signup.client.view.html';
-            vm.loginType = 'SIGNUP';
+            dialogVm.loginForm = '/modules/users/client/views/authentication/signup.client.view.html';
+            dialogVm.loginType = 'SIGNUP';
           }
         })
         .error(function(data, status, headers, config) {
-          vm.error = 'Error checking if there are any users in the database. Status: ' + status;
+          dialogVm.error = 'Error checking if there are any users in the database. Status: ' + status;
         });
 
       // If user is signed in then redirect back home
-      if (vm.authentication.user) $mdDialog.cancel();
+      if (dialogVm.authentication.user) $mdDialog.cancel();
     }
 
     // OAuth provider request
@@ -65,16 +65,16 @@
         return false;
       }
       
-      usersService.signin(vm.credentials)
+      usersService.signin(dialogVm.credentials)
         .success(function(response) {
           // If successful we assign the response to the global user model
-          vm.authentication.user = response;
+          dialogVm.authentication.user = response;
 
           // And close the dialog
           $mdDialog.hide();
         })
         .error(function(response) {
-          vm.error = response.message;
+          dialogVm.error = response.message;
         });
     }
 
@@ -86,16 +86,17 @@
         return false;
       }
 
-      usersService.signup(vm.credentials)
+      usersService.signup(dialogVm.credentials)
         .success(function(response) {
           // If successful we assign the response to the global user model
-          vm.authentication.user = response;
+          dialogVm.authentication.user = response;
+          $state.reload();
 
           /// And close the dialog
           $mdDialog.hide();
         })
         .error(function(response) {
-          vm.error = response.message;
+          dialogVm.error = response.message;
         });
     }
   }

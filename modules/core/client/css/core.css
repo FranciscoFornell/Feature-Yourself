@@ -75,6 +75,12 @@ a:hover .header-profile-image {
   margin-bottom: 10px;
   overflow: hidden;
 }
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  white-space: nowrap;
+}
 .no-padding {
   padding: 0;
 }
@@ -94,7 +100,7 @@ a:hover .header-profile-image {
   overflow: visible;
 }
 .message-area {
-  padding: 10px;
+  padding: 20px;
   margin: 10px;
   border-radius: 5px;
 }
@@ -211,6 +217,10 @@ a:hover .header-profile-image {
   max-width: 600px;
   width: 100%;
 }
+.dialog-4k {
+  width: 3840px;
+  height: 2160px;
+}
 .card-with-floating-button {
   margin-top: 40px; padding-top: 20px;
 }
@@ -227,10 +237,14 @@ a:hover .header-profile-image {
 .md-icon-48{
   width: 48px;
   height: 48px;
+  min-width: 48px;
+  min-height: 48px;
 }
 .md-icon-128{
   width: 128px;
   height: 128px;
+  min-width: 128px;
+  min-height: 128px;
 }
 .md-subicon-128{
   fill: white;
@@ -270,6 +284,9 @@ a:hover .header-profile-image {
   border-radius: 3px;
   width: 18px;
   height: 18px;
+}
+.fullwidth {
+  width: 100%!important;
 }
 .fullsize{
   width: 100%!important;
@@ -360,6 +377,12 @@ a:hover .header-profile-image {
   transform-origin: 100%;
 
 }
+.transition-300ms {
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
 
 .opaque {
   opacity: 1;
@@ -420,18 +443,6 @@ a:hover .header-profile-image {
   height: 20px;
   width: 30px;
 }
-.translate-button-en {
-  margin: 0;
-}
-.translate-button-en > div > .flag-icon {
-  background-image: url("../img/UK_flag.svg");
-}
-.translate-button-es {
-  margin: 0;
-}
-.translate-button-es > div > .flag-icon {
-  background-image: url("../img/Spain_flag.svg");
-}
 
 .md-table-toolbar md-input-container {
   top: 12px;
@@ -448,7 +459,7 @@ md-expansion-panel-header .md-title {
   font-size: 16px;
   font-weight: 600;
   min-width: 80px;
-  max-width: 250px;
+  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;

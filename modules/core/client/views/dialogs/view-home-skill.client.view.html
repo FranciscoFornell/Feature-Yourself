@@ -12,14 +12,15 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-dialog-content layout-margin layout="column">
-    <div layout="column" layout-gt-xs="row" layout-align="center center">
-      <md-icon md-svg-icon="{{::dialogVm.skill.icon}}" aria-label="Skill Icon" flex="30" class="md-icon-128 margin-10px"></md-icon>
-      <div flex="100" layout="column" layout-align="start center">
-        <strong ng-bind="::dialogVm.skill.name[dialogVm.currentLanguage]"></strong>
-        <star-rating ng-model="::dialogVm.skill.level" readonly="true"></star-rating>
-        <p class="multiline-justified-string" ng-bind="::dialogVm.skill.description[dialogVm.currentLanguage]"></p>
-      </div>
+  <md-dialog-content layout="column" layout-gt-xs="row" layout-align="center center" layout-padding>
+    <div layout-align="center center" flex="noshrink">
+      <md-icon ng-if="::!dialogVm.skill.icon" md-svg-icon="wrench" aria-label="Skill Icon" class="md-icon-128"></md-icon>
+      <md-icon ng-if="::dialogVm.skill.icon" md-svg-icon="{{::dialogVm.skill.icon}}" aria-label="Skill Icon" class="md-icon-128"></md-icon>
+    </div>
+    <div flex="100" layout="column" layout-align="start center" class="fullsize">
+      <strong ng-bind="::dialogVm.skill.name[dialogVm.currentLanguage]"></strong>
+      <star-rating ng-model="::dialogVm.skill.level" readonly="true"></star-rating>
+      <span ng-bind-html="::dialogVm.skill.description[dialogVm.currentLanguage]" class="indented-text fullsize"></span>
     </div>
   </md-dialog-content>
 </md-dialog>

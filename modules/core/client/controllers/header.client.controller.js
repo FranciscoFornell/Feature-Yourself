@@ -14,9 +14,9 @@
           en: 'English version',
           es: 'Versión en español'
         },
-        class: {
-          en: 'translate-button-en',
-          es: 'translate-button-es'
+        flag: {
+          en: 'url("./modules/core/client/img/UK_flag.svg")',
+          es: 'url("./modules/core/client/img/Spain_flag.svg")'
         }
       };
 
@@ -37,7 +37,7 @@
     function activate() {      
       vm.sidenavIsMoving = false;
       langButton.language = vm.currentLanguage === 'en' ? 'es' : 'en';
-      vm.traslateButtonClass = langButton.class[langButton.language];
+      vm.traslateButtonFlag = langButton.flag[langButton.language];
       vm.traslateButtonText = langButton.text[langButton.language];
       
       // This waits untill left-sidenav exists to make $mdSidenav look for it
@@ -69,7 +69,7 @@
         langButton.language = prevKey;
         vm.currentLanguage = $translate.use();
         vm.traslateButtonText = langButton.text[langButton.language];
-        vm.traslateButtonClass = langButton.class[langButton.language];
+        vm.traslateButtonFlag = langButton.flag[langButton.language];
         dateTimeUtilsService.setDateLocale(langKey);
       });
     }

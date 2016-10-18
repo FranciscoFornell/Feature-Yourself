@@ -5,9 +5,9 @@
     .module('experiences')
     .controller('ExperiencesListController', ExperiencesListController);
 
-  ExperiencesListController.$inject = ['$scope', 'experiencesService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService', 'dateTimeUtilsService'];
+  ExperiencesListController.$inject = ['$scope', 'experiencesService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService', 'dateTimeUtilsService', 'iconsService'];
 
-  function ExperiencesListController($scope, experiencesService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService, dateTimeUtilsService) {
+  function ExperiencesListController($scope, experiencesService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService, dateTimeUtilsService, iconsService) {
     var vm = this;
 
     vm.editName = editName;
@@ -79,7 +79,6 @@
         },
         targetEvent: ev,
         validators: {
-          'md-maxlength': 30,
           'required': true
         }
       };
@@ -107,9 +106,7 @@
           });
         },
         targetEvent: ev,
-        validators: {
-          'md-maxlength': 30
-        }
+        validators: {}
       };
 
       ev.stopPropagation(); // in case autoselect is enabled
@@ -201,10 +198,16 @@
 
         function activateDialog() {
           dialogVm.experience = angular.merge({}, experience);
+          dialogVm.icons = iconsService.icons;
           dialogVm.isNewExperience = !experience._id;
           dialogVm.currentLanguage = vm.currentLanguage;
           dialogVm.profilesCollection = vm.profilesCollection;
           dialogVm.profileIdsArray = vm.profileIdsArray;
+          dialogVm.searchText = '';
+
+          $translate('SELECT_ICON').then(function(translation){
+            dialogVm.iconsPlaceholder = translation;
+          });
 
           if (vm.currentLanguage === 'en') {
             dialogVm.tinymceLanguage = 'en_GB';

@@ -46,6 +46,7 @@ module.exports.initLocalVariables = function (app) {
     linkedin: config.linkedin.clientID !== 'APP_ID',
     github: config.github.clientID !== 'APP_ID'
   };
+  app.locals.themeSettings = config.themeSettings;
 
   // Passing the request url to environment locals
   app.use(function (req, res, next) {

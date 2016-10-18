@@ -84,5 +84,7 @@
   "START": "Inicio",
   "END": "Fin",
   "INVALID_DATE": "Fecha inválida",
-  "DURATION": "Duración"
+  "DURATION": "Duración",
+  "SELECT_ICON": "Seleccione un icono",
+  "NO_MATCHING_ICONS_FOUND": "No se incontraron iconos que se correspondan con \"{{searchText}}\""
 }

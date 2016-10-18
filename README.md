@@ -13,12 +13,13 @@ MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid 
 + You can have different profiles in different tabs, each one with it's own description. Only related skills, educations and experiences are shown on each tab.
 + If you add the parameter "profile" to the url, it will automatically select the appropriate tab. (example: http://feature-yourself-demo.mybluemix.net?profile=software-developer).
 + Different social services login supported.
++ Theme personalization through environment variables
 
 ### Features planned for future versions
 + Recommendations system
 + Integrated blog
 + URL parameter for hiding the profile tabs
-+ Theme personalization through environment variables
++ Theme personalization through a settings view on the UI.
 
 # Direct deploy
 This project can be deployed to many different platforms, but it's easier to do it to a Cloud Foundry instance. And it's even easier in the case of IBM Bluemix, as it can be done with a simple click and a few guided steps.
@@ -180,6 +181,36 @@ MAILER_SERVICE_PROVIDER
 MAILER_EMAIL_ID
 MAILER_PASSWORD
 ```
+
+# Make it yours
+Once you have your own feature yourself deployment up and running, it's time to personalize it.
+
+## Theming
+Feature Yourself has a preconfigured theme, but you can change it by adding the following environment variables to your server:
+```bash
+PRIMARY_PALETTE
+ACCENT_PALETTE
+WARN_PALETTE
+```
+If you decide to use this variables, they must be filled only with the palette names listed [here](https://material.google.com/style/color.html#color-color-palette), and they must be in **lowercase**, and **with dashes instead of spaces** if it has more than one word. **Otherwise, the application will fail**.
+
+## Data population
+The first time you open your Feature Yourself instance on a browser, it will show the following error message:
+```
+There is no local user in the database.
+```
+There can be only one local user per Feature Yourself instance, and this message is telling you that currently there are none. You can click on the top right button and sign up to create a new local user.
+
+Once this is done, you will still see another error:
+```
+There are no profiles in the database.
+```
+Once you are logged in with the local user (which have administrator privileges), you should see the **Admin options** menu. From there you can populate and manage all the data you need, including the profiles. Once there is at least one profile in the database, you can click on the home button, and you should see the home page without errors.
+
+Through the **Admin options** menu you can populate skills, educations and experiences, and of course as many profiles as you need. For each skill, education or experience you can select one or more profiles for them to be assigned to.
+
+## User settings
+If you click on the login button (the one on the top right corner) when you are already logged in, you will see a menu with an option for closing the session, and some extra options. These options will send you to the settings dashboard, in which you can change your profile picture, your password, your user data, or manage your social accounts. Any social account you connect with your local user will be linked on the home page.
 
 # Download and make your own version of Feature Yourself
 

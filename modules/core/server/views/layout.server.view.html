@@ -48,7 +48,8 @@
   <script type="text/javascript">
     var user = {{ user | json | safe }},
       env = '{{ env }}',
-      configuredSocialProviders = {{ configuredSocialProviders | json | safe }};
+      configuredSocialProviders = {{ configuredSocialProviders | json | safe }},
+      themeSettings = {{ themeSettings | json | safe }};
   </script>
 
   <!--Load The Socket.io File-->

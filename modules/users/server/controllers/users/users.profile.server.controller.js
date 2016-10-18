@@ -69,7 +69,7 @@ exports.changeProfilePicture = function (req, res) {
         cb(null, config.uploads.profileUpload.dest);
       },
       filename: function (req, file, cb) {
-        cb(null, user._id.toString());
+        cb(null, user._id.toString() + '.jpg');
       }
     }),
     limits: config.uploads.profileUpload.limits
@@ -102,7 +102,7 @@ exports.changeProfilePicture = function (req, res) {
           );
         }
 
-        user.profileImageURL = '/files/users/picture/' + req.file.filename + '?r=' + Math.round(Math.random() * 999999);
+        user.profileImageURL = '/files/users/picture/' + user._id.toString() + '?r=' + Math.round(Math.random() * 999999);
 
         user.save(function (saveError) {
           if (saveError) {
@@ -134,7 +134,7 @@ exports.changeProfilePicture = function (req, res) {
 exports.getProfilePicture = function (req, res) {
   var user = req.model,
     path = config.uploads.profileUpload.dest,
-    filename = user._id;
+    filename = user._id + '.jpg';
 
   fs.access(path + filename, fs.F_OK, function(err) {
     if (!err) {

@@ -25,11 +25,32 @@
         <div class="fullsize" layout="row">
           <md-input-container flex="100">
             <label translate="ICON"></label>
-            <input type="text" id="icon" name="icon" ng-model="dialogVm.education.icon">
+            <input type="text" value="_" hide>
           </md-input-container>
-          <md-icon md-svg-icon="{{dialogVm.education.icon}}" aria-label="Education Icon"></md-icon>
         </div>
-        <a href="https://materialdesignicons.com/" target="_blank" translate="FULL_ICON_LIST"></a>
+        <div class="fullsize" layout="row">
+          <md-autocomplete
+              md-selected-item="dialogVm.education.icon"
+              md-search-text="dialogVm.searchText"
+              md-items="icon in filteredIcons = (dialogVm.icons | filter: dialogVm.searchText)"
+              md-item-text="icon"
+              md-min-length="0"
+              placeholder="{{dialogVm.iconsPlaceholder}}"
+              flex="100">
+            <md-icon md-svg-icon="{{icon}}" aria-label="{{icon}} Icon"></md-icon>
+            <md-item-template>
+              <md-icon md-svg-icon="{{icon}}" aria-label="{{icon}} Icon"></md-icon>
+              <span>{{icon}}
+              </span>
+            </md-item-template>
+            <md-not-found>
+              <span translate="NO_MATCHING_ICONS_FOUND" translate-values="{ searchText: dialogVm.searchText }"></span>
+            </md-not-found>
+          </md-autocomplete>
+          <div class="md-whiteframe-z1 padding-8px">
+              <md-icon md-svg-icon="{{dialogVm.education.icon}}" aria-label="Education Icon"></md-icon>
+          </div>
+        </div>
         <md-input-container class="margin-top-45px">
           <label translate="DESCRIPTION"></label>
           <textarea hide="true">_</textarea>

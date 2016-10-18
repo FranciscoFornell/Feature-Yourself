@@ -114,7 +114,6 @@
         },
         targetEvent: ev,
         validators: {
-          'md-maxlength': 30,
           'required': true
         }
       };
@@ -142,7 +141,7 @@
         },
         targetEvent: ev,
         validators: {
-          'md-maxlength': 30
+          'required': true
         }
       };
 

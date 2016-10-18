@@ -5,9 +5,9 @@
     .module('skills')
     .controller('SkillsListController', SkillsListController);
 
-  SkillsListController.$inject = ['$scope', 'skillsService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService'];
+  SkillsListController.$inject = ['$scope', 'skillsService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService', 'iconsService'];
 
-  function SkillsListController($scope, skillsService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService) {
+  function SkillsListController($scope, skillsService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService, iconsService) {
     var vm = this;
 
     vm.editName = editName;
@@ -69,7 +69,6 @@
         },
         targetEvent: ev,
         validators: {
-          'md-maxlength': 30,
           'required': true
         }
       };
@@ -162,10 +161,16 @@
 
         function activateDialog () {
           dialogVm.currentLanguage = vm.currentLanguage;
+          dialogVm.icons = iconsService.icons;
           dialogVm.isNewSkill = !skill._id;
           dialogVm.profilesCollection = vm.profilesCollection;
           dialogVm.profileIdsArray = vm.profileIdsArray;
+          dialogVm.searchText = '';
           dialogVm.skill = angular.merge({}, skill);
+
+          $translate('SELECT_ICON').then(function(translation){
+            dialogVm.iconsPlaceholder = translation;
+          });
 
           if (vm.currentLanguage === 'en') {
             dialogVm.tinymceLanguage = 'en_GB';

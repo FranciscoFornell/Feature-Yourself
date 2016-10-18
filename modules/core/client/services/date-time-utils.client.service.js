@@ -8,7 +8,6 @@
   dateTimeUtilsService.$inject = ['$mdDateLocale'];
 
   function dateTimeUtilsService($mdDateLocale) {
-    var shouldRender;
     var service = {
       getDurationInfo: getDurationInfo,
       setDateLocale: setDateLocale

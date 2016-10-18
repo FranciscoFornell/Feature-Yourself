@@ -1,4 +1,4 @@
-(function() {
+(function(app) {
   'use strict';
 
   angular
@@ -8,9 +8,11 @@
   themingConfig.$inject = ['$mdThemingProvider'];
 
   function themingConfig ($mdThemingProvider) {
+    var themeSettings = app.themeSettings;
+
     $mdThemingProvider.theme('default')
-      .primaryPalette('blue-grey')
-      .accentPalette('deep-orange')
-      .warnPalette('red');
+      .primaryPalette(themeSettings.primaryPalette)
+      .accentPalette(themeSettings.accentPalette)
+      .warnPalette(themeSettings.warnPalette);
   }
-})();
+})(ApplicationConfiguration);

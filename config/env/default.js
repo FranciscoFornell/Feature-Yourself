@@ -52,5 +52,10 @@ module.exports = {
         fileSize: 1*1024*1024 // Max file size in bytes (1 MB)
       }
     }
+  },
+  themeSettings: {
+    primaryPalette: process.env.PRIMARY_PALETTE || 'blue-grey',
+    accentPalette: process.env.ACCENT_PALETTE ||'deep-orange',
+    warnPalette: process.env.WARN_PALETTE || 'red'
   }
 };

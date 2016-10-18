@@ -83,5 +83,7 @@
   "START": "Start",
   "END": "End",
   "INVALID_DATE": "Invalid date",
-  "DURATION": "Duration"
+  "DURATION": "Duration",
+  "SELECT_ICON": "Select an icon",
+  "NO_MATCHING_ICONS_FOUND": "No icons matching \"{{searchText}}\" were found"
 }

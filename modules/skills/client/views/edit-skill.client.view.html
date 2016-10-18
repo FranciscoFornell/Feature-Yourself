@@ -22,6 +22,35 @@
             <div ng-message="required"><span translate="REQUIRED_FIELD"></span></div>
           </div>
         </md-input-container>
+        <div class="fullsize" layout="row">
+          <md-input-container flex="100">
+            <label translate="ICON"></label>
+            <input type="text" value="_" hide>
+          </md-input-container>
+        </div>
+        <div class="fullsize" layout="row">
+          <md-autocomplete
+              md-selected-item="dialogVm.skill.icon"
+              md-search-text="dialogVm.searchText"
+              md-items="icon in filteredIcons = (dialogVm.icons | filter: dialogVm.searchText)"
+              md-item-text="icon"
+              md-min-length="0"
+              placeholder="{{dialogVm.iconsPlaceholder}}"
+              flex="100">
+            <md-icon md-svg-icon="{{icon}}" aria-label="{{icon}} Icon"></md-icon>
+            <md-item-template>
+              <md-icon md-svg-icon="{{icon}}" aria-label="{{icon}} Icon"></md-icon>
+              <span>{{icon}}
+              </span>
+            </md-item-template>
+            <md-not-found>
+              <span translate="NO_MATCHING_ICONS_FOUND" translate-values="{ searchText: dialogVm.searchText }"></span>
+            </md-not-found>
+          </md-autocomplete>
+          <div class="md-whiteframe-z1 padding-8px">
+              <md-icon md-svg-icon="{{dialogVm.skill.icon}}" aria-label="Skill Icon"></md-icon>
+          </div>
+        </div>
         <md-input-container>
           <label translate="LEVEL"></label>
           <input type="text" ng-model="::dialogVm.skill.level" hide>
@@ -32,14 +61,6 @@
           <textarea hide="true">_</textarea>
         </md-input-container>
         <textarea ui-tinymce="dialogVm.tinymceOptions" ng-model="dialogVm.skill.description[dialogVm.currentLanguage]"></textarea>
-        <div class="fullsize" layout="row" class="margin-top-45px">
-          <md-input-container flex="100">
-            <label translate="ICON"></label>
-            <input type="text" id="icon" name="icon" ng-model="dialogVm.skill.icon">
-          </md-input-container>
-          <md-icon md-svg-icon="{{dialogVm.skill.icon}}" aria-label="Skill Icon"></md-icon>
-        </div>
-        <a href="https://materialdesignicons.com/" target="_blank" translate="FULL_ICON_LIST"></a>
         <md-input-container class="margin-top-45px">
           <label translate="PROFILES_ASSIGNED"></label>
           <md-chips ng-if="dialogVm.skill.profiles.length" ng-model="dialogVm.skill.profiles" ng-disabled>

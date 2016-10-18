@@ -90,6 +90,9 @@ a:hover .header-profile-image {
 .margin-top-45px {
   margin-top: 45px;
 }
+.padding-8px {
+  padding: 8px;
+}
 .no-error-spacing .md-errors-spacer {
     min-height: 0;
 }
@@ -262,6 +265,7 @@ a:hover .header-profile-image {
   min-width: 40px;
   min-height: 40px;
   border-radius: 50%;
+  background-color: white;
 }
 .md-fab-img-48{
   width: 48px;
@@ -269,6 +273,7 @@ a:hover .header-profile-image {
   min-width: 48px;
   min-height: 48px;
   border-radius: 50%;
+  background-color: white;
 }
 .md-fab-img-128{
   width: 128px;
@@ -276,6 +281,7 @@ a:hover .header-profile-image {
   min-width: 128px;
   min-height: 128px;
   border-radius: 50%;
+  background-color: white;
 }
 .md-fab-img-subicon{
   margin-bottom: -2px;

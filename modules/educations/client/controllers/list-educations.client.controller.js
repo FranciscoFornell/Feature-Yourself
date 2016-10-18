@@ -5,9 +5,9 @@
     .module('educations')
     .controller('EducationsListController', EducationsListController);
 
-  EducationsListController.$inject = ['$scope', 'educationsService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService'];
+  EducationsListController.$inject = ['$scope', 'educationsService', '$translatePartialLoader', '$mdDialog', '$translate', '$q', '$mdMedia', '$mdEditDialog', '$mdToast', '$rootScope', 'profileListService', 'iconsService'];
 
-  function EducationsListController($scope, educationsService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService) {
+  function EducationsListController($scope, educationsService, $translatePartialLoader, $mdDialog, $translate, $q, $mdMedia, $mdEditDialog, $mdToast, $rootScope, profileListService, iconsService) {
     var vm = this;
 
     vm.editName = editName;
@@ -78,7 +78,6 @@
         },
         targetEvent: ev,
         validators: {
-          'md-maxlength': 30,
           'required': true
         }
       };
@@ -172,9 +171,15 @@
         function activateDialog() {
           dialogVm.currentLanguage = vm.currentLanguage;
           dialogVm.education = angular.merge({}, education);
+          dialogVm.icons = iconsService.icons;
           dialogVm.isNewEducation = !education._id;
           dialogVm.profilesCollection = vm.profilesCollection;
           dialogVm.profileIdsArray = vm.profileIdsArray;
+          dialogVm.searchText = '';
+
+          $translate('SELECT_ICON').then(function(translation){
+            dialogVm.iconsPlaceholder = translation;
+          });
 
           if (vm.currentLanguage === 'en') {
             dialogVm.tinymceLanguage = 'en_GB';

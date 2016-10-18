@@ -9,6 +9,7 @@
 
   function iconsConfig ($mdIconProvider) {
     $mdIconProvider
-      .defaultIconSet('/modules/core/client/img/mdi.svg');
+      .defaultIconSet('/modules/core/client/img/mdi.svg')
+      .iconSet('fy', '/modules/core/client/img/fy-icons.svg');
   }
 })();

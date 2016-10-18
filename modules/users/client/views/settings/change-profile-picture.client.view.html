@@ -2,7 +2,7 @@
   <div flex="100">
     <md-card class="crop-area">
       <img ng-src="{{vm.imageURL}}" alt="{{vm.user.displayName}}" ng-hide="vm.uploader.queue.length">
-      <img-crop class="aspect-ratio-1-1" ng-show="vm.uploader.queue.length" image="vm.imageURL" result-image="vm.croppedImage" result-image-size="500"></img-crop>
+      <img-crop class="aspect-ratio-1-1" ng-show="vm.uploader.queue.length" image="vm.imageURL" result-image="vm.croppedImage" result-image-size="500" result-image-format="image/jpeg"></img-crop>
       <md-card-actions layout="row" layout-align="space-around">
         <div class="btn-file" ng-hide="vm.uploader.queue.length" layout="row" layout-align="center center">
           <input id="input-file" type="file" nv-file-select uploader="vm.uploader" aria-label="Select image">

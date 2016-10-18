@@ -27,7 +27,7 @@
                 <h2 flex="100" ng-bind="::vm.localUserData.displayName"></h2>
               </div>                
               <div flex layout="column" layout-align="space-between">
-                <h1 style="margin-left: 144px; min-height: 40px;" ng-bind="profile.name[vm.currentLanguage]"></h1><br>
+                <h2 style="margin-left: 144px; min-height: 40px;" ng-bind="profile.name[vm.currentLanguage]"></h2><br>
                 <md-content layout="row" layout-align="center" layout-margin>
                   <md-button class="md-icon-button" ng-href="mailto:{{::vm.localUserData.email}}?subject={{'WEB_CONTACT' | translate}} - {{'PROFILE' | translate}}: {{profile.name[vm.currentLanguage]}}" aria-label="Contact Email Button">
                     <md-icon md-svg-icon="contact-mail" aria-label="Contact Mail Icon"></md-icon>

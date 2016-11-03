@@ -30,7 +30,9 @@
       vm.loadingData = true;
       $q.all([
         usersService.getLocalUser(),
-        profilesService.getProfilesWithData()
+        profilesService.getProfilesWithData(
+          vm.params.singleProfile ? vm.params.profile : null
+        )
       ])
         .then(function(responses) {
           vm.localUserData = responses[0].data;

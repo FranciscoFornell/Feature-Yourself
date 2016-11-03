@@ -2,7 +2,7 @@
 
 Feature Yourself is a solution meant to build your own personal promotion page. It's based on [MEAN.JS](http://meanjs.org/), a MEAN (Mongo DB, Express, Angular, Node.js) full-stack JavaScript open-source framework, and enhanced with Google's Material Design visual style thanks to [Angular-Material](https://material.angularjs.org) UI Component framework.
 
-You can see a working demo [here](http://feature-yourself-demo.mybluemix.net).
+You can see a working demo [here](http://feature-yourself.mybluemix.net).
 
 MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. The idea is to solve the common issues with connecting those frameworks, build a robust framework to support daily development needs, and help developers use better practices while working with popular JavaScript components.
 
@@ -11,14 +11,15 @@ MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid 
 + i18n internationalization. Only English and Spanish for now.
 + Skills, educations and professional experiences details.
 + You can have different profiles in different tabs, each one with it's own description. Only related skills, educations and experiences are shown on each tab.
-+ If you add the parameter "profile" to the url, it will automatically select the appropriate tab. (example: http://feature-yourself-demo.mybluemix.net?profile=software-developer).
++ A general profile tab will be automatically added with all skills, educations and experiences. This tab will be optional in future versions.
++ If you add a slash and an profile id to the url, it will automatically select the appropriate tab. (example: [http://feature-yourself.mybluemix.net/software-developer](http://feature-yourself.mybluemix.net/software-developer)). You can see all profile ids in the profiles management page.
++ If you add /single-profile/ followed by a profile id, it will only load that profile and there will be no tabs. (example: [http://feature-yourself.mybluemix.net/single-profile/software-developer](http://feature-yourself.mybluemix.net/single-profile/software-developer))
 + Different social services login supported.
 + Theme personalization through environment variables
 
 ### Features planned for future versions
 + Recommendations system
 + Integrated blog
-+ URL parameter for hiding the profile tabs
 + Theme personalization through a settings view on the UI.
 
 # Direct deploy
@@ -89,7 +90,7 @@ After `cf push` completes you will see the URL to your running Feature Yourself 
     requested state: started
     instances: 1/1
     usage: 128M x 1 instances
-    urls: feature-yourself-demo.mybluemix.net
+    urls: feature-yourself.mybluemix.net
 
 Open your browser and go to that URL and your should see your Feature Yourself app running!
 

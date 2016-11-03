@@ -26,8 +26,10 @@
       return $http.get('/api/profiles/id_name_list');
     }
 
-    function getProfilesWithData() {
-      return $http.get('/api/profiles/with_data');
+    function getProfilesWithData(profile) {
+      var suffix = profile ? '/' + profile : '';
+
+      return $http.get('/api/profiles/with_data' + suffix);
     }
   }
 })();

@@ -98,24 +98,33 @@ exports.list = function(req, res) {
 /**
  * List of Profiles with asociated data
  */
-exports.listWithAsociatedData = function(req, res) { 
+exports.listWithAsociatedData = function(req, res) {
+  var profileFindParams = {},
+    dataFindParams = {},
+    profile = req.profile;
+
+  if (profile) {
+    profileFindParams._id = profile;
+    dataFindParams.profiles = profile;
+  }
+
   Promise.all([
-    Profile.find()
+    Profile.find(profileFindParams)
       .sort('-created')
       .select('name bio')
       .lean()
       .exec(),
-    Skill.find()
+    Skill.find(dataFindParams)
       .sort('-created')
       .select('name level description icon profiles')
       .lean()
       .exec(),
-    Education.find()
+    Education.find(dataFindParams)
       .sort('-created')
       .select('name icon educationType certificate issuingAuthority description profiles')
       .lean()
       .exec(),
-    Experience.find()
+    Experience.find(dataFindParams)
       .sort('-created')
       .select('name icon duration position company mainAssignments projects description profiles')
       .lean()
@@ -132,6 +141,18 @@ exports.listWithAsociatedData = function(req, res) {
         profiles[i].skills = skills.filter(isAssociatedToProfile(profiles[i]._id));
         profiles[i].educations = educations.filter(isAssociatedToProfile(profiles[i]._id));
         profiles[i].experiences = experiences.filter(isAssociatedToProfile(profiles[i]._id));
+      }
+
+      if (!profile) {
+        profiles.unshift({
+          name: {
+            en: 'General profile',
+            es: 'Perfil general'
+          },
+          skills: skills,
+          educations: educations,
+          experiences: experiences
+        });
       }
 
       res.jsonp(profiles);

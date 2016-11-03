@@ -342,6 +342,12 @@ a:hover .header-profile-image {
   margin: 0;
   padding: 0;
 }
+.md-tabs-labels-hidden md-tabs-wrapper {
+ visibility: hidden;
+}
+.md-tabs-labels-hidden md-tabs-content-wrapper {
+ top: 0;
+}
 
 /*Star rating styles*/
 .star-rating {

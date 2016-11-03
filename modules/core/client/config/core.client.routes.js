@@ -30,12 +30,6 @@
 
     // Home state routing
     $stateProvider
-      .state('home', {
-        url: '/?profile',
-        templateUrl: 'modules/core/client/views/home.client.view.html',
-        controller: 'HomeController',
-        controllerAs: 'vm'
-      })
       .state('not-found', {
         url: '/not-found',
         templateUrl: 'modules/core/client/views/404.client.view.html',
@@ -59,6 +53,21 @@
           ignoreState: true,
           pageTitle: 'Forbidden'
         }
+      })
+      .state('single-profile', {
+        url: '/single-profile/:profile',
+        templateUrl: 'modules/core/client/views/home.client.view.html',
+        controller: 'HomeController',
+        controllerAs: 'vm',
+        params: {
+          singleProfile: true
+        }
+      })
+      .state('home', {
+        url: '/:profile',
+        templateUrl: 'modules/core/client/views/home.client.view.html',
+        controller: 'HomeController',
+        controllerAs: 'vm'
       });
   }
     

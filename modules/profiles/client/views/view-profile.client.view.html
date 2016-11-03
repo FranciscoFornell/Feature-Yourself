@@ -15,6 +15,10 @@
     <h2 ng-bind="::dialogVm.profile.name[
         dialogVm.currentLanguage]"></h2>
     <p>
+      <strong>Id: </strong>
+      <span ng-bind-html="dialogVm.profile._id"></span>
+    </p>
+    <p>
       <strong><span translate="DESCRIPTION"></span>:</strong>
       <span ng-bind-html="dialogVm.profile.bio[dialogVm.currentLanguage]" class="indented-text"></span>
     </p>

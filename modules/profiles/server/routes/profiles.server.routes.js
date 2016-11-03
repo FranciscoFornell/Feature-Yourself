@@ -18,6 +18,9 @@ module.exports = function(app) {
   app.route('/api/profiles/with_data')
     .get(profiles.listWithAsociatedData);
 
+  app.route('/api/profiles/with_data/:profileId')
+    .get(profiles.listWithAsociatedData);
+
   app.route('/api/profiles/:profileId').all(profilesPolicy.isAllowed)
     .get(profiles.read)
     .put(profiles.update)

@@ -17,7 +17,9 @@
     </md-card>
   </div>
   <div layout="column" layout-align="start" flex="100" ng-if="!vm.showSplash"><div layout="row" layout-align="center" flex="100"><div flex-lg="95" flex-xl="75" flex="100" layout="column">
-    <md-tabs md-center-tabs md-swipe-content flex="100">
+    <md-tabs md-center-tabs md-swipe-content
+        flex="100"
+        ng-class="{'md-tabs-labels-hidden': vm.params.singleProfile}">
       <md-tab md-active="vm.params.profile === profile._id" ng-repeat="profile in vm.profiles" label="{{profile.name[vm.currentLanguage]}}" layout="column">
         <md-tab-body class="scrollable">
           <div layout="column" layout-gt-sm="row" layout-align="start stretch" layout-margin class="md-whiteframe-z2" md-colors="{::background: 'default-primary-200'}">

@@ -35,7 +35,8 @@
     menuService.addSubMenuItem('account', 'settings', {
       title: 'CHANGE_PASSWORD',
       state: 'settings.password',
-      icon: 'account-key'
+      icon: 'account-key',
+      roles: ['admin']
     });
 
     menuService.addSubMenuItem('account', 'settings', {

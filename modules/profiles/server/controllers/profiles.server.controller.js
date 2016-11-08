@@ -211,7 +211,7 @@ exports.profileByID = function(req, res, next, id) {
       return next(err);
     } else if (!profile) {
       return res.status(404).send({
-        message: 'No Profile with that identifier has been found'
+        message: 'NO_MATCHING_PROFILE'
       });
     }
     req.profile = profile;

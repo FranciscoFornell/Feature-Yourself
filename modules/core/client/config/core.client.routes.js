@@ -54,6 +54,12 @@
           pageTitle: 'Forbidden'
         }
       })
+      .state('profile', {
+        url: '/profile/:profile',
+        templateUrl: 'modules/core/client/views/home.client.view.html',
+        controller: 'HomeController',
+        controllerAs: 'vm'
+      })
       .state('single-profile', {
         url: '/single-profile/:profile',
         templateUrl: 'modules/core/client/views/home.client.view.html',
@@ -64,7 +70,7 @@
         }
       })
       .state('home', {
-        url: '/:profile',
+        url: '/',
         templateUrl: 'modules/core/client/views/home.client.view.html',
         controller: 'HomeController',
         controllerAs: 'vm'

@@ -11,7 +11,7 @@
           <md-icon md-svg-icon="alert" class="md-warn" aria-label="Alert Icon"></md-icon>
           <span ng-if="vm.noUser" translate="NO_LOCAL_USER"></span>
           <span ng-if="vm.noProfiles" translate="NO_PROFILES"></span>
-          <span ng-if="vm.error"><span translate="DATA_ERROR"></span> Status: <span ng-bind="vm.error"></span></span>
+          <span ng-if="vm.error">Status: <span ng-bind="vm.error"></span>. <span translate="DATA_ERROR"></span> <span translate="{{vm.errorMessage}}"></span></span>
         </div>
       </div>
     </md-card>

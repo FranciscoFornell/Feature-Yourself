@@ -49,6 +49,7 @@
         .catch(function(response) {
           vm.loadingData = false;
           vm.error = response.status;
+          vm.errorMessage = response.data.message;
         });
     }
 

@@ -58,7 +58,7 @@
           <span ng-bind="vm.authentication.user.displayName"></span><b class="caret"></b>
         </md-button> -->
         <md-menu-content>
-          <md-menu-item ng-repeat="item in ::vm.accountMenu.items" ng-if="item.state !== 'settings.password' || vm.authentication.user.provider === 'local'">
+          <md-menu-item ng-repeat="item in ::vm.accountMenu.items" ng-if="item.shouldRender(vm.authentication.user)">
             <md-button aria-label="{{::item.title}} button" class="md-primary md-hue-2" ui-sref="{{::item.state}}">
               <md-icon md-svg-icon="{{item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
               <span translate="{{::item.title}}"></span>

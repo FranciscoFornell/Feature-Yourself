@@ -21,7 +21,7 @@
   </span>
   <div ng-show="vm.checkStateContains('settings')" layout="column">
     <md-toolbar class="md-hue-1 md-whiteframe-z1" layout="row" layout-align="center center" translate="USER_SETTINGS"></md-toolbar>
-    <md-button ng-repeat="item in ::vm.accountMenu.items" ng-if="item.state !== 'settings.password' || vm.authentication.user.provider === 'local'" aria-label="{{::item.title}} button" ng-click="vm.closeSidenav()" ui-sref="{{::item.state}}" class="capitalized-text left-aligned-text" ui-sref-active="md-raised md-primary md-hue-1">
+    <md-button ng-repeat="item in ::vm.accountMenu.items" ng-if="item.shouldRender(vm.authentication.user)" aria-label="{{::item.title}} button" ng-click="vm.closeSidenav()" ui-sref="{{::item.state}}" class="capitalized-text left-aligned-text" ui-sref-active="md-raised md-primary md-hue-1">
       <md-icon md-svg-icon="{{::item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
       <span translate="{{::item.title}}"></span>
     </md-button>

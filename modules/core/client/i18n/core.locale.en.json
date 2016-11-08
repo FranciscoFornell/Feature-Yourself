@@ -48,6 +48,7 @@
   "FORMATTED_DATE": "{{date|date:'M/d/yyyy h:mm a'}}",
   "NO_LOCAL_USER": "There is no local user in the database.",
   "NO_PROFILES": "There are no profiles in the database.",
+  "NO_MATCHING_PROFILE": "No profile with that identifier has been found.",
   "DATA_ERROR": "Error retrieving data.",
   "PROFILE": "Profile",
   "WEB_CONTACT": "Contact trough your web page",

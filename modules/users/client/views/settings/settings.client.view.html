@@ -2,7 +2,7 @@
   <div layout="column" class="dashboard-sidenav" hide-xs md-colors="{background: 'default-primary-200'}">
     <div class="dashboard-sidenav-content" layout-fill layout="column" layout-padding>
       <div flex></div>
-      <md-button ng-repeat="item in ::settingsVm.accountMenu.items" class="md-raised md-hue-1 md-dashboard-button" ui-sref="{{::item.state}}" ui-sref-active="md-primary md-hue-2" aria-label="{{::item.title}} button" ng-if="::item.state !== 'settings.password' || settingsVm.user.provider === 'local'">
+      <md-button ng-repeat="item in ::settingsVm.accountMenu.items" class="md-raised md-hue-1 md-dashboard-button" ui-sref="{{::item.state}}" ui-sref-active="md-primary md-hue-2" aria-label="{{::item.title}} button" ng-if="item.shouldRender(settingsVm.user)">
         <md-icon class="md-dashboard-icon" md-svg-icon="{{::item.icon}}" aria-label="{{::item.title}} icon"></md-icon>
         <span translate="{{::item.title}}"></span>
       </md-button>

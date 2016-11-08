@@ -34,7 +34,8 @@
         controller: 'ChangePasswordController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Settings password'
+          pageTitle: 'Settings password',
+          roles: ['admin']
         }
       })
       .state('settings.accounts', {

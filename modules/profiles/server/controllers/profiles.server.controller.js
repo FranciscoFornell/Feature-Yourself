@@ -9,6 +9,7 @@ var path = require('path'),
   Skill = mongoose.model('Skill'),
   Education = mongoose.model('Education'),
   Experience = mongoose.model('Experience'),
+  User = mongoose.model('User'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -128,6 +129,11 @@ exports.listWithAsociatedData = function(req, res) {
       .sort('-created')
       .select('name icon duration position company mainAssignments projects description profiles')
       .lean()
+      .exec(),
+    User.find({ provider: 'local' })
+      .limit(1)
+      .select('preferences')
+      .lean()
       .exec()
   ])
     .then(function(results) {
@@ -135,7 +141,12 @@ exports.listWithAsociatedData = function(req, res) {
         profiles = results[0],
         skills = results[1],
         educations = results[2],
-        experiences = results[3];
+        experiences = results[3],
+        preferences = { showGeneralProfile: true };
+
+      if (results[4][0]) {
+        preferences = results[4][0].preferences;
+      }
 
       for(i = 0, l = profiles.length; i < l; i++) {
         profiles[i].skills = skills.filter(isAssociatedToProfile(profiles[i]._id));
@@ -144,15 +155,17 @@ exports.listWithAsociatedData = function(req, res) {
       }
 
       if (!profile) {
-        profiles.unshift({
-          name: {
-            en: 'General profile',
-            es: 'Perfil general'
-          },
-          skills: skills,
-          educations: educations,
-          experiences: experiences
-        });
+        if (preferences.showGeneralProfile) {
+          profiles.unshift({
+            name: {
+              en: 'General profile',
+              es: 'Perfil general'
+            },
+            skills: skills,
+            educations: educations,
+            experiences: experiences
+          });  
+        }        
       }
 
       res.jsonp(profiles);

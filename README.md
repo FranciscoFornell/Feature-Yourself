@@ -16,12 +16,11 @@ MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid 
 + If you add /profile/ and a profile id to the url, it will automatically select the appropriate tab. (example: [http://demo-feature-yourself.mybluemix.net/profile/software-developer](http://demo-feature-yourself.mybluemix.net/profile/software-developer)). You can see all profile ids in the profiles management page.
 + If you add /single-profile/ followed by a profile id, it will only load that profile and there will be no tabs. (example: [http://demo-feature-yourself.mybluemix.net/single-profile/software-developer](http://demo-feature-yourself.mybluemix.net/single-profile/software-developer))
 + Different social services login supported.
-+ Theme personalization through environment variables
++ Theme personalization.
 
 ### Features planned for future versions
 + Recommendations system
 + Integrated blog
-+ Theme personalization through a settings view on the UI.
 
 # Direct deploy
 This project can be deployed to many different platforms, but it's easier to do it to a Cloud Foundry instance. And it's even easier in the case of IBM Bluemix, as it can be done with a simple click and a few guided steps.
@@ -188,7 +187,9 @@ MAILER_PASSWORD
 Once you have your own feature yourself deployment up and running, it's time to personalize it.
 
 ## Theming
-Feature Yourself has a preconfigured theme, but you can change it by adding the following environment variables to your server:
+Feature Yourself has a preconfigured theme, but you can change it in the preferences view. This view can be accessed from the preferences menu option, clicking on the login button (on the top right corner) once you are logged in with the local user (admin).
+
+Another way of changing the theme's colors is adding the following environment variables to your server:
 ```bash
 PRIMARY_PALETTE
 ACCENT_PALETTE
@@ -203,11 +204,7 @@ There is no local user in the database.
 ```
 There can be only one local user per Feature Yourself instance, and this message is telling you that currently there are none. You can click on the top right button and sign up to create a new local user.
 
-Once this is done, you will still see another error:
-```
-There are no profiles in the database.
-```
-Once you are logged in with the local user (which have administrator privileges), you should see the **Admin options** menu. From there you can populate and manage all the data you need, including the profiles. Once there is at least one profile in the database, you can click on the home button, and you should see the home page without errors.
+Once this is done, you can create some profiles, skills, educations and experiences. To do that, once you are logged in with the local user (which have administrator privileges), you should see the **Admin options** menu. From there you can populate and manage all the data you need.
 
 Through the **Admin options** menu you can populate skills, educations and experiences, and of course as many profiles as you need. For each skill, education or experience you can select one or more profiles for them to be assigned to.
 

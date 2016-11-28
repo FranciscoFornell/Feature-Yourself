@@ -187,7 +187,8 @@ exports.local = function (req, res) {
         lastName: user.lastName,
         email: user.email,
         profileImageURL: user.profileImageURL,
-        social: {}        
+        social: {},
+        preferences: user.preferences
       };
       if (user.additionalProvidersData){
         if (user.additionalProvidersData.google) {

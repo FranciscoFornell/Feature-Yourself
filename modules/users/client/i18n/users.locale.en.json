@@ -50,5 +50,15 @@
   "ROLE_USER": "User",
   "ROLE_USER_ADMIN": "User and admin",
   "EDIT_USER": "Edit user",
-  "VIEW_USER": "View user"
+  "VIEW_USER": "View user",
+  "PREFERENCES_TITLE": "Set your preferences",
+  "SHOW_GENERAL_PROFILE": "Show general profile",
+  "THEME_PRIMARY_COLOR": "Theme primary color",
+  "THEME_ACCENT_COLOR": "Theme accent color",
+  "THEME_WARN_COLOR": "Theme warn color",
+  "SELECT_COLOR": "Select a color",
+  "SAVE_PREFERENCES": "Save preferences",
+  "SAVE_PREFERENCES_SUCCESS": "Preferences successfully saved",
+  "UI_COLORS": "User interface colors",
+  "PROFILE_OPTIONS": "Profile options"
 }

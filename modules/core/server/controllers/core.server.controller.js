@@ -1,13 +1,24 @@
 'use strict';
 
-var validator = require('validator');
+var validator = require('validator'),
+  mongoose = require('mongoose'),
+  User = mongoose.model('User');
 
 /**
  * Render the main application page
  */
 exports.renderIndex = function (req, res) {
 
-  var safeUserObject = null;
+  var safeUserObject = null,
+    userSettings = {
+      theme: {
+        primary: null,
+        accent: null,
+        warn: null
+      },
+      showGeneralProfile: true
+    };
+
   if (req.user) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),
@@ -19,13 +30,37 @@ exports.renderIndex = function (req, res) {
       email: validator.escape(req.user.email),
       lastName: validator.escape(req.user.lastName),
       firstName: validator.escape(req.user.firstName),
-      additionalProvidersData: req.user.additionalProvidersData
+      additionalProvidersData: req.user.additionalProvidersData,
+      preferences: {
+        theme: {
+          primary: validator.escape(req.user.preferences.theme.primary || ''),
+          accent: validator.escape(req.user.preferences.theme.accent || ''),
+          warn: validator.escape(req.user.preferences.theme.warn || '')
+        },
+        showGeneralProfile: req.user.preferences.showGeneralProfile
+      }
     };
   }
 
-  res.render('modules/core/server/views/index', {
-    user: safeUserObject
-  });
+  User.find({ provider: 'local' })
+    .limit(1)
+    .exec(function(err, users){
+      var user = users[0];
+
+      if (!!user && user.preferences && user.preferences.theme) {
+        userSettings = user.preferences;
+      }
+      res.render('modules/core/server/views/index', {
+        user: safeUserObject,
+        userSettings: {
+          theme: {
+            primary: validator.escape(userSettings.theme.primary || ''),
+            accent: validator.escape(userSettings.theme.accent || ''),
+            warn: validator.escape(userSettings.theme.warn || '')
+          }
+        }
+      });
+    });
 };
 
 /**

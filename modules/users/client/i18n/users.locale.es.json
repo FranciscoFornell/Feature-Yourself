@@ -50,5 +50,15 @@
   "ROLE_USER": "Usuario",
   "ROLE_USER_ADMIN": "Usuario y administrador",
   "EDIT_USER": "Editar usuario",
-  "VIEW_USER": "Ver usuario"
+  "VIEW_USER": "Ver usuario",
+  "PREFERENCES_TITLE": "Establezca sus preferencias",
+  "SHOW_GENERAL_PROFILE": "Mostrar perfil general",
+  "THEME_PRIMARY_COLOR": "Color primario del tema",
+  "THEME_ACCENT_COLOR": "Color acentuado del tema",
+  "THEME_WARN_COLOR": "Color de advertencia del tema",
+  "SELECT_COLOR": "Seleccione un color",
+  "SAVE_PREFERENCES": "Guardar preferencias",
+  "SAVE_PREFERENCES_SUCCESS": "Preferencias guardadas correctamente",
+  "UI_COLORS": "Colores de la interfaz de usuario",
+  "PROFILE_OPTIONS": "Opciones de perfil"
 }

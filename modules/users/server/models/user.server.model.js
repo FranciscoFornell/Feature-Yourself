@@ -96,6 +96,17 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  preferences: {
+    showGeneralProfile: {
+      type: Boolean,
+      default: true
+    },
+    theme: {
+      primary: String,
+      accent: String,
+      warn: String
+    }
   }
 });
 

@@ -56,6 +56,16 @@
           pageTitle: 'Settings picture'
         }
       })
+      .state('settings.preferences', {
+        url: '/preferences?success',
+        templateUrl: 'modules/users/client/views/settings/preferences.client.view.html',
+        controller: 'PreferencesController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Settings preferences',
+          roles: ['admin']
+        }
+      })
       .state('reqAuthentication', {
         url: '/require-authentication',
         templateUrl: 'modules/users/client/views/authentication/require-authentication.client.html',

@@ -395,10 +395,10 @@
           dialogVm.profilesCollection = vm.profilesCollection;
           dialogVm.experience = experience;
           dialogVm.currentLanguage = vm.currentLanguage;
-          if(dialogVm.experience.duration && dialogVm.experience.duration.start && dialogVm.experience.duration.end) {
+          if(dialogVm.experience.duration && dialogVm.experience.duration.start) {
             dialogVm.durationInfo = dateTimeUtilsService.getDurationInfo(
               new Date(dialogVm.experience.duration.start),
-              new Date(dialogVm.experience.duration.end)
+              new Date(dialogVm.experience.duration.end || Date.now())
             );
           }
         }

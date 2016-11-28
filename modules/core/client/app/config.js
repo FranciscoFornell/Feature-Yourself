@@ -8,7 +8,8 @@
     applicationModuleName: applicationModuleName,
     applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'angularFileUpload', 'ngMaterial', 'ngSanitize', 'pascalprecht.translate', 'ngCookies', 'md.data.table', 'material.components.expansionPanels', 'ngImgCrop', 'ui.tinymce', 'mp.autoFocus'],
     registerModule: registerModule,
-    themeSettings: window.themeSettings
+    themeSettings: window.themeSettings,
+    userSettings: window.userSettings
   };
 
   window.ApplicationConfiguration = service;

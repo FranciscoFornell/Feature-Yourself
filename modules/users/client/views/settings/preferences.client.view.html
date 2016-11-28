@@ -1,0 +1,84 @@
+<section flex flex="95" flex-sm="75" flex-md="60" flex-gt-md="35"
+    layout="row" layout-align="center center">
+  <form name="preferencesForm"
+      ng-submit="vm.updateUserPreferences(preferencesForm.$valid)"
+      flex="100">
+    <md-card>
+      <md-card-content>
+        <h3 class="md-headline centered-text"
+            translate="PREFERENCES_TITLE">
+        </h3>
+        <div layout="column" layout-align="center" layout-margin>
+          <fieldset layout="column" layout-align="center"
+              md-colors="{'border-color': 'primary'}"
+              style="border-style: solid;">
+            <legend translate="UI_COLORS"></legend>
+            <div layout="row" layout-align="space-between center">
+              <span><span translate="THEME_PRIMARY_COLOR" flex></span>: </span>
+              <md-select ng-model="vm.user.preferences.theme.primary"
+                  aria-label="Select primary color"
+                  md-colors="{ background: vm.user.preferences.theme.primary || 'primary-50' }">
+                <md-select-label><span translate="SELECT_COLOR"></span></md-select-label>
+                <md-option ng-value="color" ng-repeat="color in ::vm.materialColors"
+                    md-colors="{background: ::color}">
+                  {{ ::color }}
+                </md-option>
+              </md-select>
+            </div>
+            <div layout="row" layout-align="space-between center">
+              <span><span translate="THEME_ACCENT_COLOR" flex></span>: </span>
+              <md-select ng-model="vm.user.preferences.theme.accent"
+                  aria-label="Select accent color"
+                  md-colors="{ background: vm.user.preferences.theme.accent || 'primary-50' }">
+                <md-select-label><span translate="SELECT_COLOR"></span></md-select-label>
+                <md-option ng-value="color" ng-repeat="color in ::vm.materialColors"
+                    md-colors="{background: ::color}">
+                  {{ ::color }}
+                </md-option>
+              </md-select>
+            </div>
+            <div layout="row" layout-align="space-between center">
+              <span><span translate="THEME_WARN_COLOR" flex></span>: </span>
+              <md-select ng-model="vm.user.preferences.theme.warn"
+                  aria-label="Select warn color"
+                  md-colors="{ background: vm.user.preferences.theme.warn || 'primary-50' }">
+                <md-select-label><span translate="SELECT_COLOR"></span></md-select-label>
+                <md-option ng-value="color" ng-repeat="color in ::vm.materialColors"
+                    md-colors="{background: ::color}">
+                  {{ ::color }}
+                </md-option>
+              </md-select>
+            </div>
+          </fieldset>
+          <fieldset layout="column" layout-align="center"
+              md-colors="{'border-color': 'primary'}"
+              style="border-style: solid;">
+            <legend translate="PROFILE_OPTIONS"></legend>
+            <md-checkbox ng-model="vm.user.preferences.showGeneralProfile"
+                aria-label="General profile check">
+              <span translate="SHOW_GENERAL_PROFILE"></span>
+            </md-checkbox>
+          </fieldset>
+        </div>
+        <md-subheader
+            class="md-no-sticky md-warn centered-text"
+            ng-show="vm.error"
+            translate="{{vm.error}}">
+        </md-subheader>
+        <md-subheader
+            class="md-no-sticky md-success centered-text"
+            ng-show="vm.success"
+            translate="SAVE_PREFERENCES_SUCCESS">
+        </md-subheader>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="center">
+        <md-button type="submit"
+            class="md-raised md-primary"
+            aria-label="Save password"
+            md-autofocus>
+          <span translate="SAVE_PREFERENCES"></span>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </form>
+</section>

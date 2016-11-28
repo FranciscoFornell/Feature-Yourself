@@ -8,11 +8,16 @@
   themingConfig.$inject = ['$mdThemingProvider'];
 
   function themingConfig ($mdThemingProvider) {
-    var themeSettings = app.themeSettings;
+    var themeSettings = app.themeSettings,
+      theme = app.userSettings.theme;
 
-    $mdThemingProvider.theme('default')
-      .primaryPalette(themeSettings.primaryPalette)
-      .accentPalette(themeSettings.accentPalette)
-      .warnPalette(themeSettings.warnPalette);
+    setDefaultTheme(theme.primary, theme.accent, theme.warn);
+
+    function setDefaultTheme (primary, accent, warn) {
+      $mdThemingProvider.theme('default')
+        .primaryPalette(primary || themeSettings.primaryPalette)
+        .accentPalette(accent || themeSettings.accentPalette)
+        .warnPalette(warn || themeSettings.warnPalette);
+    }
   }
 })(ApplicationConfiguration);

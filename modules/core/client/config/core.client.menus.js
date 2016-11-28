@@ -44,5 +44,12 @@
       state: 'settings.accounts',
       icon: 'account-multiple'
     });
+
+    menuService.addSubMenuItem('account', 'settings', {
+      title: 'PREFERENCES',
+      state: 'settings.preferences',
+      icon: 'settings',
+      roles: ['admin']
+    });
   }
 })();

@@ -50,6 +50,7 @@
       env = '{{ env }}',
       configuredSocialProviders = {{ configuredSocialProviders | json | safe }},
       themeSettings = {{ themeSettings | json | safe }};
+      userSettings = {{ userSettings | json | safe }};
   </script>
 
   <!--Load The Socket.io File-->
